@@ -1,0 +1,13 @@
+{
+  "enter":"Enter",
+  "registr": "Registration",
+    "registr_name": "Name",
+    "language": "Language",
+    "registr_password": "Password",
+    "registr_repid_password": "Repid password",
+    "login": "Login",
+    "about": "About",
+    "pass_erro": "Enter the password",
+    "name_erro": "Enter your name"
+  }
+  
