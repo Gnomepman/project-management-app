@@ -1,43 +1,43 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import "../../styles/card-form.css";
+import "./Login-form.css";
 export function Login() {
   const [name, setname] = useState("");
-  const [password, setpassword] = useState("");
-  const [nameDirty, setnameDirty] = useState(false);
-  const [passwordDirty, setpasswordDirty] = useState(false);
-  const [namerro, setnamerro] = useState("");
-  const [passworderro, setpassworderro] = useState("");
+  const [password, setPassword] = useState("");
+  const [nameDirty, setNameDirty] = useState(false);
+  const [passwordDirty, setPasswordDirty] = useState(false);
+  const [nameError, setnameError] = useState("Укажите название");
+  const [passworderror, setPassworderror] = useState("Введите описание");
   const [validation, setValidation] = useState(false);
   const { t } = useTranslation();
-  const entername = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const enterName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setname(e.target.value);
     if (e.target.value.length < 4 || e.target.value.length > 25) {
-      setnamerro("Введите имя");
+      setnameError("Введите название");
     } else {
-      setnamerro("");
+      setnameError("");
     }
   };
   const enterPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setpassword(e.target.value);
+    setPassword(e.target.value);
     if (e.target.value.length < 4 || e.target.value.length > 100) {
-      setpassworderro("Введите пароль");
+      setPassworderror("Введите пароль");
     } else {
-      setpassworderro("");
+      setPassworderror("");
     }
   };
-  const voidField = (e: React.ChangeEvent<HTMLInputElement>) => {
-    switch (e.target.name) {
+  const voidField = (event: React.ChangeEvent<HTMLInputElement>) => {
+    switch (event.target.name) {
       case "name":
-        setnameDirty(true);
+        setNameDirty(true);
         break;
       case "password":
-        setpasswordDirty(true);
+        setPasswordDirty(true);
         break;
     }
   };
   useEffect(() => {
-    if (namerro || passworderro) {
+    if (nameError || passworderror) {
       setValidation(false);
     } else {
       setValidation(true);
@@ -46,38 +46,38 @@ export function Login() {
   return (
     <div className="section">
       <form className="login_container">
-        <div className="create">{t("login")}</div>
+        <div className="create">Вход</div>
         <div className="info">
           <div>
-            <label htmlFor="name">{t("registr_name")}</label>
+            <label htmlFor="name">{t("registration_name")}</label>
           </div>
           <input
             value={name}
-            onBlur={(e) => voidField(e)}
-            onChange={(e) => entername(e)}
+            onBlur={(event) => voidField(event)}
+            onChange={(e) => enterName(e)}
             type="text"
             name="name"
           />
-          {nameDirty && namerro && (
-            <div className="mistake">{t("name_erro")}</div>
+          {nameDirty && nameError && (
+            <div className="mistake">{t("name_error")}</div>
           )}
         </div>
         <div className="info">
           <div>
-            <label htmlFor="password">{t("registr_password")}</label>
+            <label htmlFor="password">{t("registration_password")}</label>
           </div>
           <input
             value={password}
-            onBlur={(e) => voidField(e)}
+            onBlur={(event) => voidField(event)}
             onChange={(e) => enterPassword(e)}
             type="text"
             name="password"
           />
-          {passwordDirty && passworderro && (
-            <div className="mistake">{t("pass_erro")}</div>
+          {passwordDirty && passworderror && (
+            <div className="mistake">{t("pass_error")}</div>
           )}
         </div>
-        <button type="submit" id="creat" disabled={!validation}>
+        <button type="submit" disabled={!validation}>
           {t("enter")}
         </button>
       </form>
