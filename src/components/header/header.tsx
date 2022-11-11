@@ -6,12 +6,10 @@ const languages = [
   {
     code: "ru",
     name: "Русский",
-    country_code: "rus",
   },
   {
     code: "en",
     name: "English",
-    country_code: "gb",
   },
 ];
 export function Header() {
@@ -25,8 +23,8 @@ export function Header() {
         404 page
       </a>
       <a href="/about">{t("about")}</a>
-      {languages.map(({ code, name, country_code }) => (
-        <li key={country_code}>
+      {languages.map(({ code, name }) => (
+        <li key={name}>
           <a
             href="#"
             onClick={() => {
