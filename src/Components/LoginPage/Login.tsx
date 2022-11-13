@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import "./Registration-form.css";
-export function Registration() {
+import "./Login-form.css";
+export function Login() {
   const [name, setname] = useState("");
   const [password, setPassword] = useState("");
   const [nameDirty, setNameDirty] = useState(false);
@@ -46,7 +46,7 @@ export function Registration() {
   return (
     <div className="section">
       <form className="login_container">
-        <div className="create">{t("registration")}</div>
+        <div className="create">{t("enter")}</div>
         <div className="info">
           <div>
             <label htmlFor="name">{t("registration_name")}</label>
@@ -74,7 +74,7 @@ export function Registration() {
             name="password"
           />
           {passwordDirty && passworderror && (
-            <div className="mistake">{t("registration_password")}</div>
+            <div className="mistake">{t("pass_error")}</div>
           )}
         </div>
         <div className="info">

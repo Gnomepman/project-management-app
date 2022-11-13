@@ -1,13 +1,13 @@
 {
   "enter":"Вход",
-  "registr": "Регистрация",
-    "registr_name": "Имя",
+  "registration": "Регистрация",
+    "registration_name": "Имя",
     "language": "Язык",
-    "registr_password": "Пароль",
-    "registr_repid_password": "Повторите пароль",
+    "registration_password": "Пароль",
+    "registration_repeat_password": "Повторите пароль",
     "login": "Войти",
     "about": "Про нас",
-    "pass_erro": "Введите пароль",
-    "name_erro": "Введите Ваше имя"
+    "pass_error": "Введите пароль",
+    "name_error": "Введите Ваше имя"
   }
   

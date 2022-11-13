@@ -3,10 +3,8 @@ import { Header } from "./Components/Header/HeaderPage";
 import { Route, Routes } from "react-router-dom";
 import { Login } from "./Components/LoginPage/Login";
 import { Registration } from "./Components/Registration/RegistrationPage";
-import { useTranslation } from "react-i18next";
 
 function App() {
-  const { t } = useTranslation();
   return (
     <div>
       <Header />
