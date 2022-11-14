@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import "./Header.css";
-import i18next from "i18next";
+import i18next, { changeLanguage } from "i18next";
 const languages = [
   {
     code: "ru",
@@ -28,7 +28,7 @@ export function Header() {
             <a
               href="#"
               onClick={() => {
-                i18next.changeLanguage(code);
+                changeLanguage(code);
               }}
             >
               {name}
