@@ -1,4 +1,4 @@
-.InfoBar{
+.infoBar{
     display: flex;
     justify-content: space-around;
     height: 100px;
@@ -9,9 +9,4 @@ a{
     font-size:25px;
     text-decoration: none;
     color: rgb(106, 20, 219);
-}
-.Error{
-    font-size:25px;
-    text-decoration: none;
-    color: rgb(245, 13, 13);
 }
