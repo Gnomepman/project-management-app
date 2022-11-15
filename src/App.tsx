@@ -1,7 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Error } from "./Components/Error/ErrorPage";
+import { Error } from "./pages/ErrorPage/ErrorPage";
 import { Route, Routes } from "react-router-dom";
-import { Header } from "./Components/Header/HeaderPage";
+import { Header } from "./components/Header/Header";
 
 function App() {
   return (
