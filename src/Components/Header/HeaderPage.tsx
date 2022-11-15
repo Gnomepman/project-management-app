@@ -1,6 +1,9 @@
 import { useTranslation } from "react-i18next";
-import "./Header.css";
-import i18next, { changeLanguage } from "i18next";
+// import "./Header.css";
+import { changeLanguage } from "i18next";
+import Nav from "react-bootstrap/Nav";
+import NavDropdown from "react-bootstrap/NavDropdown";
+import "bootstrap/dist/css/bootstrap.min.css";
 const languages = [
   {
     code: "ru",
@@ -15,27 +18,29 @@ export function Header() {
   const { t } = useTranslation();
   return (
     <>
-      <div className="InfoBar">
-        <a href="/login">{t("login")}</a>
-        <a href="/registration">{t("registration")}</a>
-        <a className="Error" href="*">
-          {" "}
-          404 page
-        </a>
-        <a href="/about">{t("about")}</a>
-        {languages.map(({ code, name }) => (
-          <li key={name}>
-            <a
-              href="#"
+      <Nav className="justify-content-around">
+        <Nav.Item>
+          <Nav.Link href="*">{t("about")}</Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link href="/registration">{t("registration")}</Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link href="/login">{t("login")}</Nav.Link>
+        </Nav.Item>
+        <NavDropdown title={t("language")} id="basic-nav-dropdown">
+          {languages.map(({ code, name }) => (
+            <NavDropdown.Item
+              key={name}
               onClick={() => {
                 changeLanguage(code);
               }}
             >
               {name}
-            </a>
-          </li>
-        ))}
-      </div>
+            </NavDropdown.Item>
+          ))}
+        </NavDropdown>
+      </Nav>
     </>
   );
 }

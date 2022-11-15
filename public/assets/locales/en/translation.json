@@ -8,6 +8,7 @@
     "login": "Login",
     "about": "About",
     "pass_error": "Enter the password",
-    "name_error": "Enter your name"
+    "name_error": "Enter your name",
+    "error": "Sorry, smth went wrong"
   }
   
