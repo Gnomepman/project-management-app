@@ -6,7 +6,9 @@
 .pnp.js
 .eslint.json
 .prettier.json
-
+.package-lock.json
+.package.json
+.tsconfig.json
 # testing
 /coverage
 
