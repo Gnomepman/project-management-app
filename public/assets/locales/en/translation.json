@@ -1,14 +1,13 @@
 {
-  "enter":"Enter",
+  "enter": "Enter",
   "registration": "Registration",
-    "registration_name": "Name",
-    "language": "Language",
-    "registration_password": "Password",
-    "registration_repeat_password": "Repeat password",
-    "login": "Login",
-    "about": "About",
-    "pass_error": "Enter the password",
-    "name_error": "Enter your name",
-    "error": "Sorry, smth went wrong"
-  }
-  
+  "registration_name": "Name",
+  "language": "Language",
+  "registration_password": "Password",
+  "registration_repeat_password": "Repeat password",
+  "login": "Login",
+  "about": "About",
+  "pass_error": "Enter the password",
+  "name_error": "Enter your name",
+  "error": "Sorry, smth went wrong"
+}

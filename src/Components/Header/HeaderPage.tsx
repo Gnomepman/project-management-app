@@ -16,30 +16,28 @@ const languages = [
 export function Header() {
   const { t } = useTranslation();
   return (
-    <>
-      <Nav className="justify-content-around">
-        <Nav.Item>
-          <Nav.Link href="*">{t("about")}</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link href="/registration">{t("registration")}</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link href="/login">{t("login")}</Nav.Link>
-        </Nav.Item>
-        <NavDropdown title={t("language")} id="basic-nav-dropdown">
-          {languages.map(({ code, name }) => (
-            <NavDropdown.Item
-              key={name}
-              onClick={() => {
-                changeLanguage(code);
-              }}
-            >
-              {name}
-            </NavDropdown.Item>
-          ))}
-        </NavDropdown>
-      </Nav>
-    </>
+    <Nav className="justify-content-around">
+      <Nav.Item>
+        <Nav.Link href="*">{t("about")}</Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link href="/registration">{t("registration")}</Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link href="/login">{t("login")}</Nav.Link>
+      </Nav.Item>
+      <NavDropdown title={t("language")} id="basic-nav-dropdown">
+        {languages.map(({ code, name }) => (
+          <NavDropdown.Item
+            key={name}
+            onClick={() => {
+              changeLanguage(code);
+            }}
+          >
+            {name}
+          </NavDropdown.Item>
+        ))}
+      </NavDropdown>
+    </Nav>
   );
 }
