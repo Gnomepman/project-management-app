@@ -1,17 +1,24 @@
 import Card from 'react-bootstrap/Card';
+import { ITeamMember } from '../../models';
+import GHLogo from '../../assets/images/gh-logo.png';
 
-export const TeamMembersItem = () => {
-    return (
-        <Card border="secondary" style={{ width: '18rem' }}>
-            <Card.Header>Header</Card.Header>
-            <Card.Body>
-                <Card.Title>Secondary Card Title</Card.Title>
-                <Card.Text>
-                    Some quick example text to build on the card title and make up the
-                    bulk of the card's content.
-                </Card.Text>
-            </Card.Body>
-        </Card>
-
-    )
+interface TeamMemberProps {
+  item: ITeamMember;
 }
+
+export const TeamMember = ({ item }: TeamMemberProps) => {
+  return (
+    <div className="col-4 justify-content-center rounded ">
+      <Card>
+        <a className="h-25" href={item.url} target="_blank" rel="noreferrer">
+          <img className="img-thumbnail" src={GHLogo} alt="github-logo" />
+          <Card.Title>{item.username}</Card.Title>
+        </a>
+        <Card.Body>
+          <Card.Subtitle>{item.role}</Card.Subtitle>
+          <Card.Text>{item.description} </Card.Text>
+        </Card.Body>
+      </Card>
+    </div>
+  );
+};

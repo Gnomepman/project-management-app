@@ -1,11 +1,13 @@
-import {TeamMembersItem} from "../components/TeamMemberItem/TeamMemberItem";
-
+import { TeamMembers } from '../components/TeamMembers/TeamMembers';
+import { Introduction } from '../components/Introduction/Introduction';
+import { Technologies } from '../components/Technologies/Technologies';
 
 export const WelcomePage = () => {
-    return (
-        <>
-        <div>Welcome</div>
-            <TeamMembersItem></TeamMembersItem>
-        </>
-    )
-}
+  return (
+    <>
+      <Introduction />
+      <Technologies />
+      <TeamMembers />
+    </>
+  );
+};
