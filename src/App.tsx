@@ -1,6 +1,6 @@
 import React from 'react';
-import './App.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.scss';
 import { WelcomePage } from './pages/WelcomePage';
 import { Footer } from './components/Footer/Footer';
 
