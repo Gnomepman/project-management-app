@@ -1,16 +1,16 @@
-import { useTranslation } from "react-i18next";
-import { changeLanguage } from "i18next";
-import Nav from "react-bootstrap/Nav";
-import NavDropdown from "react-bootstrap/NavDropdown";
-import "bootstrap/dist/css/bootstrap.min.css";
+import { useTranslation } from 'react-i18next';
+import { changeLanguage } from 'i18next';
+import Nav from 'react-bootstrap/Nav';
+import NavDropdown from 'react-bootstrap/NavDropdown';
+import 'bootstrap/dist/css/bootstrap.min.css';
 const languages = [
   {
-    code: "ru",
-    name: "Русский",
+    code: 'ru',
+    name: 'Русский',
   },
   {
-    code: "en",
-    name: "English",
+    code: 'en',
+    name: 'English',
   },
 ];
 export function Header() {
@@ -18,15 +18,15 @@ export function Header() {
   return (
     <Nav className="justify-content-around">
       <Nav.Item>
-        <Nav.Link href="*">{t("about")}</Nav.Link>
+        <Nav.Link href="*">{t('about')}</Nav.Link>
       </Nav.Item>
       <Nav.Item>
-        <Nav.Link href="/registration">{t("registration")}</Nav.Link>
+        <Nav.Link href="/registration">{t('registration')}</Nav.Link>
       </Nav.Item>
       <Nav.Item>
-        <Nav.Link href="/login">{t("login")}</Nav.Link>
+        <Nav.Link href="/login">{t('login')}</Nav.Link>
       </Nav.Item>
-      <NavDropdown title={t("language")} id="basic-nav-dropdown">
+      <NavDropdown title={t('language')} id="basic-nav-dropdown">
         {languages.map(({ code, name }) => (
           <NavDropdown.Item
             key={name}
