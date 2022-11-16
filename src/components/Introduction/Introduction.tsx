@@ -4,12 +4,12 @@ import { Button } from 'react-bootstrap';
 
 export const Introduction = () => {
   return (
-    <div className="row align-items-end h-100 my-1">
+    <div className="row align-items-end h-auto my-1">
       <div className="col-4 mt-5">
-        <h1 className="mt-lg-5 mt-md-3">PM Guru</h1>
+        <h1 className="mt-lg-5 mt-md-3 fw-bold">PM Guru</h1>
         <h4 className="py-2">The work management tool for happy collaboration.</h4>
         <Button className="mt-5" color="secondary">
-          Try it
+          Try it now
         </Button>
       </div>
       <div className="col-8">

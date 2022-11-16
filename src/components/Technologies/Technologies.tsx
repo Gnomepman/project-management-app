@@ -5,10 +5,12 @@ import { TechnologyItem } from '../TechnologyItem/TechnologyItem';
 
 export const Technologies = () => {
   return (
-    <div className="row text-center mb-1">
+    <section className="row justify-content-md-center">
+      <h2 className="text-center mt-2">Used Technologies</h2>
+
       {TechnologiesData.map((item: ITechnology) => (
         <TechnologyItem key={item.id} item={item} />
       ))}
-    </div>
+    </section>
   );
 };

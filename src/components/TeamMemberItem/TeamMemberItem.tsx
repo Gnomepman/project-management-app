@@ -10,14 +10,12 @@ export const TeamMember = ({ item }: TeamMemberProps) => {
   return (
     <div className="col-4 justify-content-center rounded ">
       <Card>
-        <a className="h-25" href={item.url} target="_blank" rel="noreferrer">
+        <a href={item.url} target="_blank" rel="noreferrer">
           <img className="img-thumbnail" src={GHLogo} alt="github-logo" />
           <Card.Title>{item.username}</Card.Title>
         </a>
-        <Card.Body>
-          <Card.Subtitle>{item.role}</Card.Subtitle>
-          <Card.Text>{item.description} </Card.Text>
-        </Card.Body>
+        <Card.Subtitle>{item.role}</Card.Subtitle>
+        <Card.Text>{item.description} </Card.Text>
       </Card>
     </div>
   );

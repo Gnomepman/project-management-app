@@ -25,7 +25,7 @@ export const TechnologiesData: ITechnology[] = [
     id: '4',
     title: 'React-Redux',
     url: 'https://react-redux.js.org/',
-    logo_url: 'https://upload.wikimedia.org/wikipedia/commons/4/49/Redux.png',
+    logo_url: 'https://cdn.iconscout.com/icon/free/png-256/redux-3445829-2878755.png',
   },
   {
     id: '5',
@@ -44,7 +44,7 @@ export const TechnologiesData: ITechnology[] = [
     id: '7',
     title: 'Bootstrap',
     url: 'https://getbootstrap.com/',
-    logo_url: 'https://cdn.iconscout.com/icon/free/png-256/bootstrap-6-1175203.png',
+    logo_url: 'https://cdn-icons-png.flaticon.com/512/5968/5968672.png',
   },
   {
     id: '8',

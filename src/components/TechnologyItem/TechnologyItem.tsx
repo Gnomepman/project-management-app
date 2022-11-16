@@ -9,13 +9,11 @@ interface TechnologyItemProps {
 
 export const TechnologyItem = ({ item }: TechnologyItemProps) => {
   return (
-    <div className="col-3 justify-content-center rounded ">
-      <Card>
-        <a href={item.url} target="_blank" rel="noreferrer">
-          <img className="tech-img rounded-2" src={item.logo_url} alt={item.title} />
-          <Card.Title>{item.title}</Card.Title>
-        </a>
-      </Card>
-    </div>
+    <Card className="col mx-1">
+      <a href={item.url} target="_blank" rel="noreferrer">
+        <img className="tech-img rounded-2" src={item.logo_url} alt={item.title} />
+        <h5 className="d-none d-sm-block d-sm-none d-md-block">{item.title}</h5>
+      </a>
+    </Card>
   );
 };
