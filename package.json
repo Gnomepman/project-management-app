@@ -39,11 +39,7 @@
     "lint": "eslint .",
     "format": "npx prettier --write .",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "server": "json-server -w src/data/videos.json --port 3001",
-    "client": "react-scripts start",
-    "clientinstall": "npm install --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client"
+    "eject": "react-scripts eject"
   },
   "prettier": {
     "doubleQuote": true
