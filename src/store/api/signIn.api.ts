@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { IUser } from '../../models';
+import { IBoard, IUser } from '../../models';
 
 export const signInApi = createApi({
   reducerPath: 'user/api',
@@ -38,9 +38,21 @@ export const signInApi = createApi({
       }),
     }),
 
-    getUserById: build.query<Record<string, string>, string>({
+    getUserById: build.query<IUser, string>({
       query: (id) => ({
         url: `users/${id}`,
+        query: {
+          id: id,
+        },
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+      }),
+    }),
+
+    getBoardById: build.query<IBoard, string>({
+      query: (id) => ({
+        url: `boards/${id}`,
         query: {
           id: id,
         },
@@ -52,4 +64,5 @@ export const signInApi = createApi({
   }),
 });
 
-export const { useSignInUserQuery, useSignUpUserQuery, useGetUserByIdQuery } = signInApi;
+export const { useSignInUserQuery, useSignUpUserQuery, useGetUserByIdQuery, useGetBoardByIdQuery } =
+  signInApi;

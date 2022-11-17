@@ -1,7 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useGetBoardByIdQuery } from '../../store/api/signIn.api';
+import { Loader } from '../../components/Loader/Loader';
 
 export function BoardsPage() {
+  const boarderId = '63763bacc02777e984c57e3a';
+  const { isLoading, isError, data } = useGetBoardByIdQuery(boarderId);
+
   //const { boards, setBoards } = useState([]);
   const temp = 123;
 
@@ -15,6 +20,9 @@ export function BoardsPage() {
       <Link to={`/boards/${temp}`}>testing board</Link>
 
       {/* })} */}
+      {isLoading && <Loader />}
+      {isError && <p className="text-center text-danger">Error</p>}
+      {data && <p className="fw-bold">Fetched mockBorder title: {data.title}</p>}
     </>
   );
 }
