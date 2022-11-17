@@ -9,7 +9,7 @@ export const Technologies = () => {
 
   return (
     <section className="row justify-content-md-center">
-      <h3 className="text-center mt-1">{t('wp.created')}</h3>
+      <h5 className="text-center mt-3">{t('wp.created')}</h5>
 
       {TechnologiesData.map((item: ITechnology) => (
         <TechnologyItem key={item.id} item={item} />

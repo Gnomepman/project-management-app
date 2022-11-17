@@ -12,7 +12,7 @@ export function Header() {
   return (
     <Navbar bg="light">
       <Navbar.Collapse>
-        <Navbar.Brand href="#home">
+        <Navbar.Brand href="/">
           <img
             src={Logo}
             width="100"
