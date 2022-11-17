@@ -2,12 +2,18 @@ import { useTranslation } from 'react-i18next';
 import { changeLanguage } from 'i18next';
 import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import { Navbar } from 'react-bootstrap';
+import { Button, Navbar } from 'react-bootstrap';
 import Logo from '../../assets/images/pm-logo.jpg';
 import { languages } from '../../utils/languages';
 
 export function Header() {
   const { t } = useTranslation();
+
+  const isLogged = localStorage.getItem('token');
+
+  const Logout = () => {
+    localStorage.removeItem('token');
+  };
 
   return (
     <Navbar bg="light">
@@ -34,17 +40,32 @@ export function Header() {
           ))}
         </NavDropdown>
       </Navbar.Collapse>
-      <Nav className="me-auto">
-        <Nav.Item>
-          <Nav.Link href="/about">{t('about')}</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link href="/registration">{t('registration')}</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link href="/login">{t('login')}</Nav.Link>
-        </Nav.Item>
-      </Nav>
+      {!isLogged && (
+        <Nav className="me-auto">
+          <Nav.Item>
+            <Nav.Link href="/about">{t('about')}</Nav.Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Nav.Link href="/registration">{t('registration')}</Nav.Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Nav.Link href="/login">{t('login')}</Nav.Link>
+          </Nav.Item>
+        </Nav>
+      )}
+      {isLogged && (
+        <Nav className="me-auto">
+          <Nav.Item>
+            <Nav.Link href="/user-info">
+              Hi <span className="text-danger fw-bold">{'data.login'} </span>
+            </Nav.Link>
+          </Nav.Item>
+
+          <Nav.Item>
+            <Button onClick={Logout}>{t('Log out')}</Button>
+          </Nav.Item>
+        </Nav>
+      )}
     </Navbar>
   );
 }
