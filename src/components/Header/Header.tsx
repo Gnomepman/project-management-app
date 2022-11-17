@@ -2,7 +2,6 @@ import { useTranslation } from 'react-i18next';
 import { changeLanguage } from 'i18next';
 import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import 'bootstrap/dist/css/bootstrap.min.css';
 const languages = [
   {
     code: 'ru',
