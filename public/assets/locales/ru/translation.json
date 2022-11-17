@@ -1,0 +1,13 @@
+{
+  "enter": "Вход",
+  "registration": "Регистрация",
+  "registration_name": "Имя",
+  "language": "Язык",
+  "registration_password": "Пароль",
+  "registration_repeat_password": "Повторите пароль",
+  "login": "Войти",
+  "about": "Про нас",
+  "pass_error": "Введите пароль",
+  "name_error": "Введите Ваше имя",
+  "error": "Простите, что-то пошло не так"
+}
