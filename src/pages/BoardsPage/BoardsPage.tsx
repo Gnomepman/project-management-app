@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useGetUserByIdQuery } from '../../store/api/signIn.api';
+import { Loader } from '../../components/Loader/Loader';
 
 export function BoardsPage() {
   //const { boards, setBoards } = useState([]);
@@ -16,8 +17,10 @@ export function BoardsPage() {
   console.log(data);
   return (
     <>
+      {isLoading && <Loader />}
+      {isError && <p className="text-center">Error</p>}
       <div>Here will be boards </div>
-      <p className="text-bg-danger">{data?.name}</p>
+      {data && <p className="text-bg-danger">{data.name}</p>}
       {/* {boards.map((elem) => { */}
       <Link to={`/boards/${temp}`}>testing board</Link>
 
