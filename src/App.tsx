@@ -6,6 +6,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.scss';
 import { Footer } from './components/Footer/Footer';
 import { WelcomePage } from './pages/WelcomePage/WelcomePage';
+import { BoardsPage } from './pages/BoardsPage/BoardsPage';
+import { Board } from './components/Board/Board';
 
 function App() {
   return (
@@ -13,6 +15,10 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<WelcomePage />} />
+        <Route path="/boards" element={<BoardsPage />}></Route>
+        <Route path="/boards/:id" element={<Board />}></Route>
+        {/* <Route path="/registration" element={}></Route> */}
+        {/* <Route path="/login" element={}></Route> */}
         <Route path="*" element={<Error />} />
       </Routes>
       <Footer />
