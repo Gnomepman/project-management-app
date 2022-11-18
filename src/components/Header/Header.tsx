@@ -5,15 +5,16 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Button, Navbar } from 'react-bootstrap';
 import Logo from '../../assets/images/pm-logo.jpg';
 import { languages } from '../../utils/languages';
+import { useActions } from '../../hooks/actions';
+import { useAppSelector } from '../../hooks/redux';
 
 export function Header() {
   const { t } = useTranslation();
 
-  const isLogged = localStorage.getItem('token');
+  const { logoutUser } = useActions();
+  const { login } = useAppSelector((store) => store.user);
 
-  const Logout = () => {
-    localStorage.removeItem('token');
-  };
+  const isLogged = localStorage.getItem('token');
 
   return (
     <Navbar bg="light">
@@ -57,12 +58,12 @@ export function Header() {
         <Nav className="me-auto">
           <Nav.Item>
             <Nav.Link href="/user-info">
-              Hi <span className="text-danger fw-bold">{'data.login'} </span>
+              Hi <span className="text-danger fw-bold">{login} </span>
             </Nav.Link>
           </Nav.Item>
 
           <Nav.Item>
-            <Button onClick={Logout}>{t('Log out')}</Button>
+            <Button onClick={logoutUser}>{t('Log out')}</Button>
           </Nav.Item>
         </Nav>
       )}

@@ -9,8 +9,8 @@ import { Footer } from './components/Footer/Footer';
 import { WelcomePage } from './pages/WelcomePage/WelcomePage';
 import { BoardsPage } from './pages/BoardsPage/BoardsPage';
 import { Board } from './components/Board/Board';
-import { SignInPage } from './pages/SignInPage/SignInPage';
 import { SignUpPage } from './pages/SignUpPage/SignUpPage';
+import { LoginPage } from './pages/LoginPage/LoginPage';
 
 function App() {
   return (
@@ -21,9 +21,8 @@ function App() {
         <Route path="/boards" element={<BoardsPage />}></Route>
         <Route path="/boards/:id" element={<Board />}></Route>
         <Route path="/registration" element={<SignUpPage />}></Route>
-        <Route path="/login" element={<SignInPage />}></Route>
-        {/* <Route path="/registration" element={}></Route> */}
-        {/* <Route path="/login" element={}></Route> */}
+        <Route path="/login" element={<LoginPage />}></Route>
+
         <Route path="*" element={<Error />} />
       </Routes>
       <Footer />

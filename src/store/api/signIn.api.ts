@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { IBoard, IUser } from '../../models';
+import { IBoard, IToken, IUser } from '../../models';
 
-export const signInApi = createApi({
+export const appApi = createApi({
   reducerPath: 'user/api',
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://pm-app-back.up.railway.app/',
@@ -19,7 +19,7 @@ export const signInApi = createApi({
   }),
 
   endpoints: (build) => ({
-    signInUser: build.query<Record<string, string>, IUser>({
+    loginUser: build.query<IToken, IUser>({
       query: (payload: IUser) => ({
         url: `auth/signin`,
         method: 'POST',
@@ -27,7 +27,7 @@ export const signInApi = createApi({
       }),
     }),
 
-    signUpUser: build.query<Record<string, string>, IUser>({
+    signUpUser: build.query<IUser, IUser>({
       query: (payload: IUser) => ({
         url: `auth/signup`,
         method: 'POST',
@@ -64,5 +64,5 @@ export const signInApi = createApi({
   }),
 });
 
-export const { useSignInUserQuery, useSignUpUserQuery, useGetUserByIdQuery, useGetBoardByIdQuery } =
-  signInApi;
+export const { useLoginUserQuery, useSignUpUserQuery, useGetUserByIdQuery, useGetBoardByIdQuery } =
+  appApi;

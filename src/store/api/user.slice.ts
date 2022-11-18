@@ -1,28 +1,26 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { IUser } from '../../models';
 
 const LS_KEY = 'token';
 
 interface UserState {
-  user: string;
+  login: string;
 }
 
 const initialState: UserState = {
-  user: '',
+  login: '',
 };
 
 export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    checkUser(state, action: PayloadAction<string>) {
-      // state.user.concat(action.payload);
-      // localStorage.setItem(LS_KEY, JSON.stringify(state.user));
-      console.log('state.user', state.user);
+    storeUser(state, action: PayloadAction<IUser>) {
+      state.login = action.payload.login;
     },
-    removeToken(state, action: PayloadAction<string>) {
-      // state.user = state.user.filter((f) => f !== action.payload);
-      // localStorage.removeItem(LS_KEY);
-      console.log('removeToken');
+    logoutUser(state) {
+      state.login = '';
+      localStorage.removeItem(LS_KEY);
     },
   },
 });
