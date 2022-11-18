@@ -18,7 +18,7 @@ function App() {
         <Route path="/boards" element={<BoardsPage />}></Route>
         <Route path="/boards/:id" element={<Board />}></Route>
         {/* <Route path="/registration" element={}></Route> */}
-        {/* <Route path="/login" element={}></Route> */}  
+        {/* <Route path="/login" element={}></Route> */}
         <Route path="*" element={<Error />} />
       </Routes>
       <Footer />
