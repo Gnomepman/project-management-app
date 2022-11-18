@@ -4,6 +4,7 @@ import { Route, Routes } from 'react-router-dom';
 import { Header } from './components/Header/Header';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.scss';
+
 import { Footer } from './components/Footer/Footer';
 import { WelcomePage } from './pages/WelcomePage/WelcomePage';
 import { BoardsPage } from './pages/BoardsPage/BoardsPage';
@@ -21,6 +22,8 @@ function App() {
         <Route path="/boards/:id" element={<Board />}></Route>
         <Route path="/registration" element={<SignUpPage />}></Route>
         <Route path="/login" element={<SignInPage />}></Route>
+        {/* <Route path="/registration" element={}></Route> */}
+        {/* <Route path="/login" element={}></Route> */}
         <Route path="*" element={<Error />} />
       </Routes>
       <Footer />
