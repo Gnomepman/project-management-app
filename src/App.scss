@@ -1,0 +1,34 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+}
+
+:root {
+  --primary: red;
+}
+
+a {
+  text-decoration: none;
+  color: #5160a3;
+}
+
+a:hover {
+  color: #292b69;
+}
+
+.img-thumbnail {
+  height: 30px;
+  border: none;
+}
+
+.tech-img {
+  height: 70px;
+}
+
+.rss-img {
+  height: 37px;
+}
