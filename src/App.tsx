@@ -9,8 +9,8 @@ import { Footer } from './components/Footer/Footer';
 import { WelcomePage } from './pages/WelcomePage/WelcomePage';
 import { BoardsPage } from './pages/BoardsPage/BoardsPage';
 import { Board } from './components/Board/Board';
-import { SignUpPage } from './pages/SignUpPage/SignUpPage';
 import { LoginPage } from './pages/LoginPage/LoginPage';
+import { RegistrationPage } from './pages/RegistrationPage/RegistrationPage';
 
 function App() {
   return (
@@ -20,7 +20,7 @@ function App() {
         <Route path="/" element={<WelcomePage />} />
         <Route path="/boards" element={<BoardsPage />}></Route>
         <Route path="/boards/:id" element={<Board />}></Route>
-        <Route path="/registration" element={<SignUpPage />}></Route>
+        <Route path="/registration" element={<RegistrationPage />}></Route>
         <Route path="/login" element={<LoginPage />}></Route>
 
         <Route path="*" element={<Error />} />

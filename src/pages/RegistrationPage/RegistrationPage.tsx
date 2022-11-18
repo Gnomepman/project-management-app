@@ -1,8 +1,8 @@
 import React from 'react';
 import { IUser } from '../../models';
-import { useSignUpUserQuery } from '../../store/api/signIn.api';
+import { useRegisterUserQuery } from '../../store/api/authApi';
 
-export const SignUpPage = () => {
+export const RegistrationPage = () => {
   const user: IUser = {
     login: 'test1',
     name: 'test1',
@@ -10,7 +10,7 @@ export const SignUpPage = () => {
   };
 
   // Todo refactor
-  const { isLoading, isError, data } = useSignUpUserQuery(user);
+  const { isLoading, isError, data } = useRegisterUserQuery(user);
 
   const auth = localStorage.getItem('token');
 

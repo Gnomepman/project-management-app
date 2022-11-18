@@ -18,7 +18,8 @@ export const userSlice = createSlice({
     storeUser(state, action: PayloadAction<IUser>) {
       state.login = action.payload.login;
     },
-    logoutUser(state) {
+    logout(state) {
+      console.log('logout');
       state.login = '';
       localStorage.removeItem(LS_KEY);
     },

@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useGetBoardByIdQuery } from '../../store/api/signIn.api';
 import { Loader } from '../../components/Loader/Loader';
+import { useGetBoardByIdQuery } from '../../store/api/boardApi';
 
 export function BoardsPage() {
   const boarderId = '63763bacc02777e984c57e3a';

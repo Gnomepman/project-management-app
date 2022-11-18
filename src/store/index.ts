@@ -1,14 +1,22 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { appApi } from './api/signIn.api';
+import { authApi } from './api/authApi';
 import { setupListeners } from '@reduxjs/toolkit/query';
-import { userReducer } from './api/user.slice';
+import { userReducer } from './feature/userSlice';
+import { userApi } from './api/userApi';
+import { boardApi } from './api/boardApi';
 
 export const store = configureStore({
   reducer: {
-    [appApi.reducerPath]: appApi.reducer,
+    [authApi.reducerPath]: authApi.reducer,
+    [userApi.reducerPath]: userApi.reducer,
+    [boardApi.reducerPath]: boardApi.reducer,
     user: userReducer,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(appApi.middleware),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+      // Todo recheck if we need serializableCheck
+    }).concat([authApi.middleware, userApi.middleware, boardApi.middleware]),
 });
 
 setupListeners(store.dispatch);

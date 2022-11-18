@@ -3,7 +3,7 @@ import { IUser } from '../../models';
 import { parseJwt } from '../../utils/parseJwt';
 import { useActions } from '../../hooks/actions';
 import { useAppSelector } from '../../hooks/redux';
-import { useLoginUserQuery } from '../../store/api/signIn.api';
+import { useLoginUserQuery } from '../../store/api/authApi';
 
 export const LoginPage = () => {
   const userMock: IUser = {
