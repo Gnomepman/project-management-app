@@ -1,7 +1,8 @@
+import React from 'react';
 import { useTranslation } from 'react-i18next';
-import './ErrorPage.scss';
+import './NotFoundPage.scss';
 
-export function Error() {
+export const NotFoundPage = () => {
   const { t } = useTranslation();
 
   return (
@@ -18,4 +19,4 @@ export function Error() {
       </div>
     </div>
   );
-}
+};

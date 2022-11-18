@@ -3,24 +3,23 @@ import { IUser } from '../../models';
 
 const LS_KEY = 'token';
 
-interface UserState {
-  login: string;
+interface IUserState {
+  user: IUser | null;
 }
 
-const initialState: UserState = {
-  login: '',
+const initialState: IUserState = {
+  user: null,
 };
 
 export const userSlice = createSlice({
-  name: 'user',
+  name: 'userSlice',
   initialState,
   reducers: {
-    storeUser(state, action: PayloadAction<IUser>) {
-      state.login = action.payload.login;
+    setUser: (state, action: PayloadAction<IUser>) => {
+      state.user = action.payload;
     },
-    logout(state) {
-      console.log('logout');
-      state.login = '';
+    logout: (state) => {
+      state.user = null;
       localStorage.removeItem(LS_KEY);
     },
   },

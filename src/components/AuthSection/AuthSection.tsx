@@ -8,13 +8,13 @@ export const AuthSection = () => {
   const { t } = useTranslation();
 
   const { logout } = useActions();
-  const { login } = useAppSelector((store) => store.user);
+  const { user } = useAppSelector((store) => store.user);
 
   const isLogged = localStorage.getItem('token');
 
   return (
     <>
-      {isLogged && (
+      {!isLogged && (
         <Nav className="me-auto">
           <Nav.Item>
             <Nav.Link href="/registration">{t('registration')}</Nav.Link>
@@ -29,7 +29,7 @@ export const AuthSection = () => {
         <Nav className="me-auto">
           <Nav.Item>
             <Nav.Link href="/user-info">
-              Hi <span className="text-danger fw-bold">{login} </span>
+              Hi <span className="text-danger fw-bold">{user?.login} </span>
             </Nav.Link>
           </Nav.Item>
 

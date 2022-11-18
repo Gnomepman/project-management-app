@@ -1,9 +1,10 @@
 import React from 'react';
 import { IUser } from '../../models';
-import { parseJwt } from '../../utils/parseJwt';
 import { useActions } from '../../hooks/actions';
 import { useAppSelector } from '../../hooks/redux';
 import { useLoginUserQuery } from '../../store/api/authApi';
+import { Loader } from '../../components/Loader/Loader';
+import { ErrorComponent } from '../../components/Error/ErrorComponent';
 
 export const LoginPage = () => {
   const userMock: IUser = {
@@ -12,24 +13,26 @@ export const LoginPage = () => {
   };
 
   // Todo refactor
-  const { isLoading, data } = useLoginUserQuery(userMock);
+  const { isError, isLoading, data } = useLoginUserQuery(userMock);
 
-  const { login } = useAppSelector((store) => store.user);
-  const { storeUser } = useActions();
+  const { user } = useAppSelector((store) => store.user);
+  const { setUser } = useActions();
 
   const addUserToStore = () => {
-    console.log(data?.token);
+    setUser(userMock);
     localStorage.setItem('token', data?.token || '');
-    const auth = localStorage.getItem('token');
-    const userData = auth ? parseJwt(auth) : 'no';
-    storeUser(userData);
-    console.log(userData);
   };
 
   return (
     <>
       <button onClick={addUserToStore}>Sign In</button>
-      <p>Hi, {login}</p>
+      {isLoading && <Loader />}
+      {isError && <ErrorComponent />}
+      {user && (
+        <p>
+          Hi, <span>{user?.login} </span>
+        </p>
+      )}
     </>
   );
 };
