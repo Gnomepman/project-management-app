@@ -1,16 +1,6 @@
-.page {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+$body_padding: 600px;
 
-.text {
-  margin-top: 150px;
-  font-style: normal;
-  font-weight: 700;
-  font-size: 24px;
-  line-height: 28px;
-  display: flex;
-  align-items: center;
-  color: #828282;
+// ToDo Change with %
+.app-container {
+  height: calc(#{$body_padding});
 }
