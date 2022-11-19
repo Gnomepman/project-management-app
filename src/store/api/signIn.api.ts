@@ -27,7 +27,7 @@ export const signInApi = createApi({
       }),
     }),
 
-    signUpUser: build.query<Record<string, string>, IUser>({
+    signUpUser: build.mutation({
       query: (payload: IUser) => ({
         url: `auth/signup`,
         method: 'POST',
@@ -52,4 +52,4 @@ export const signInApi = createApi({
   }),
 });
 
-export const { useSignInUserQuery, useSignUpUserQuery, useGetUserByIdQuery } = signInApi;
+export const { useSignInUserQuery, useSignUpUserMutation, useGetUserByIdQuery } = signInApi;
