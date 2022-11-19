@@ -1,15 +1,16 @@
 import React from 'react';
-import { Error } from './pages/ErrorPage/ErrorPage';
 import { Route, Routes } from 'react-router-dom';
 import { Header } from './components/Header/Header';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.scss';
+
 import { Footer } from './components/Footer/Footer';
 import { WelcomePage } from './pages/WelcomePage/WelcomePage';
 import { BoardsPage } from './pages/BoardsPage/BoardsPage';
 import { Board } from './components/Board/Board';
-import { SignInPage } from './pages/SignInPage/SignInPage';
-import { SignUpPage } from './pages/SignUpPage/SignUpPage';
+import { LoginPage } from './pages/LoginPage/LoginPage';
+import { RegistrationPage } from './pages/RegistrationPage/RegistrationPage';
+import { NotFoundPage } from './pages/NotFoundPage/NotFoundPage';
 
 function App() {
   return (
@@ -19,9 +20,9 @@ function App() {
         <Route path="/" element={<WelcomePage />} />
         <Route path="/boards" element={<BoardsPage />}></Route>
         <Route path="/boards/:id" element={<Board />}></Route>
-        <Route path="/registration" element={<SignUpPage />}></Route>
-        <Route path="/login" element={<SignInPage />}></Route>
-        <Route path="*" element={<Error />} />
+        <Route path="/registration" element={<RegistrationPage />}></Route>
+        <Route path="/login" element={<LoginPage />}></Route>
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
       <Footer />
     </div>

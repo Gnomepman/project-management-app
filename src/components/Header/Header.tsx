@@ -5,6 +5,8 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Navbar } from 'react-bootstrap';
 import Logo from '../../assets/images/pm-logo.jpg';
 import { languages } from '../../utils/languages';
+import { AuthSection } from '../AuthSection/AuthSection';
+import React from 'react';
 
 export function Header() {
   const { t } = useTranslation();
@@ -34,17 +36,13 @@ export function Header() {
           ))}
         </NavDropdown>
       </Navbar.Collapse>
-      <Nav className="me-auto">
-        <Nav.Item>
-          <Nav.Link href="/about">{t('about')}</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link href="/registration">{t('registration')}</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link href="/login">{t('login')}</Nav.Link>
-        </Nav.Item>
-      </Nav>
+      <Nav.Item className="px-2">
+        <Nav.Link href="/about">{t('about')}</Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link href="/boards">{t('Boards')}</Nav.Link>
+      </Nav.Item>
+      <AuthSection />
     </Navbar>
   );
 }
