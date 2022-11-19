@@ -1,4 +1,4 @@
-import { ITeamMember } from '../../models/team-member';
+import { ITeamMember } from '../../models';
 
 export const TeamMembersData: ITeamMember[] = [
   {

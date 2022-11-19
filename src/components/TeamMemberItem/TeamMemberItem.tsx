@@ -11,7 +11,7 @@ export const TeamMember = ({ item }: TeamMemberProps) => {
     <div className="col-4 justify-content-center rounded ">
       <Card>
         <a href={item.url} target="_blank" rel="noreferrer">
-          <img className="img-thumbnail" src={GHLogo} alt="github-logo" />
+          <img height="30" src={GHLogo} alt="github-logo" />
           <Card.Title>{item.username}</Card.Title>
         </a>
         <Card.Subtitle>{item.role}</Card.Subtitle>

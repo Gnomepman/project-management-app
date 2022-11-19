@@ -1,4 +1,4 @@
-import { ITechnology } from '../../models/technology';
+import { ITechnology } from '../../models';
 
 export const TechnologiesData: ITechnology[] = [
   {
