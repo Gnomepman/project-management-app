@@ -2,29 +2,33 @@ import React, { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { IUser } from '../../models';
-import { useSignUpUserMutation } from '../../store/api/signIn.api';
+import { useRegisterUserMutation } from '../../store/api/authApi';
 
 export const SignUpPage = () => {
-  const [signUpUser, { isLoading, isError, data }] = useSignUpUserMutation();
-  const [name, setname] = useState('');
+  const { t } = useTranslation();
+
+  const [signUpUser, { isLoading, isError, data }] = useRegisterUserMutation();
+
+  const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [login, setLogin] = useState('');
   const [nameDirty, setNameDirty] = useState(false);
   const [passwordDirty, setPasswordDirty] = useState(false);
   const [loginDirty, setLoginDirty] = useState(false);
-  const [nameError, setnameError] = useState('Укажите название');
-  const [passworderror, setPassworderror] = useState('Введите описание');
+  const [nameError, setNameError] = useState('Укажите название');
+  const [passwordError, setPasswordError] = useState('Введите описание');
   const [loginError, setLoginError] = useState('Укажите название');
   const [validation, setValidation] = useState(false);
-  const { t } = useTranslation();
+
   const enterName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setname(e.target.value);
+    setName(e.target.value);
     if (e.target.value.length < 4 || e.target.value.length > 25) {
-      setnameError('Введите название');
+      setNameError('Введите название');
     } else {
-      setnameError('');
+      setNameError('');
     }
   };
+
   const enterLogin = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLogin(e.target.value);
     if (e.target.value.length < 4 || e.target.value.length > 25) {
@@ -33,15 +37,17 @@ export const SignUpPage = () => {
       setLoginError('');
     }
   };
+
   const enterPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
     console.log(password);
     if (e.target.value.length < 4 || e.target.value.length > 100) {
-      setPassworderror('Введите пароль');
+      setPasswordError('Введите пароль');
     } else {
-      setPassworderror('');
+      setPasswordError('');
     }
   };
+
   const voidField = (event: React.ChangeEvent<HTMLInputElement>) => {
     switch (event.target.name) {
       case 'name':
@@ -55,19 +61,22 @@ export const SignUpPage = () => {
         break;
     }
   };
+
   useEffect(() => {
-    if (nameError || passworderror || loginError) {
+    if (nameError || passwordError || loginError) {
       setValidation(false);
     } else {
       setValidation(true);
     }
   });
+
   const user: IUser = {
     login: login,
     name: name,
     password: password,
   };
-  const onSubmited = async () => {
+
+  const onSubmit = async () => {
     if (validation === true) {
       await signUpUser({
         login: login,
@@ -120,14 +129,14 @@ export const SignUpPage = () => {
             type="text"
             name="password"
           />
-          {passwordDirty && passworderror && (
+          {passwordDirty && passwordError && (
             <div className="mistake">{t('registration_password')}</div>
           )}
         </div>
         <Button
           variant="primary"
           onClick={() => {
-            onSubmited();
+            onSubmit();
           }}
           disabled={!validation}
         >

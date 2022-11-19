@@ -14,7 +14,7 @@ export function Header() {
   return (
     <Navbar bg="light">
       <Navbar.Collapse>
-        <NavLink to="/boards">
+        <NavLink to="/">
           <img
             src={Logo}
             width="100"

@@ -1,0 +1,56 @@
+.section {
+  display: flex;
+  justify-content: center;
+}
+
+.login_container {
+  position: relative;
+  margin-top: 10%;
+  height: 500px;
+  width: 432px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  background: #f2f2f2;
+  border-radius: 17.6119px;
+}
+
+.create {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 22.6439px;
+  line-height: 27px;
+  display: flex;
+  align-items: center;
+  color: #000000;
+}
+
+label {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12.5799px;
+  line-height: 15px;
+  display: flex;
+  align-items: center;
+  color: #828282;
+}
+input {
+  background: #e0e0e0;
+  border: none;
+  width: 382.43px;
+  height: 44.76px;
+}
+
+#creat {
+  border: none;
+  width: 187px;
+  height: 37px;
+  background: #2f80ed;
+  border-radius: 6px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 18px;
+  color: #ffffff;
+}

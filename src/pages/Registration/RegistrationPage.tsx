@@ -1,31 +1,33 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/esm/Button';
 import { useTranslation } from 'react-i18next';
-import './Registration-form.css';
+import './RegistrationPage.scss';
+
 export function Registration() {
-  const [name, setname] = useState('');
+  const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [nameDirty, setNameDirty] = useState(false);
   const [passwordDirty, setPasswordDirty] = useState(false);
-  const [nameError, setnameError] = useState('Укажите название');
-  const [passworderror, setPassworderror] = useState('Введите описание');
+  const [nameError, setNameError] = useState('Укажите название');
+  const [passwordError, setPasswordError] = useState('Введите описание');
   const [validation, setValidation] = useState(false);
   const { t } = useTranslation();
+
   const enterName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setname(e.target.value);
+    setName(e.target.value);
     if (e.target.value.length < 4 || e.target.value.length > 25) {
-      setnameError('Введите название');
+      setNameError('Введите название');
     } else {
-      setnameError('');
+      setNameError('');
     }
   };
   const enterPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
     console.log(password);
     if (e.target.value.length < 4 || e.target.value.length > 100) {
-      setPassworderror('Введите пароль');
+      setPasswordError('Введите пароль');
     } else {
-      setPassworderror('');
+      setPasswordError('');
     }
   };
   const voidField = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -38,13 +40,15 @@ export function Registration() {
         break;
     }
   };
+
   useEffect(() => {
-    if (nameError || passworderror) {
+    if (nameError || passwordError) {
       setValidation(false);
     } else {
       setValidation(true);
     }
   });
+
   return (
     <div className="section">
       <form className="login_container">
@@ -73,7 +77,7 @@ export function Registration() {
             type="text"
             name="password"
           />
-          {passwordDirty && passworderror && (
+          {passwordDirty && passwordError && (
             <div className="mistake">{t('registration_password')}</div>
           )}
         </div>
