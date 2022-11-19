@@ -1,20 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { Button } from 'react-bootstrap';
+import { useEffect, useState } from 'react';
+import Button from 'react-bootstrap/esm/Button';
 import { useTranslation } from 'react-i18next';
-import { IUser } from '../../models';
-import { useSignUpUserMutation } from '../../store/api/signIn.api';
-
-export const SignUpPage = () => {
-  const [signUpUser, { isLoading, isError, data }] = useSignUpUserMutation();
+import './Registration-form.css';
+export function Registration() {
   const [name, setname] = useState('');
   const [password, setPassword] = useState('');
-  const [login, setLogin] = useState('');
   const [nameDirty, setNameDirty] = useState(false);
   const [passwordDirty, setPasswordDirty] = useState(false);
-  const [loginDirty, setLoginDirty] = useState(false);
   const [nameError, setnameError] = useState('Укажите название');
   const [passworderror, setPassworderror] = useState('Введите описание');
-  const [loginError, setLoginError] = useState('Укажите название');
   const [validation, setValidation] = useState(false);
   const { t } = useTranslation();
   const enterName = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -23,14 +17,6 @@ export const SignUpPage = () => {
       setnameError('Введите название');
     } else {
       setnameError('');
-    }
-  };
-  const enterLogin = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setLogin(e.target.value);
-    if (e.target.value.length < 4 || e.target.value.length > 25) {
-      setLoginError('Введите название');
-    } else {
-      setLoginError('');
     }
   };
   const enterPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -47,38 +33,18 @@ export const SignUpPage = () => {
       case 'name':
         setNameDirty(true);
         break;
-      case 'login':
-        setLoginDirty(true);
-        break;
       case 'password':
         setPasswordDirty(true);
         break;
     }
   };
   useEffect(() => {
-    if (nameError || passworderror || loginError) {
+    if (nameError || passworderror) {
       setValidation(false);
     } else {
       setValidation(true);
     }
   });
-  const user: IUser = {
-    login: login,
-    name: name,
-    password: password,
-  };
-  const onSubmited = async () => {
-    if (validation === true) {
-      await signUpUser({
-        login: login,
-        name: name,
-        password: password,
-      }).unwrap();
-    }
-  };
-
-  const auth = localStorage.getItem('token');
-
   return (
     <div className="section">
       <form className="login_container">
@@ -98,19 +64,6 @@ export const SignUpPage = () => {
         </div>
         <div className="info">
           <div>
-            <label htmlFor="login">Login</label>
-          </div>
-          <input
-            value={login}
-            onBlur={(event) => voidField(event)}
-            onChange={(e) => enterLogin(e)}
-            type="text"
-            name="login"
-          />
-          {loginDirty && loginError && <div className="mistake">{t('name_error')}</div>}
-        </div>
-        <div className="info">
-          <div>
             <label htmlFor="password">{t('registration_password')}</label>
           </div>
           <input
@@ -124,16 +77,10 @@ export const SignUpPage = () => {
             <div className="mistake">{t('registration_password')}</div>
           )}
         </div>
-        <Button
-          variant="primary"
-          onClick={() => {
-            onSubmited();
-          }}
-          disabled={!validation}
-        >
+        <Button variant="primary" type="submit" disabled={!validation}>
           {t('enter')}
         </Button>
       </form>
     </div>
   );
-};
+}
