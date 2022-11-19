@@ -36,8 +36,11 @@ export function Header() {
           ))}
         </NavDropdown>
       </Navbar.Collapse>
-      <Nav.Item>
+      <Nav.Item className="px-2">
         <Nav.Link href="/about">{t('about')}</Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link href="/boards">{t('Boards')}</Nav.Link>
       </Nav.Item>
       <AuthSection />
     </Navbar>

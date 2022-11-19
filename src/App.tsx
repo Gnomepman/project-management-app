@@ -22,7 +22,6 @@ function App() {
         <Route path="/boards/:id" element={<Board />}></Route>
         <Route path="/registration" element={<RegistrationPage />}></Route>
         <Route path="/login" element={<LoginPage />}></Route>
-
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
       <Footer />

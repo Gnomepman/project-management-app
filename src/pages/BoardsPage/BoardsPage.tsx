@@ -2,13 +2,15 @@ import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Loader } from '../../components/Loader/Loader';
 import { useGetBoardByIdQuery } from '../../store/api/boardApi';
+import { ErrorComponent } from '../../components/Error/ErrorComponent';
 
 export function BoardsPage() {
   const boarderId = '63763bacc02777e984c57e3a';
-  const { isLoading, isError, data } = useGetBoardByIdQuery(boarderId);
+  const { isLoading, isError, error, data } = useGetBoardByIdQuery(boarderId);
 
   //const { boards, setBoards } = useState([]);
   const temp = 123;
+  console.log(error);
 
   useEffect(() => {
     //fetch boards and setBoards()
@@ -21,7 +23,7 @@ export function BoardsPage() {
 
       {/* })} */}
       {isLoading && <Loader />}
-      {isError && <p className="text-center text-danger">Error</p>}
+      {isError && <ErrorComponent />}
       {data && <p className="fw-bold">Fetched mockBorder title: {data.title}</p>}
     </>
   );
