@@ -1,12 +1,12 @@
 import { useTranslation } from 'react-i18next';
 import { changeLanguage } from 'i18next';
-import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Navbar } from 'react-bootstrap';
 import Logo from '../../assets/images/pm-logo.jpg';
 import { languages } from '../../utils/languages';
 import { AuthSection } from '../AuthSection/AuthSection';
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 export function Header() {
   const { t } = useTranslation();
@@ -14,7 +14,7 @@ export function Header() {
   return (
     <Navbar bg="light">
       <Navbar.Collapse>
-        <Navbar.Brand href="/">
+        <NavLink to="/boards">
           <img
             src={Logo}
             width="100"
@@ -22,8 +22,8 @@ export function Header() {
             className="d-inline-block align-top"
             alt="pm-app-logo"
           />
-        </Navbar.Brand>
-        <NavDropdown title={t('language')} id="basic-nav-dropdown">
+        </NavLink>
+        <NavDropdown title={t('language')} id="basic-nav-dropdown" className="px-2">
           {languages.map(({ code, name }) => (
             <NavDropdown.Item
               key={name}
@@ -36,12 +36,14 @@ export function Header() {
           ))}
         </NavDropdown>
       </Navbar.Collapse>
-      <Nav.Item className="px-2">
-        <Nav.Link href="/about">{t('about')}</Nav.Link>
-      </Nav.Item>
-      <Nav.Item>
-        <Nav.Link href="/boards">{t('Boards')}</Nav.Link>
-      </Nav.Item>
+
+      <NavLink className="px-2" to="/about">
+        {t('about')}
+      </NavLink>
+
+      <NavLink className="px-2" to="/boards">
+        Boards
+      </NavLink>
       <AuthSection />
     </Navbar>
   );
