@@ -1,21 +1,16 @@
 import ReactDOM from 'react-dom/client';
 import App from './App';
-import './App.css';
+import './App.scss';
 import './i18n';
 import { BrowserRouter } from 'react-router-dom';
-import { Suspense } from 'react';
-
-const loadingMarkup = (
-  <div>
-    <h3>Loading..</h3>
-  </div>
-);
+import { Provider } from 'react-redux';
+import { store } from './store';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
-  <Suspense fallback={loadingMarkup}>
+  <Provider store={store}>
     <BrowserRouter>
       <App />
     </BrowserRouter>
-  </Suspense>
+  </Provider>
 );

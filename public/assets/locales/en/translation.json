@@ -1,13 +1,24 @@
 {
   "enter": "Enter",
-  "registration": "Registration",
+  "registration": "Sign Up",
   "registration_name": "Name",
   "language": "Language",
   "registration_password": "Password",
   "registration_repeat_password": "Repeat password",
-  "login": "Login",
+  "login": "Sign In",
   "about": "About",
   "pass_error": "Enter the password",
   "name_error": "Enter your name",
-  "error": "Sorry, smth went wrong"
+  "error-main": "Opps! Page not found.",
+  "error-description": "The page you’re looking for doesn/’t exist.",
+  "error-button": "Go Home",
+  "wp": {
+    "description": "The work management tool for happy collaboration",
+    "button": "Try it now",
+    "created": "created with"
+  },
+  "footer": {
+    "created": "Created in",
+    "rights": "2022 | All Rights Reserved"
+  }
 }

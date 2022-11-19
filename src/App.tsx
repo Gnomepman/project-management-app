@@ -1,20 +1,28 @@
-import { Error } from './pages/ErrorPage/ErrorPage';
 import { Route, Routes } from 'react-router-dom';
 import { Header } from './components/Header/Header';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.scss';
-import { Login } from './pages/LoginPage/Login';
-import { Registration } from './pages/Registration/RegistrationPage';
+import { Footer } from './components/Footer/Footer';
+import { WelcomePage } from './pages/WelcomePage/WelcomePage';
+import { BoardsPage } from './pages/BoardsPage/BoardsPage';
+import { Board } from './components/Board/Board';
+import { LoginPage } from './pages/LoginPage/LoginPage';
+import { SignUpPage } from './pages/RegistrationPage/RegistrationPage';
+import { NotFoundPage } from './pages/NotFoundPage/NotFoundPage';
 
 function App() {
   return (
-    <div>
+    <div className="container-xxl">
       <Header />
       <Routes>
-        <Route path="*" element={<Error />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/registration" element={<Registration />} />
+        <Route path="/" element={<WelcomePage />} />
+        <Route path="/boards" element={<BoardsPage />}></Route>
+        <Route path="/boards/:id" element={<Board />}></Route>
+        <Route path="/registration" element={<SignUpPage />}></Route>
+        <Route path="/login" element={<LoginPage />}></Route>
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
+      <Footer />
     </div>
   );
 }
