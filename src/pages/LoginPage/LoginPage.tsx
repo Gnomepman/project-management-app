@@ -30,7 +30,7 @@ export const LoginPage = () => {
       {isError && <ErrorComponent />}
       {user && (
         <p>
-          Hi, <span>{user?.login} </span>
+          Hello, <span>{user?.login} </span>
         </p>
       )}
     </>
