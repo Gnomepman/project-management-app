@@ -14,19 +14,20 @@ import { NotFoundPage } from './pages/NotFoundPage/NotFoundPage';
 
 function App() {
   return (
-    <div className="container-xxl">
-      {/* I suggest moving <Header /> and <Footer /> outside of "container-xxl" and adding padding, so they have the witdh of screen. Otherwise we get white stripes on the sides */}
+    <>
       <Header />
-      <Routes>
-        <Route path="/" element={<WelcomePage />} />
-        <Route path="/boards" element={<BoardsPage />}></Route>
-        <Route path="/boards/:id" element={<Board />}></Route>
-        <Route path="/registration" element={<RegistrationPage />}></Route>
-        <Route path="/login" element={<LoginPage />}></Route>
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
+      <div className="container-xxl">
+        <Routes>
+          <Route path="/" element={<WelcomePage />} />
+          <Route path="/boards" element={<BoardsPage />}></Route>
+          <Route path="/boards/:id" element={<Board />}></Route>
+          <Route path="/registration" element={<RegistrationPage />}></Route>
+          <Route path="/login" element={<LoginPage />}></Route>
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </div>
       <Footer />
-    </div>
+    </>
   );
 }
 

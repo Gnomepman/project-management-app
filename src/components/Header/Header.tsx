@@ -13,38 +13,40 @@ export function Header() {
 
   return (
     <Navbar bg="light">
-      <Navbar.Collapse>
-        <NavLink to="/boards">
-          <img
-            src={Logo}
-            width="100"
-            height="50"
-            className="d-inline-block align-top"
-            alt="pm-app-logo"
-          />
+      <div className="container-xxl">
+        <Navbar.Collapse>
+          <NavLink to="/boards">
+            <img
+              src={Logo}
+              width="100"
+              height="50"
+              className="d-inline-block align-top"
+              alt="pm-app-logo"
+            />
+          </NavLink>
+          <NavDropdown title={t('language')} id="basic-nav-dropdown" className="px-2">
+            {languages.map(({ code, name }) => (
+              <NavDropdown.Item
+                key={name}
+                onClick={() => {
+                  changeLanguage(code);
+                }}
+              >
+                {name}
+              </NavDropdown.Item>
+            ))}
+          </NavDropdown>
+        </Navbar.Collapse>
+
+        <NavLink className="px-2" to="/about">
+          {t('about')}
         </NavLink>
-        <NavDropdown title={t('language')} id="basic-nav-dropdown" className="px-2">
-          {languages.map(({ code, name }) => (
-            <NavDropdown.Item
-              key={name}
-              onClick={() => {
-                changeLanguage(code);
-              }}
-            >
-              {name}
-            </NavDropdown.Item>
-          ))}
-        </NavDropdown>
-      </Navbar.Collapse>
 
-      <NavLink className="px-2" to="/about">
-        {t('about')}
-      </NavLink>
-
-      <NavLink className="px-2" to="/boards">
-        Boards
-      </NavLink>
-      <AuthSection />
+        <NavLink className="px-2" to="/boards">
+          Boards
+        </NavLink>
+        <AuthSection />
+      </div>
     </Navbar>
   );
 }
