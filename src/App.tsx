@@ -12,6 +12,7 @@ import { WelcomePage } from './pages/WelcomePage/WelcomePage';
 function App() {
   return (
     <div className="container-xxl">
+      {/* I suggest moving <Header /> and <Footer /> outside of "container-xxl" and adding padding, so they have the witdh of screen. Otherwise we get white stripes on the sides */}
       <Header />
       <Routes>
         <Route path="/" element={<WelcomePage />} />
