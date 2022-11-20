@@ -4,8 +4,15 @@ import Form from 'react-bootstrap/Form';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import './BoardsPage.scss';
+import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { Loader } from '../../components/Loader/Loader';
+import { useGetBoardByIdQuery } from '../../store/api/boardApi';
+import { ErrorComponent } from '../../components/Error/ErrorComponent';
 
 export function BoardsPage() {
+  const boarderId = '63763bacc02777e984c57e3a';
+  const { isLoading, isError, error, data } = useGetBoardByIdQuery(boarderId);
   //const { boards, setBoards } = useState([]);
   const { t } = useTranslation();
   const [show, setShow] = useState(false);
