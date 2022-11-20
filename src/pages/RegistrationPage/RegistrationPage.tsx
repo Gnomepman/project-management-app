@@ -1,18 +1,93 @@
-import React from 'react';
-import { IUser } from '../../models';
-import { useRegisterUserQuery } from '../../store/api/authApi';
+import React, { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
+import Button from 'react-bootstrap/esm/Button';
+import { useActions } from '../../hooks/actions';
+import { IError, IUser } from '../../models';
+import { useRegisterUserMutation } from '../../store/api/authApi';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { FormInput } from '../../components/FormInput/FormInput';
+import { Loader } from '../../components/Loader/Loader';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
-export const RegistrationPage = () => {
-  const user: IUser = {
-    login: 'test1',
-    name: 'test1',
-    password: 'test1',
+export function RegistrationPage() {
+  const { t } = useTranslation();
+
+  const navigate = useNavigate();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<IUser>({});
+
+  const [loginUser, { isLoading, isError, error, isSuccess, data }] = useRegisterUserMutation();
+
+  const { setUser } = useActions();
+
+  // Todo Refactor
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success('You successfully logged in', {
+        position: 'top-right',
+        autoClose: 1000,
+      });
+      navigate('/boards');
+    }
+
+    if (isError) {
+      toast.error((error as IError).data.message, {
+        position: 'top-right',
+        autoClose: 2000,
+      });
+    }
+  }, [isLoading]);
+
+  useEffect(() => {
+    if (!errors) {
+      reset();
+    }
+  }, [errors]);
+
+  const onSubmit: SubmitHandler<IUser> = (data: IUser) => {
+    setUser(data);
+    loginUser(data);
   };
 
-  // Todo refactor
-  const { isLoading, isError, data } = useRegisterUserQuery(user);
+  const hasError = () => {
+    return Object.keys(errors).length !== 0;
+  };
 
-  const auth = localStorage.getItem('token');
+  return (
+    <>
+      {!data && (
+        <div className="container mt-5">
+          <div className="row d-flex justify-content-center">
+            <div className="col-md-4">
+              <form onSubmit={handleSubmit(onSubmit)} data-testid="form">
+                <div className="form-outline mb-4">
+                  <FormInput field="login" register={register} errors={errors.login} />
 
-  return <div>SignUpPage {auth}</div>;
-};
+                  <div className="mb-6">
+                    <FormInput field="password" register={register} errors={errors.password} />
+                  </div>
+                  <Button
+                    type="submit"
+                    value="submit"
+                    data-testid="button-submit"
+                    disabled={hasError()}
+                    className={hasError() ? 'bg-secondary my-4' : 'bg-primary my-4'}
+                  >
+                    {t('Submit')}
+                  </Button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      )}
+      {isLoading && <Loader />}
+    </>
+  );
+}

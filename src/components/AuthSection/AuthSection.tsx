@@ -3,14 +3,22 @@ import { useActions } from '../../hooks/actions';
 import { useAppSelector } from '../../hooks/redux';
 import { Button, Nav } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 export const AuthSection = () => {
   const { t } = useTranslation();
 
   const { logout } = useActions();
+  const navigate = useNavigate();
+
   const { user } = useAppSelector((store) => store.user);
 
   const isLogged = localStorage.getItem('token');
+
+  const onClickHandler = () => {
+    logout();
+    navigate('/');
+  };
 
   return (
     <>
@@ -34,7 +42,7 @@ export const AuthSection = () => {
           </Nav.Item>
 
           <Nav.Item>
-            <Button onClick={logout}>{t('Log out')}</Button>
+            <Button onClick={onClickHandler}>{t('Log out')}</Button>
           </Nav.Item>
         </Nav>
       )}
