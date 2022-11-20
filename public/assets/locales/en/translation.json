@@ -10,7 +10,7 @@
   "pass_error": "Enter the password",
   "name_error": "Enter your name",
   "error-main": "Opps! Page not found.",
-  "error-description": "The page you’re looking for doesn/’t exist.",
+  "error-description": "The page you’re looking for doesn’t exist.",
   "error-button": "Go Home",
   "wp": {
     "description": "The work management tool for happy collaboration",
@@ -20,5 +20,17 @@
   "footer": {
     "created": "Created in",
     "rights": "2022 | All Rights Reserved"
+  },
+  "boards":{
+    "create": "CREATE NEW BOARD",
+    "modal": {
+      "creating": "Adding new board",
+      "close": "Close",
+      "create": "Create",
+      "form": {
+        "title": "Board name",
+        "placeholder": "My cool board"
+      }
+    }
   }
 }
