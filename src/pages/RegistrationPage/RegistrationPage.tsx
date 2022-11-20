@@ -1,148 +1,93 @@
-import React, { useEffect, useState } from 'react';
-import { Button } from 'react-bootstrap';
+import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { IUser } from '../../models';
+import Button from 'react-bootstrap/esm/Button';
+import { useActions } from '../../hooks/actions';
+import { IError, IUser } from '../../models';
 import { useRegisterUserMutation } from '../../store/api/authApi';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { FormInput } from '../../components/FormInput/FormInput';
+import { Loader } from '../../components/Loader/Loader';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
-export const SignUpPage = () => {
+export function RegistrationPage() {
   const { t } = useTranslation();
 
-  const [signUpUser, { isLoading, isError, data }] = useRegisterUserMutation();
+  const navigate = useNavigate();
 
-  const [name, setName] = useState('');
-  const [password, setPassword] = useState('');
-  const [login, setLogin] = useState('');
-  const [nameDirty, setNameDirty] = useState(false);
-  const [passwordDirty, setPasswordDirty] = useState(false);
-  const [loginDirty, setLoginDirty] = useState(false);
-  const [nameError, setNameError] = useState('Укажите название');
-  const [passwordError, setPasswordError] = useState('Введите описание');
-  const [loginError, setLoginError] = useState('Укажите название');
-  const [validation, setValidation] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<IUser>({});
 
-  const enterName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setName(e.target.value);
-    if (e.target.value.length < 4 || e.target.value.length > 25) {
-      setNameError('Введите название');
-    } else {
-      setNameError('');
+  const [loginUser, { isLoading, isError, error, isSuccess, data }] = useRegisterUserMutation();
+
+  const { setUser } = useActions();
+
+  // Todo Refactor
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success('You successfully logged in', {
+        position: 'top-right',
+        autoClose: 1000,
+      });
+      navigate('/boards');
     }
-  };
 
-  const enterLogin = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setLogin(e.target.value);
-    if (e.target.value.length < 4 || e.target.value.length > 25) {
-      setLoginError('Введите название');
-    } else {
-      setLoginError('');
+    if (isError) {
+      toast.error((error as IError).data.message, {
+        position: 'top-right',
+        autoClose: 2000,
+      });
     }
-  };
-
-  const enterPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
-    console.log(password);
-    if (e.target.value.length < 4 || e.target.value.length > 100) {
-      setPasswordError('Введите пароль');
-    } else {
-      setPasswordError('');
-    }
-  };
-
-  const voidField = (event: React.ChangeEvent<HTMLInputElement>) => {
-    switch (event.target.name) {
-      case 'name':
-        setNameDirty(true);
-        break;
-      case 'login':
-        setLoginDirty(true);
-        break;
-      case 'password':
-        setPasswordDirty(true);
-        break;
-    }
-  };
+  }, [isLoading]);
 
   useEffect(() => {
-    if (nameError || passwordError || loginError) {
-      setValidation(false);
-    } else {
-      setValidation(true);
+    if (!errors) {
+      reset();
     }
-  });
+  }, [errors]);
 
-  const user: IUser = {
-    login: login,
-    name: name,
-    password: password,
+  const onSubmit: SubmitHandler<IUser> = (data: IUser) => {
+    setUser(data);
+    loginUser(data);
   };
 
-  const onSubmit = async () => {
-    if (validation === true) {
-      await signUpUser({
-        login: login,
-        name: name,
-        password: password,
-      }).unwrap();
-    }
+  const hasError = () => {
+    return Object.keys(errors).length !== 0;
   };
-
-  const auth = localStorage.getItem('token');
 
   return (
-    <div className="section">
-      <form className="login_container">
-        <div className="create">{t('registration')}</div>
-        <div className="info">
-          <div>
-            <label htmlFor="name">{t('registration_name')}</label>
+    <>
+      {!data && (
+        <div className="container mt-5">
+          <div className="row d-flex justify-content-center">
+            <div className="col-md-4">
+              <form onSubmit={handleSubmit(onSubmit)} data-testid="form">
+                <div className="form-outline mb-4">
+                  <FormInput field="login" register={register} errors={errors.login} />
+
+                  <div className="mb-6">
+                    <FormInput field="password" register={register} errors={errors.password} />
+                  </div>
+                  <Button
+                    type="submit"
+                    value="submit"
+                    data-testid="button-submit"
+                    disabled={hasError()}
+                    className={hasError() ? 'bg-secondary my-4' : 'bg-primary my-4'}
+                  >
+                    {t('Submit')}
+                  </Button>
+                </div>
+              </form>
+            </div>
           </div>
-          <input
-            value={name}
-            onBlur={(event) => voidField(event)}
-            onChange={(e) => enterName(e)}
-            type="text"
-            name="name"
-          />
-          {nameDirty && nameError && <div className="mistake">{t('name_error')}</div>}
         </div>
-        <div className="info">
-          <div>
-            <label htmlFor="login">Login</label>
-          </div>
-          <input
-            value={login}
-            onBlur={(event) => voidField(event)}
-            onChange={(e) => enterLogin(e)}
-            type="text"
-            name="login"
-          />
-          {loginDirty && loginError && <div className="mistake">{t('name_error')}</div>}
-        </div>
-        <div className="info">
-          <div>
-            <label htmlFor="password">{t('registration_password')}</label>
-          </div>
-          <input
-            value={password}
-            onBlur={(event) => voidField(event)}
-            onChange={(e) => enterPassword(e)}
-            type="text"
-            name="password"
-          />
-          {passwordDirty && passwordError && (
-            <div className="mistake">{t('registration_password')}</div>
-          )}
-        </div>
-        <Button
-          variant="primary"
-          onClick={() => {
-            onSubmit();
-          }}
-          disabled={!validation}
-        >
-          {t('enter')}
-        </Button>
-      </form>
-    </div>
+      )}
+      {isLoading && <Loader />}
+    </>
   );
-};
+}

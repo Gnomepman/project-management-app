@@ -11,7 +11,7 @@ export const FormErrorMessage = ({ field, errors }: errorProps) => {
   return (
     <>
       {errors && (
-        <p className="text-danger" data-testid={`${field}-error`}>
+        <p className="text-danger form-label" data-testid={`${field}-error`}>
           {errorMsg} {field}
         </p>
       )}

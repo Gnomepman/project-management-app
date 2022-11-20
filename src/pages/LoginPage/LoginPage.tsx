@@ -1,21 +1,19 @@
-import React from 'react';
-import Button from 'react-bootstrap/esm/Button';
+import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import './LoginPage.scss';
-import { useAppSelector } from '../../hooks/redux';
+import Button from 'react-bootstrap/esm/Button';
 import { useActions } from '../../hooks/actions';
-import { IUser } from '../../models';
-import { useLoginUserQuery } from '../../store/api/authApi';
+import { IError, IUser } from '../../models';
+import { useLoginUserMutation } from '../../store/api/authApi';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { FormInput } from '../../components/FormInput/FormInput';
+import { Loader } from '../../components/Loader/Loader';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 export function LoginPage() {
   const { t } = useTranslation();
 
-  const userMock: IUser = {
-    login: 'IMask',
-    password: 'Tesla4ever',
-  };
+  const navigate = useNavigate();
 
   const {
     register,
@@ -24,15 +22,40 @@ export function LoginPage() {
     reset,
   } = useForm<IUser>({});
 
-  const { isError, isLoading, data } = useLoginUserQuery(userMock);
+  const [loginUser, { isLoading, isError, error, isSuccess, data }] = useLoginUserMutation();
 
-  const { user } = useAppSelector((store) => store.user);
   const { setUser } = useActions();
 
+  // Todo Refactor
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success('You successfully logged in', {
+        position: 'top-right',
+        autoClose: 1000,
+      });
+      navigate('/boards');
+    }
+
+    if (isError) {
+      toast.error((error as IError).data.message, {
+        position: 'top-right',
+        autoClose: 2000,
+      });
+    }
+  }, [isLoading]);
+
+  useEffect(() => {
+    if (!errors) {
+      reset();
+    }
+  }, [errors]);
+
   const onSubmit: SubmitHandler<IUser> = (data: IUser) => {
-    setUser(userMock);
-    localStorage.setItem('token', data?.login || '');
-    reset();
+    setUser(data);
+    loginUser(data);
+    if (isSuccess) {
+      localStorage.setItem('token', data?.login || '');
+    }
   };
 
   const hasError = () => {
@@ -40,46 +63,34 @@ export function LoginPage() {
   };
 
   return (
-    <div className="container mx-auto sm:max-w-2xl my-4">
-      <form className="w-full" onSubmit={handleSubmit(onSubmit)} data-testid="form">
-        <div className="flex flex-wrap -mx-3 mb-6">
-          <FormInput
-            field="login"
-            className="w-full md:w-1/2 px-3 mb-6 md:mb-0"
-            register={register}
-            errors={errors.login}
-          />
+    <>
+      {!data && (
+        <div className="container mt-5">
+          <div className="row d-flex justify-content-center">
+            <div className="col-md-4">
+              <form onSubmit={handleSubmit(onSubmit)} data-testid="form">
+                <div className="form-outline mb-4">
+                  <FormInput field="login" register={register} errors={errors.login} />
 
-          <div className="flex flex-wrap -mx-3 mb-6">
-            <FormInput
-              field="password"
-              className="w-full px-3"
-              register={register}
-              errors={errors.password}
-            />
+                  <div className="mb-6">
+                    <FormInput field="password" register={register} errors={errors.password} />
+                  </div>
+                  <Button
+                    type="submit"
+                    value="submit"
+                    data-testid="button-submit"
+                    disabled={hasError()}
+                    className={hasError() ? 'bg-secondary my-4' : 'bg-primary my-4'}
+                  >
+                    {t('Submit')}
+                  </Button>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
-
-        <Button
-          type="submit"
-          value="submit"
-          data-testid="button-submit"
-          disabled={hasError()}
-          className={hasError() ? 'bg-secondary my-2' : 'bg-primary my-2'}
-        >
-          {'Submit'}
-        </Button>
-      </form>
-    </div>
-    // <>
-    //   <button onClick={addUserToStore}>Sign In</button>
-    //   {isLoading && <Loader />}
-    //   {isError && <ErrorComponent />}
-    //   {user && (
-    //     <p>
-    //       Hello, <span>{user?.login} </span>
-    //     </p>
-    //   )}
-    // </>
+      )}
+      {isLoading && <Loader />}
+    </>
   );
 }

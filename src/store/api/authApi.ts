@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { IToken, IUser } from '../../models';
+import { IUser } from '../../models';
 
 export const authApi = createApi({
   reducerPath: 'auth/api',
@@ -8,7 +8,7 @@ export const authApi = createApi({
   }),
 
   endpoints: (build) => ({
-    loginUser: build.query<Record<string, string>, IUser>({
+    loginUser: build.mutation({
       query: (payload: IUser) => ({
         url: `auth/signin`,
         method: 'POST',
@@ -29,4 +29,4 @@ export const authApi = createApi({
   }),
 });
 
-export const { useLoginUserQuery, useRegisterUserMutation } = authApi;
+export const { useLoginUserMutation, useRegisterUserMutation } = authApi;

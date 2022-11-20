@@ -4,23 +4,17 @@ import { IUser } from '../../models';
 import { FormErrorMessage } from '../FormErrorMessage/FormErrorMessage';
 
 interface IInputProps {
-  field: 'id' | 'name' | 'login' | 'password';
-  className: string;
+  field: 'name' | 'login' | 'password';
   register: UseFormRegister<IUser>;
   errors: FieldError | undefined;
 }
 
-export const FormInput = ({ field, className, register, errors }: IInputProps) => {
+export const FormInput = ({ field, register, errors }: IInputProps) => {
   return (
-    <div className={className}>
-      <label
-        className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-        htmlFor={field}
-      >
-        {field}
-      </label>
+    <div className="form-group mt-3">
+      <label htmlFor={field}>{field}</label>
       <input
-        className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+        className="form-control mt-1"
         id={field}
         data-testid={field}
         placeholder={`Add ${field}`}
