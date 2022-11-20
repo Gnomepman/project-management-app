@@ -43,7 +43,7 @@ export function LoginPage() {
         autoClose: 3000,
       });
     }
-  }, [isLoading]);
+  }, [data, error, isError, isSuccess, navigate, isLoading]);
 
   useEffect(() => {
     if (!errors) {
