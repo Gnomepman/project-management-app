@@ -1,10 +1,11 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { IUser } from '../../models';
+import { API_URL } from '../../constants';
 
 export const userApi = createApi({
   reducerPath: 'user/api',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://pm-app-back.up.railway.app/',
+    baseUrl: API_URL,
 
     prepareHeaders: (headers) => {
       const token = localStorage.getItem('token');

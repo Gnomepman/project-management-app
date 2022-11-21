@@ -1,10 +1,11 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { IBoard } from '../../models';
+import { API_URL } from '../../constants';
 
 export const boardApi = createApi({
   reducerPath: 'board/api',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://pm-app-back.up.railway.app/',
+    baseUrl: API_URL,
 
     prepareHeaders: (headers) => {
       const token = localStorage.getItem('token');

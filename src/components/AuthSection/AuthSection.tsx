@@ -4,6 +4,7 @@ import { useAppSelector } from '../../hooks/redux';
 import { Button, Nav, Navbar } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { NavLink, useNavigate } from 'react-router-dom';
+import { isAuthenticated } from '../../utils/isAuthenticated';
 
 export const AuthSection = () => {
   const { t } = useTranslation();
@@ -19,11 +20,9 @@ export const AuthSection = () => {
     navigate('/');
   };
 
-  const isLogged = sessionStorage.getItem('user');
-
   return (
     <>
-      {!isLogged && (
+      {!isAuthenticated() && (
         <Navbar>
           <NavLink className="px-2" to="/registration">
             <Button variant="outline-secondary">{t('registration')}</Button>
@@ -34,7 +33,7 @@ export const AuthSection = () => {
         </Navbar>
       )}
 
-      {isLogged && (
+      {isAuthenticated() && (
         <Navbar>
           <NavLink className="mr-10 px-2" to="/boards">
             <Button variant="outline-danger"> {t('add-boards')}</Button>

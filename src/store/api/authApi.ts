@@ -1,10 +1,11 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { IUser } from '../../models';
+import { API_URL } from '../../constants';
 
 export const authApi = createApi({
   reducerPath: 'auth/api',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://pm-app-back.up.railway.app/',
+    baseUrl: API_URL,
   }),
 
   endpoints: (build) => ({
