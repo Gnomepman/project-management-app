@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import Button from 'react-bootstrap/esm/Button';
 import { useActions } from '../../hooks/actions';
-import { IError, IUser } from '../../models';
+import { IError, ILogin } from '../../models';
 import { useLoginUserMutation } from '../../store/api/authApi';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { FormInput } from '../../components/FormInput/FormInput';
@@ -21,7 +21,7 @@ export function LoginPage() {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<IUser>({});
+  } = useForm<ILogin>({});
 
   const [loginUser, { isLoading, isError, error, isSuccess, data }] = useLoginUserMutation();
 
@@ -34,10 +34,10 @@ export function LoginPage() {
         position: 'top-right',
         autoClose: 800,
       });
-      const userData = parseJwt(data.token);
+      sessionStorage.setItem('token', data?.token as string);
+      const userData = parseJwt(data?.token as string);
       setUser(userData);
       sessionStorage.setItem('user', JSON.stringify(userData));
-
       navigate('/boards');
     }
 
@@ -55,7 +55,7 @@ export function LoginPage() {
     }
   }, [reset, errors]);
 
-  const onSubmit: SubmitHandler<IUser> = (data: IUser) => {
+  const onSubmit: SubmitHandler<ILogin> = (data: ILogin) => {
     loginUser(data);
   };
 

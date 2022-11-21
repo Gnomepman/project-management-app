@@ -8,7 +8,7 @@ export const boardApi = createApi({
     baseUrl: API_URL,
 
     prepareHeaders: (headers) => {
-      const token = localStorage.getItem('token');
+      const token = sessionStorage.getItem('token');
       if (token) {
         headers.set('authorization', `Bearer ${token}`);
       }
@@ -17,6 +17,15 @@ export const boardApi = createApi({
   }),
 
   endpoints: (build) => ({
+    getBoards: build.mutation({
+      query: () => ({
+        url: `boards`,
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+      }),
+    }),
+
     getBoardById: build.query<IBoard, string>({
       query: (id) => ({
         url: `boards/${id}`,
@@ -30,4 +39,4 @@ export const boardApi = createApi({
     }),
   }),
 });
-export const { useGetBoardByIdQuery } = boardApi;
+export const { useGetBoardsMutation, useGetBoardByIdQuery } = boardApi;

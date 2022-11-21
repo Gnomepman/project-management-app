@@ -9,7 +9,7 @@ export const columnApi = createApi({
     baseUrl: API_URL,
 
     prepareHeaders: (headers) => {
-      const token = localStorage.getItem('token');
+      const token = sessionStorage.getItem('token');
       if (token) {
         headers.set('authorization', `Bearer ${token}`);
       }

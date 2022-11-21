@@ -22,7 +22,7 @@ export function RegistrationPage() {
     reset,
   } = useForm<IUser>({});
 
-  const [loginUser, { isLoading, isError, error, isSuccess, data }] = useRegisterUserMutation();
+  const [registerUser, { isLoading, isError, error, isSuccess, data }] = useRegisterUserMutation();
 
   const { setUser } = useActions();
 
@@ -52,7 +52,7 @@ export function RegistrationPage() {
 
   const onSubmit: SubmitHandler<IUser> = (data: IUser) => {
     setUser(data);
-    loginUser(data);
+    registerUser(data);
   };
 
   const hasError = () => {

@@ -22,8 +22,8 @@ export const store = configureStore({
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
-      serializableCheck: false,
       // Todo recheck if we need serializableCheck
+      serializableCheck: false,
     }).concat([
       authApi.middleware,
       userApi.middleware,
