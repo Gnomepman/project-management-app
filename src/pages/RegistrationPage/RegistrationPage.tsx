@@ -42,13 +42,13 @@ export function RegistrationPage() {
         autoClose: 2000,
       });
     }
-  }, [isLoading]);
+  }, [error, isError, isSuccess, navigate, isLoading]);
 
   useEffect(() => {
     if (!errors) {
       reset();
     }
-  }, [errors]);
+  }, [reset, errors]);
 
   const onSubmit: SubmitHandler<IUser> = (data: IUser) => {
     setUser(data);

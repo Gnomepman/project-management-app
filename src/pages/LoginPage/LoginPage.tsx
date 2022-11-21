@@ -33,29 +33,27 @@ export function LoginPage() {
         position: 'top-right',
         autoClose: 1000,
       });
+      localStorage.setItem('token', data.token);
       navigate('/boards');
     }
 
     if (isError) {
       toast.error((error as IError).data.message, {
         position: 'top-right',
-        autoClose: 2000,
+        autoClose: 3000,
       });
     }
-  }, [isLoading]);
+  }, [data, error, isError, isSuccess, navigate, isLoading]);
 
   useEffect(() => {
     if (!errors) {
       reset();
     }
-  }, [errors]);
+  }, [reset, errors]);
 
   const onSubmit: SubmitHandler<IUser> = (data: IUser) => {
     setUser(data);
     loginUser(data);
-    if (isSuccess) {
-      localStorage.setItem('token', data?.login || '');
-    }
   };
 
   const hasError = () => {

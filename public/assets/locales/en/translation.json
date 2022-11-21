@@ -7,9 +7,12 @@
   "registration_repeat_password": "Repeat password",
   "login": "Sign In",
   "about": "About",
+  "add-boards": "Create new board",
+  "edit-profile": "Edit profile",
+  "sign-out": "Sign Out",
   "pass_error": "Enter the password",
   "name_error": "Enter your name",
-  "error-main": "Opps! Page not found.",
+  "error-main": "Oops! Page not found.",
   "error-description": "The page you’re looking for doesn’t exist.",
   "error-button": "Go Home",
   "wp": {
@@ -21,7 +24,7 @@
     "created": "Created in",
     "rights": "2022 | All Rights Reserved"
   },
-  "boards":{
+  "boards": {
     "create": "CREATE NEW BOARD",
     "modal": {
       "creating": "Adding new board",

@@ -8,7 +8,10 @@
 }
 
 :root {
-  --primary: red;
+  .Toastify__toast-container--top-right {
+    margin-top: 60px;
+    width: 250px;
+  }
 }
 
 a {
