@@ -9,6 +9,7 @@ import { FormInput } from '../../components/FormInput/FormInput';
 import { Loader } from '../../components/Loader/Loader';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { parseJwt } from '../../utils/parseJwt';
 
 export function LoginPage() {
   const { t } = useTranslation();
@@ -31,9 +32,12 @@ export function LoginPage() {
     if (isSuccess) {
       toast.success('You successfully logged in', {
         position: 'top-right',
-        autoClose: 1000,
+        autoClose: 800,
       });
-      localStorage.setItem('token', data.token);
+      const userData = parseJwt(data.token);
+      setUser(userData);
+      sessionStorage.setItem('user', JSON.stringify(userData));
+
       navigate('/boards');
     }
 
@@ -43,7 +47,7 @@ export function LoginPage() {
         autoClose: 3000,
       });
     }
-  }, [data, error, isError, isSuccess, navigate, isLoading]);
+  }, [error, isError, isSuccess, navigate, isLoading, data, setUser]);
 
   useEffect(() => {
     if (!errors) {
@@ -52,7 +56,6 @@ export function LoginPage() {
   }, [reset, errors]);
 
   const onSubmit: SubmitHandler<IUser> = (data: IUser) => {
-    setUser(data);
     loginUser(data);
   };
 
