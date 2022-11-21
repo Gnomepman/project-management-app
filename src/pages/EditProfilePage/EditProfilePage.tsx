@@ -2,12 +2,12 @@ import React from 'react';
 import { useGetUserByIdQuery, useGetUsersQuery } from '../../store/api/userApi';
 import { Button } from 'react-bootstrap';
 import { ErrorComponent } from '../../components/Error/ErrorComponent';
-import { IUser } from '../../models';
+import { IErrorMessage, IUser } from '../../models';
 
 export const EditProfilePage = () => {
   const id = '636d6464c02777e984c57dc1';
 
-  const { isError, data } = useGetUserByIdQuery(id);
+  const { isError, error, data } = useGetUserByIdQuery(id);
   const { data: users } = useGetUsersQuery();
 
   return (
@@ -20,9 +20,14 @@ export const EditProfilePage = () => {
           <Button>Change User data</Button>
         </div>
       )}
-      {isError && <ErrorComponent />}
+      {isError && <ErrorComponent message={(error as IErrorMessage).data.message} />}
 
-      {users && users.map((item: IUser) => <p key={item.id}>{item.login}</p>)}
+      {users &&
+        users.map((item: IUser) => (
+          <span className="px-1" key={item.login}>
+            {item.login}
+          </span>
+        ))}
     </>
   );
 };
