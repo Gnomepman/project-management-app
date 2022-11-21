@@ -1,8 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IUser } from '../../models';
 
-const LS_KEY = 'token';
-
 interface IUserState {
   user: IUser | null;
 }
@@ -20,7 +18,6 @@ export const userSlice = createSlice({
     },
     logout: (state) => {
       state.user = null;
-      localStorage.removeItem(LS_KEY);
     },
   },
 });

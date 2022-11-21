@@ -1,9 +1,10 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { IBoard } from '../../models';
+import { ITask } from '../../models';
 import { API_URL } from '../../constants';
 
-export const boardApi = createApi({
-  reducerPath: 'board/api',
+//Todo Recheck, fix and update
+export const taskApi = createApi({
+  reducerPath: 'task/api',
   baseQuery: fetchBaseQuery({
     baseUrl: API_URL,
 
@@ -17,20 +18,31 @@ export const boardApi = createApi({
   }),
 
   endpoints: (build) => ({
-    getBoards: build.mutation({
+    getTasks: build.mutation({
       query: () => ({
-        url: `boards`,
+        url: `tasksSet`,
         headers: {
           'Content-type': 'application/json; charset=UTF-8',
         },
       }),
     }),
 
-    getBoardById: build.query<IBoard, string>({
-      query: (id) => ({
-        url: `boards/${id}`,
+    patchTasks: build.mutation({
+      query: (payload: ITask) => ({
+        url: `tasksSet`,
+        method: 'PATCH',
+        body: payload,
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+      }),
+    }),
+
+    getTasksByBoard: build.mutation({
+      query: (boardId) => ({
+        url: `tasksSet/${boardId}`,
         query: {
-          id: id,
+          id: boardId,
         },
         headers: {
           'Content-type': 'application/json; charset=UTF-8',
@@ -39,4 +51,4 @@ export const boardApi = createApi({
     }),
   }),
 });
-export const { useGetBoardsMutation, useGetBoardByIdQuery } = boardApi;
+export const { useGetTasksMutation, usePatchTasksMutation, useGetTasksByBoardMutation } = taskApi;

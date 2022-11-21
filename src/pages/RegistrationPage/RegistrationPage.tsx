@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import Button from 'react-bootstrap/esm/Button';
 import { useActions } from '../../hooks/actions';
-import { IError, IUser } from '../../models';
+import { IErrorMessage, IUser } from '../../models';
 import { useRegisterUserMutation } from '../../store/api/authApi';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { FormInput } from '../../components/FormInput/FormInput';
@@ -22,7 +22,7 @@ export function RegistrationPage() {
     reset,
   } = useForm<IUser>({});
 
-  const [loginUser, { isLoading, isError, error, isSuccess, data }] = useRegisterUserMutation();
+  const [registerUser, { isLoading, isError, error, isSuccess, data }] = useRegisterUserMutation();
 
   const { setUser } = useActions();
 
@@ -37,7 +37,7 @@ export function RegistrationPage() {
     }
 
     if (isError) {
-      toast.error((error as IError).data.message, {
+      toast.error((error as IErrorMessage).data.message, {
         position: 'top-right',
         autoClose: 2000,
       });
@@ -52,7 +52,7 @@ export function RegistrationPage() {
 
   const onSubmit: SubmitHandler<IUser> = (data: IUser) => {
     setUser(data);
-    loginUser(data);
+    registerUser(data);
   };
 
   const hasError = () => {

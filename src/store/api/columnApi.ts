@@ -1,9 +1,10 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { IBoard } from '../../models';
+import { IColumn } from '../../models';
 import { API_URL } from '../../constants';
 
-export const boardApi = createApi({
-  reducerPath: 'board/api',
+//Todo Recheck, fix and update
+export const columnApi = createApi({
+  reducerPath: 'column/api',
   baseQuery: fetchBaseQuery({
     baseUrl: API_URL,
 
@@ -17,18 +18,21 @@ export const boardApi = createApi({
   }),
 
   endpoints: (build) => ({
-    getBoards: build.mutation({
-      query: () => ({
-        url: `boards`,
+    getColumns: build.mutation({
+      query: (boardId) => ({
+        url: `boards/${boardId}/columns`,
+        query: {
+          id: boardId,
+        },
         headers: {
           'Content-type': 'application/json; charset=UTF-8',
         },
       }),
     }),
 
-    getBoardById: build.query<IBoard, string>({
+    getColumnById: build.query<IColumn, string>({
       query: (id) => ({
-        url: `boards/${id}`,
+        url: `columns/${id}`,
         query: {
           id: id,
         },
@@ -39,4 +43,4 @@ export const boardApi = createApi({
     }),
   }),
 });
-export const { useGetBoardsMutation, useGetBoardByIdQuery } = boardApi;
+export const { useGetColumnsMutation, useGetColumnByIdQuery } = columnApi;

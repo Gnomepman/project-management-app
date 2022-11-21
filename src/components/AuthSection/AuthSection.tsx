@@ -1,9 +1,10 @@
 import React from 'react';
 import { useActions } from '../../hooks/actions';
 import { useAppSelector } from '../../hooks/redux';
-import { Button, Nav } from 'react-bootstrap';
+import { Button, Nav, Navbar } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { NavLink, useNavigate } from 'react-router-dom';
+import { isAuthenticated } from '../../utils/isAuthenticated';
 
 export const AuthSection = () => {
   const { t } = useTranslation();
@@ -13,35 +14,34 @@ export const AuthSection = () => {
 
   const { user } = useAppSelector((store) => store.user);
 
-  const isLogged = localStorage.getItem('token');
-
   const onClickHandler = () => {
     logout();
+    sessionStorage.removeItem('user');
     navigate('/');
   };
 
   return (
     <>
-      {!isLogged && (
-        <Nav>
-          <Nav.Link href="/registration">
+      {!isAuthenticated() && (
+        <Navbar>
+          <NavLink className="px-2" to="/registration">
             <Button variant="outline-secondary">{t('registration')}</Button>
-          </Nav.Link>
-          <Nav.Link href="/login">
+          </NavLink>
+          <NavLink className="px-2" to="/login">
             <Button variant="outline-secondary">{t('login')}</Button>
-          </Nav.Link>
-        </Nav>
+          </NavLink>
+        </Navbar>
       )}
 
-      {isLogged && (
-        <Nav>
+      {isAuthenticated() && (
+        <Navbar>
           <NavLink className="mr-10 px-2" to="/boards">
             <Button variant="outline-danger"> {t('add-boards')}</Button>
           </NavLink>
 
-          <Nav.Link href="/user-info">
+          <NavLink className="px-2" to="/edit-profile">
             Hi <span className="text-danger fw-bold">{user?.login} </span>
-          </Nav.Link>
+          </NavLink>
 
           <NavLink className="px-2" to="/edit-profile">
             <Button variant="outline-secondary">{t('edit-profile')}</Button>
@@ -50,7 +50,7 @@ export const AuthSection = () => {
           <Nav.Item>
             <Button onClick={onClickHandler}>{t('sign-out')}</Button>
           </Nav.Item>
-        </Nav>
+        </Navbar>
       )}
     </>
   );

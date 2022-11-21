@@ -1,6 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import './NotFoundPage.scss';
+import { NavLink } from 'react-router-dom';
 
 export const NotFoundPage = () => {
   const { t } = useTranslation();
@@ -13,9 +14,9 @@ export const NotFoundPage = () => {
           <span className="text-danger">{t('error-main')}</span>
         </p>
         <p className="lead">{t('error-description')}</p>
-        <a href="/" className="btn btn-primary">
+        <NavLink to="/" className="btn btn-primary">
           {t('error-button')}
-        </a>
+        </NavLink>
       </div>
     </div>
   );
