@@ -24,7 +24,7 @@ export function Header() {
               alt="pm-app-logo"
             />
           </NavLink>
-          <NavDropdown title={t('language')} className="px-2">
+          <NavDropdown title={t('auth.language')} className="px-2">
             {languages.map(({ code, name }) => (
               <NavDropdown.Item
                 key={name}

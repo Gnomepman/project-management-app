@@ -62,8 +62,8 @@ export function RegistrationPage() {
   return (
     <>
       {!data && (
-        <div className="container mt-5">
-          <div className="row d-flex justify-content-center">
+        <div className="container app-container">
+          <div className="row d-flex pt-5 justify-content-center">
             <div className="col-md-4">
               <form onSubmit={handleSubmit(onSubmit)} data-testid="form">
                 <div className="form-outline mb-4">
