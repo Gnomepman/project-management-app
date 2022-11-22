@@ -1,13 +1,14 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { IUser } from '../../models';
+import { API_URL } from '../../constants';
 
 export const userApi = createApi({
   reducerPath: 'user/api',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://pm-app-back.up.railway.app/',
+    baseUrl: API_URL,
 
     prepareHeaders: (headers) => {
-      const token = localStorage.getItem('token');
+      const token = sessionStorage.getItem('token');
       if (token) {
         headers.set('authorization', `Bearer ${token}`);
       }
@@ -16,6 +17,15 @@ export const userApi = createApi({
   }),
 
   endpoints: (build) => ({
+    getUsers: build.query<IUser[], void>({
+      query: () => ({
+        url: `users`,
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+      }),
+    }),
+
     getUserById: build.query<IUser, string>({
       query: (id) => ({
         url: `users/${id}`,
@@ -27,7 +37,43 @@ export const userApi = createApi({
         },
       }),
     }),
+
+    putUser: build.mutation<FormData, { id: string; payload: FormData }>({
+      // query: (id: string, payload: FormData) => ({
+      //   url: `users/${id}`,
+      //   method: 'PUT',
+      //   body: payload,
+      //   headers: {
+      //     'Content-type': 'application/json; charset=UTF-8',
+      //   },
+      // }),
+      query({ id, payload }) {
+        return {
+          url: `/users/${id}`,
+          method: 'PUT',
+          credentials: 'include',
+          body: payload,
+          headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+          },
+        };
+      },
+    }),
+
+    deleteUser: build.mutation<IUser, string>({
+      query: (id) => ({
+        url: `users/${id}`,
+        method: 'DELETE',
+        query: {
+          id: id,
+        },
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+      }),
+    }),
   }),
 });
 
-export const { useGetUserByIdQuery } = userApi;
+export const { useGetUsersQuery, useGetUserByIdQuery, usePutUserMutation, useDeleteUserMutation } =
+  userApi;

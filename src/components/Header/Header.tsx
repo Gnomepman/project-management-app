@@ -15,7 +15,7 @@ export function Header() {
     <Navbar bg="light">
       <div className="container-xxl">
         <Navbar.Collapse>
-          <NavLink to="/boards">
+          <NavLink to="/">
             <img
               src={Logo}
               width="100"
@@ -24,7 +24,7 @@ export function Header() {
               alt="pm-app-logo"
             />
           </NavLink>
-          <NavDropdown title={t('language')} id="basic-nav-dropdown" className="px-2">
+          <NavDropdown title={t('language')} className="px-2">
             {languages.map(({ code, name }) => (
               <NavDropdown.Item
                 key={name}
@@ -38,13 +38,6 @@ export function Header() {
           </NavDropdown>
         </Navbar.Collapse>
 
-        <NavLink className="px-2" to="/about">
-          {t('about')}
-        </NavLink>
-
-        <NavLink className="px-2" to="/boards">
-          Boards
-        </NavLink>
         <AuthSection />
       </div>
     </Navbar>

@@ -7,6 +7,9 @@
   "registration_repeat_password": "Повторите пароль",
   "login": "Войти",
   "about": "Про нас",
+  "add-boards": "Создать новую доску",
+  "edit-profile": "Редактировать профиль",
+  "sign-out": "Выйти",
   "pass_error": "Введите пароль",
   "name_error": "Введите Ваше имя",
   "error-main": "Страница не найдена.",
@@ -21,8 +24,8 @@
     "created": "Создано в",
     "rights": "2022 | Все права защищены"
   },
-  "boards":{
-    "create": "СОЗДАТЬ ДОСКУ",
+  "boards": {
+    "create": "Создать доску",
     "modal": {
       "creating": "Добавление новой доски",
       "close": "Закрыть",
