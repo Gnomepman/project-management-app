@@ -24,7 +24,21 @@ export const FormInput = ({ field, title, register, errors }: IInputProps) => {
         data-testid={field}
         placeholder={`${add} ${title}`}
         type="text"
-        {...(register && register(field, { required: true, minLength: 4, maxLength: 20 }))}
+        {...(register &&
+          register(field, {
+            required: {
+              value: true,
+              message: t('auth.required-field'),
+            },
+            maxLength: {
+              value: 20,
+              message: t('auth.max-length'),
+            },
+            minLength: {
+              value: 4,
+              message: t('auth.min-length'),
+            },
+          }))}
       />
       <FormErrorMessage field={field} errors={errors} />
     </div>
