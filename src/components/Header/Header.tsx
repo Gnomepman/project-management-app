@@ -13,31 +13,33 @@ export function Header() {
 
   return (
     <Navbar bg="light">
-      <Navbar.Collapse>
-        <NavLink to="/">
-          <img
-            src={Logo}
-            width="100"
-            height="50"
-            className="d-inline-block align-top"
-            alt="pm-app-logo"
-          />
-        </NavLink>
-        <NavDropdown title={t('language')} className="px-2">
-          {languages.map(({ code, name }) => (
-            <NavDropdown.Item
-              key={name}
-              onClick={() => {
-                changeLanguage(code);
-              }}
-            >
-              {name}
-            </NavDropdown.Item>
-          ))}
-        </NavDropdown>
-      </Navbar.Collapse>
+      <div className="container-xxl">
+        <Navbar.Collapse>
+          <NavLink to="/">
+            <img
+              src={Logo}
+              width="100"
+              height="50"
+              className="d-inline-block align-top"
+              alt="pm-app-logo"
+            />
+          </NavLink>
+          <NavDropdown title={t('language')} className="px-2">
+            {languages.map(({ code, name }) => (
+              <NavDropdown.Item
+                key={name}
+                onClick={() => {
+                  changeLanguage(code);
+                }}
+              >
+                {name}
+              </NavDropdown.Item>
+            ))}
+          </NavDropdown>
+        </Navbar.Collapse>
 
-      <AuthSection />
+        <AuthSection />
+      </div>
     </Navbar>
   );
 }
