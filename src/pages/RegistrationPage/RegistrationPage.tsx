@@ -5,7 +5,6 @@ import { useActions } from '../../hooks/actions';
 import { IError, IUser } from '../../models';
 import { useRegisterUserMutation } from '../../store/api/authApi';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { FormInput } from '../../components/FormInput/FormInput';
 import { Loader } from '../../components/Loader/Loader';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -42,13 +41,13 @@ export function RegistrationPage() {
         autoClose: 2000,
       });
     }
-  }, [isLoading]);
+  }, [isLoading, isError, error, isSuccess, navigate]);
 
   useEffect(() => {
     if (!errors) {
       reset();
     }
-  }, [errors]);
+  }, [errors, reset]);
 
   const onSubmit: SubmitHandler<IUser> = (data: IUser) => {
     setUser(data);
