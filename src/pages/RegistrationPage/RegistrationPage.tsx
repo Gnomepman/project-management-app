@@ -5,6 +5,7 @@ import { useActions } from '../../hooks/actions';
 import { IErrorMessage, IUser } from '../../models';
 import { useRegisterUserMutation } from '../../store/api/authApi';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { FormInput } from '../../components/FormInput/FormInput';
 import { Loader } from '../../components/Loader/Loader';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -28,7 +29,7 @@ export function RegistrationPage() {
   // Todo Refactor
   useEffect(() => {
     if (isSuccess) {
-      toast.success('You successfully logged in', {
+      toast.success(t('auth.reg-success'), {
         position: 'top-right',
         autoClose: 1000,
       });
@@ -41,7 +42,7 @@ export function RegistrationPage() {
         autoClose: 2000,
       });
     }
-  }, [error, isError, isSuccess, navigate, isLoading]);
+  }, [t, error, isError, isSuccess, navigate, isLoading]);
 
   useEffect(() => {
     if (!errors) {
@@ -57,6 +58,7 @@ export function RegistrationPage() {
   const hasError = () => {
     return Object.keys(errors).length !== 0;
   };
+
   return (
     <>
       {!data && (
@@ -65,54 +67,24 @@ export function RegistrationPage() {
             <div className="col-md-4">
               <form onSubmit={handleSubmit(onSubmit)} data-testid="form">
                 <div className="form-outline mb-4">
-                  <div className="form-group mt-3">
-                    <label htmlFor="name">{t('registration_name')}</label>
-                    <input
-                      className="form-control mt-1"
-                      placeholder={`${t('placeholder_name')}`}
-                      type="text"
-                      {...register('name', {
-                        required: `${t('login_error')}`,
-                        minLength: {
-                          value: 5,
-                          message: `${t('min_error')}`,
-                        },
-                      })}
-                    />
-                    <div>{errors?.name && errors.name.message}</div>
-                  </div>
-                  <div className="form-group mt-3">
-                    <label htmlFor="name">{t('registration_login')}</label>
-                    <input
-                      className="form-control mt-1"
-                      placeholder={`${t('placeholder_login')}`}
-                      type="text"
-                      {...register('login', {
-                        required: `${t('login_error')}`,
-                        minLength: {
-                          value: 5,
-                          message: `${t('min_error')}`,
-                        },
-                      })}
-                    />
-                    <div>{errors?.login && errors.login.message}</div>
-                  </div>
-                  <div className="form-group mt-3">
-                    <label htmlFor="password">{t('registration_password')}</label>
-                    <input
-                      className="form-control mt-1"
-                      placeholder={`${t('placeholder_password')}`}
-                      type="text"
-                      {...register('password', {
-                        required: `${t('pass_error')}`,
-                        minLength: {
-                          value: 5,
-                          message: `${t('min_error')}`,
-                        },
-                      })}
-                    />
-                    <div>{errors?.password && errors.password.message}</div>
-                  </div>
+                  <FormInput
+                    field="login"
+                    title={t('auth.login')}
+                    register={register}
+                    errors={errors.login}
+                  />
+                  <FormInput
+                    field="name"
+                    title={t('auth.name')}
+                    register={register}
+                    errors={errors.name}
+                  />
+                  <FormInput
+                    field="password"
+                    title={t('auth.password')}
+                    register={register}
+                    errors={errors.password}
+                  />
                   <Button
                     type="submit"
                     value="submit"
@@ -120,7 +92,7 @@ export function RegistrationPage() {
                     disabled={hasError()}
                     className={hasError() ? 'bg-secondary my-4' : 'bg-primary my-4'}
                   >
-                    {t('Submit')}
+                    {t('auth.submit')}
                   </Button>
                 </div>
               </form>
