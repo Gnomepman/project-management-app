@@ -7,8 +7,6 @@ export const Loader = () => {
       <Spinner animation="border" variant="primary" />
       <Spinner animation="border" variant="success" />
       <Spinner animation="border" variant="danger" />
-      <Spinner animation="border" variant="warning" />
-      <Spinner animation="border" variant="info" />
     </div>
   );
 };
