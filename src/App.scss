@@ -19,3 +19,19 @@ a {
 a:hover {
   color: #292b69;
 }
+
+/* width */
+::-webkit-scrollbar {
+  width: 11px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background:rgb(164, 164, 164);
+  border-radius: 10px;
+}
