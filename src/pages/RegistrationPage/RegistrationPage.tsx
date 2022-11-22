@@ -58,7 +58,6 @@ export function RegistrationPage() {
   const hasError = () => {
     return Object.keys(errors).length !== 0;
   };
-
   return (
     <>
       {!data && (
@@ -67,10 +66,53 @@ export function RegistrationPage() {
             <div className="col-md-4">
               <form onSubmit={handleSubmit(onSubmit)} data-testid="form">
                 <div className="form-outline mb-4">
-                  <FormInput field="name" register={register} errors={errors.login} />
-                  <FormInput field="login" register={register} errors={errors.login} />
-                  <div className="mb-6">
-                    <FormInput field="password" register={register} errors={errors.password} />
+                  <div className="form-group mt-3">
+                    <label htmlFor="name">{t('registration_name')}</label>
+                    <input
+                      className="form-control mt-1"
+                      placeholder={`${t('placeholder_name')}`}
+                      type="text"
+                      {...register('name', {
+                        required: `${t('login_error')}`,
+                        minLength: {
+                          value: 5,
+                          message: `${t('min_error')}`,
+                        },
+                      })}
+                    />
+                    <div>{errors?.name && errors.name.message}</div>
+                  </div>
+                  <div className="form-group mt-3">
+                    <label htmlFor="name">{t('registration_login')}</label>
+                    <input
+                      className="form-control mt-1"
+                      placeholder={`${t('placeholder_login')}`}
+                      type="text"
+                      {...register('login', {
+                        required: `${t('login_error')}`,
+                        minLength: {
+                          value: 5,
+                          message: `${t('min_error')}`,
+                        },
+                      })}
+                    />
+                    <div>{errors?.login && errors.login.message}</div>
+                  </div>
+                  <div className="form-group mt-3">
+                    <label htmlFor="password">{t('registration_password')}</label>
+                    <input
+                      className="form-control mt-1"
+                      placeholder={`${t('placeholder_password')}`}
+                      type="text"
+                      {...register('password', {
+                        required: `${t('pass_error')}`,
+                        minLength: {
+                          value: 5,
+                          message: `${t('min_error')}`,
+                        },
+                      })}
+                    />
+                    <div>{errors?.password && errors.password.message}</div>
                   </div>
                   <Button
                     type="submit"
