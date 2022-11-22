@@ -67,8 +67,8 @@ export function RegistrationPage() {
             <div className="col-md-4">
               <form onSubmit={handleSubmit(onSubmit)} data-testid="form">
                 <div className="form-outline mb-4">
+                  <FormInput field="name" register={register} errors={errors.login} />
                   <FormInput field="login" register={register} errors={errors.login} />
-
                   <div className="mb-6">
                     <FormInput field="password" register={register} errors={errors.password} />
                   </div>
