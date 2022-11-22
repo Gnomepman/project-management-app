@@ -29,7 +29,7 @@ export function RegistrationPage() {
   // Todo Refactor
   useEffect(() => {
     if (isSuccess) {
-      toast.success('You successfully logged in', {
+      toast.success(t('auth.reg-success'), {
         position: 'top-right',
         autoClose: 1000,
       });
@@ -42,7 +42,7 @@ export function RegistrationPage() {
         autoClose: 2000,
       });
     }
-  }, [error, isError, isSuccess, navigate, isLoading]);
+  }, [t, error, isError, isSuccess, navigate, isLoading]);
 
   useEffect(() => {
     if (!errors) {
@@ -67,11 +67,24 @@ export function RegistrationPage() {
             <div className="col-md-4">
               <form onSubmit={handleSubmit(onSubmit)} data-testid="form">
                 <div className="form-outline mb-4">
-                  <FormInput field="login" register={register} errors={errors.login} />
-
-                  <div className="mb-6">
-                    <FormInput field="password" register={register} errors={errors.password} />
-                  </div>
+                  <FormInput
+                    field="login"
+                    title={t('auth.login')}
+                    register={register}
+                    errors={errors.login}
+                  />
+                  <FormInput
+                    field="name"
+                    title={t('auth.name')}
+                    register={register}
+                    errors={errors.name}
+                  />
+                  <FormInput
+                    field="password"
+                    title={t('auth.password')}
+                    register={register}
+                    errors={errors.password}
+                  />
                   <Button
                     type="submit"
                     value="submit"
@@ -79,7 +92,7 @@ export function RegistrationPage() {
                     disabled={hasError()}
                     className={hasError() ? 'bg-secondary my-4' : 'bg-primary my-4'}
                   >
-                    {t('Submit')}
+                    {t('auth.submit')}
                   </Button>
                 </div>
               </form>

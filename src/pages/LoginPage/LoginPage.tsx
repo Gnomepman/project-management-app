@@ -30,7 +30,7 @@ export function LoginPage() {
   // Todo Refactor
   useEffect(() => {
     if (isSuccess) {
-      toast.success('You successfully logged in', {
+      toast.success(t('auth.login-success'), {
         position: 'top-right',
         autoClose: 800,
       });
@@ -47,7 +47,7 @@ export function LoginPage() {
         autoClose: 3000,
       });
     }
-  }, [error, isError, isSuccess, navigate, isLoading, data, setUser]);
+  }, [t, error, isError, isSuccess, navigate, isLoading, data, setUser]);
 
   useEffect(() => {
     if (!errors) {
@@ -71,11 +71,18 @@ export function LoginPage() {
             <div className="col-md-4">
               <form onSubmit={handleSubmit(onSubmit)} data-testid="form">
                 <div className="form-outline mb-4">
-                  <FormInput field="login" register={register} errors={errors.login} />
-
-                  <div className="mb-6">
-                    <FormInput field="password" register={register} errors={errors.password} />
-                  </div>
+                  <FormInput
+                    field="login"
+                    title={t('auth.login')}
+                    register={register}
+                    errors={errors.login}
+                  />
+                  <FormInput
+                    field="password"
+                    title={t('auth.password')}
+                    register={register}
+                    errors={errors.password}
+                  />
                   <Button
                     type="submit"
                     value="submit"
@@ -83,7 +90,7 @@ export function LoginPage() {
                     disabled={hasError()}
                     className={hasError() ? 'bg-secondary my-4' : 'bg-primary my-4'}
                   >
-                    {t('Submit')}
+                    {t('auth.submit')}
                   </Button>
                 </div>
               </form>

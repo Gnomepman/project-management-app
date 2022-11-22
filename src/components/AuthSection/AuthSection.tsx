@@ -25,10 +25,10 @@ export const AuthSection = () => {
       {!isAuthenticated() && (
         <Navbar>
           <NavLink className="px-2" to="/registration">
-            <Button variant="outline-secondary">{t('registration')}</Button>
+            <Button variant="outline-secondary">{t('auth.registration')}</Button>
           </NavLink>
           <NavLink className="px-2" to="/login">
-            <Button variant="outline-secondary">{t('login')}</Button>
+            <Button variant="outline-secondary">{t('auth.sign-in')}</Button>
           </NavLink>
         </Navbar>
       )}
@@ -36,7 +36,7 @@ export const AuthSection = () => {
       {isAuthenticated() && (
         <Navbar>
           <NavLink className="mr-10 px-2" to="/boards">
-            <Button variant="outline-danger"> {t('add-boards')}</Button>
+            <Button variant="outline-danger"> {t('auth.add-boards')}</Button>
           </NavLink>
 
           <NavLink className="px-2" to="/edit-profile">
@@ -44,11 +44,11 @@ export const AuthSection = () => {
           </NavLink>
 
           <NavLink className="px-2" to="/edit-profile">
-            <Button variant="outline-secondary">{t('edit-profile')}</Button>
+            <Button variant="outline-secondary">{t('auth.edit-profile')}</Button>
           </NavLink>
 
           <Nav.Item>
-            <Button onClick={onClickHandler}>{t('sign-out')}</Button>
+            <Button onClick={onClickHandler}>{t('auth.sign-out')}</Button>
           </Nav.Item>
         </Navbar>
       )}
