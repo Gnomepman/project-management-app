@@ -1,0 +1,26 @@
+.column{
+    padding: 5px;
+    width: 250px;
+    max-height: 76vh;
+    overflow-y: auto;
+    border-radius: 3px;
+    box-sizing: border-box;
+    height: fit-content;
+
+    &_header{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 2px;
+
+        span{
+            font-weight: 400;
+            font-size: 18px
+        };
+    }
+
+    &_container{
+        overflow-y: auto;
+    height: fit-content;
+    }
+}
