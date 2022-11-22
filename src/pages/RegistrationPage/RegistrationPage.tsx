@@ -5,7 +5,6 @@ import { useActions } from '../../hooks/actions';
 import { IErrorMessage, IUser } from '../../models';
 import { useRegisterUserMutation } from '../../store/api/authApi';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { FormInput } from '../../components/FormInput/FormInput';
 import { Loader } from '../../components/Loader/Loader';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -58,7 +57,6 @@ export function RegistrationPage() {
   const hasError = () => {
     return Object.keys(errors).length !== 0;
   };
-
   return (
     <>
       {!data && (
@@ -67,10 +65,53 @@ export function RegistrationPage() {
             <div className="col-md-4">
               <form onSubmit={handleSubmit(onSubmit)} data-testid="form">
                 <div className="form-outline mb-4">
-                  <FormInput field="login" register={register} errors={errors.login} />
-
-                  <div className="mb-6">
-                    <FormInput field="password" register={register} errors={errors.password} />
+                  <div className="form-group mt-3">
+                    <label htmlFor="name">{t('registration_name')}</label>
+                    <input
+                      className="form-control mt-1"
+                      placeholder={`${t('placeholder_name')}`}
+                      type="text"
+                      {...register('name', {
+                        required: `${t('login_error')}`,
+                        minLength: {
+                          value: 5,
+                          message: `${t('min_error')}`,
+                        },
+                      })}
+                    />
+                    <div>{errors?.name && errors.name.message}</div>
+                  </div>
+                  <div className="form-group mt-3">
+                    <label htmlFor="name">{t('registration_login')}</label>
+                    <input
+                      className="form-control mt-1"
+                      placeholder={`${t('placeholder_login')}`}
+                      type="text"
+                      {...register('login', {
+                        required: `${t('login_error')}`,
+                        minLength: {
+                          value: 5,
+                          message: `${t('min_error')}`,
+                        },
+                      })}
+                    />
+                    <div>{errors?.login && errors.login.message}</div>
+                  </div>
+                  <div className="form-group mt-3">
+                    <label htmlFor="password">{t('registration_password')}</label>
+                    <input
+                      className="form-control mt-1"
+                      placeholder={`${t('placeholder_password')}`}
+                      type="text"
+                      {...register('password', {
+                        required: `${t('pass_error')}`,
+                        minLength: {
+                          value: 5,
+                          message: `${t('min_error')}`,
+                        },
+                      })}
+                    />
+                    <div>{errors?.password && errors.password.message}</div>
                   </div>
                   <Button
                     type="submit"
