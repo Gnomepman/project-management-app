@@ -6,7 +6,6 @@ import { IErrorMessage, ILogin } from '../../models';
 import { useLoginUserMutation } from '../../store/api/authApi';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { FormInput } from '../../components/FormInput/FormInput';
-import { Loader } from '../../components/Loader/Loader';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { parseJwt } from '../../utils/parseJwt';
@@ -65,40 +64,37 @@ export function LoginPage() {
 
   return (
     <>
-      {!data && (
-        <div className="container app-container">
-          <div className="row d-flex pt-5 justify-content-center">
-            <div className="col-md-4">
-              <form onSubmit={handleSubmit(onSubmit)} data-testid="form">
-                <div className="form-outline mb-4">
-                  <FormInput
-                    field="login"
-                    title={t('auth.login')}
-                    register={register}
-                    errors={errors.login}
-                  />
-                  <FormInput
-                    field="password"
-                    title={t('auth.password')}
-                    register={register}
-                    errors={errors.password}
-                  />
-                  <Button
-                    type="submit"
-                    value="submit"
-                    data-testid="button-submit"
-                    disabled={hasError()}
-                    className={hasError() ? 'bg-secondary my-4' : 'bg-primary my-4'}
-                  >
-                    {t('auth.submit')}
-                  </Button>
-                </div>
-              </form>
-            </div>
+      <div className="container app-container">
+        <div className="row d-flex pt-5 justify-content-center">
+          <div className="col-md-4">
+            <form onSubmit={handleSubmit(onSubmit)} data-testid="form">
+              <div className="form-outline mb-4">
+                <FormInput
+                  field="login"
+                  title={t('auth.login')}
+                  register={register}
+                  errors={errors.login}
+                />
+                <FormInput
+                  field="password"
+                  title={t('auth.password')}
+                  register={register}
+                  errors={errors.password}
+                />
+                <Button
+                  type="submit"
+                  value="submit"
+                  data-testid="button-submit"
+                  disabled={hasError()}
+                  className={hasError() ? 'bg-secondary my-4' : 'bg-primary my-4'}
+                >
+                  {t('auth.submit')}
+                </Button>
+              </div>
+            </form>
           </div>
         </div>
-      )}
-      {isLoading && <Loader />}
+      </div>
     </>
   );
 }
