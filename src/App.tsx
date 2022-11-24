@@ -14,6 +14,7 @@ import { RegistrationPage } from './pages/RegistrationPage/RegistrationPage';
 import { NotFoundPage } from './pages/NotFoundPage/NotFoundPage';
 import { LoginPage } from './pages/LoginPage/LoginPage';
 import { EditProfilePage } from './pages/EditProfilePage/EditProfilePage';
+import { PrivateRoute } from './components/PrivateRoute/PrivateRoute';
 
 function App() {
   return (
@@ -24,11 +25,15 @@ function App() {
           <ToastContainer />
           <Routes>
             <Route path="/" element={<WelcomePage />} />
-            <Route path="/boards" element={<BoardsPage />} />
+            <Route path="/" element={<PrivateRoute />}>
+              <Route path="/boards" element={<BoardsPage />} />
+            </Route>
             <Route path="/boards/:id" element={<Board />} />
             <Route path="/registration" element={<RegistrationPage />} />
             <Route path="/login" element={<LoginPage />} />
-            <Route path="/edit-profile" element={<EditProfilePage />} />
+            <Route path="/" element={<PrivateRoute />}>
+              <Route path="/edit-profile" element={<EditProfilePage />} />
+            </Route>
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Suspense>

@@ -17,6 +17,7 @@ export const AuthSection = () => {
   const onClickHandler = () => {
     logout();
     sessionStorage.removeItem('user');
+    sessionStorage.removeItem('token');
     navigate('/');
   };
 
