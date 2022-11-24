@@ -1,24 +1,14 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { createApi } from '@reduxjs/toolkit/query/react';
 import { IColumn } from '../../models';
-import { API_URL } from '../../constants';
+import { baseQuery } from './baseQuery';
 
 //Todo Recheck, fix and update
 export const columnApi = createApi({
   reducerPath: 'column/api',
-  baseQuery: fetchBaseQuery({
-    baseUrl: API_URL,
-
-    prepareHeaders: (headers) => {
-      const token = sessionStorage.getItem('token');
-      if (token) {
-        headers.set('authorization', `Bearer ${token}`);
-      }
-      return headers;
-    },
-  }),
+  baseQuery: baseQuery,
 
   endpoints: (build) => ({
-    getColumns: build.mutation({
+    getColumns: build.query<IColumn[], void>({
       query: (boardId) => ({
         url: `boards/${boardId}/columns`,
         query: {
@@ -43,4 +33,4 @@ export const columnApi = createApi({
     }),
   }),
 });
-export const { useGetColumnsMutation, useGetColumnByIdQuery } = columnApi;
+export const { useGetColumnsQuery, useGetColumnByIdQuery } = columnApi;

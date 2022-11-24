@@ -1,24 +1,14 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { ITask } from '../../models';
-import { API_URL } from '../../constants';
+import { createApi } from '@reduxjs/toolkit/query/react';
+import { ITask, ITaskResp } from '../../models';
+import { baseQuery } from './baseQuery';
 
 //Todo Recheck, fix and update
 export const taskApi = createApi({
   reducerPath: 'task/api',
-  baseQuery: fetchBaseQuery({
-    baseUrl: API_URL,
-
-    prepareHeaders: (headers) => {
-      const token = sessionStorage.getItem('token');
-      if (token) {
-        headers.set('authorization', `Bearer ${token}`);
-      }
-      return headers;
-    },
-  }),
+  baseQuery: baseQuery,
 
   endpoints: (build) => ({
-    getTasks: build.mutation({
+    getTasks: build.mutation<ITask[], void>({
       query: () => ({
         url: `tasksSet`,
         headers: {
@@ -27,8 +17,8 @@ export const taskApi = createApi({
       }),
     }),
 
-    patchTasks: build.mutation({
-      query: (payload: ITask) => ({
+    patchTasks: build.mutation<ITaskResp[], ITask>({
+      query: (payload) => ({
         url: `tasksSet`,
         method: 'PATCH',
         body: payload,
@@ -38,7 +28,7 @@ export const taskApi = createApi({
       }),
     }),
 
-    getTasksByBoard: build.mutation({
+    getTasksByBoard: build.mutation<ITask, string>({
       query: (boardId) => ({
         url: `tasksSet/${boardId}`,
         query: {

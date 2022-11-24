@@ -1,23 +1,13 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { createApi } from '@reduxjs/toolkit/query/react';
 import { IBoard } from '../../models';
-import { API_URL } from '../../constants';
+import { baseQuery } from './baseQuery';
 
 export const boardApi = createApi({
   reducerPath: 'board/api',
-  baseQuery: fetchBaseQuery({
-    baseUrl: API_URL,
-
-    prepareHeaders: (headers) => {
-      const token = sessionStorage.getItem('token');
-      if (token) {
-        headers.set('authorization', `Bearer ${token}`);
-      }
-      return headers;
-    },
-  }),
+  baseQuery: baseQuery,
 
   endpoints: (build) => ({
-    getBoards: build.mutation({
+    getBoards: build.query<IBoard[], string>({
       query: () => ({
         url: `boards`,
         headers: {
@@ -39,4 +29,4 @@ export const boardApi = createApi({
     }),
   }),
 });
-export const { useGetBoardsMutation, useGetBoardByIdQuery } = boardApi;
+export const { useGetBoardsQuery, useGetBoardByIdQuery } = boardApi;
