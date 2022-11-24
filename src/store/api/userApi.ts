@@ -1,20 +1,10 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { createApi } from '@reduxjs/toolkit/query/react';
 import { IUser } from '../../models';
-import { API_URL } from '../../constants';
+import { baseQuery } from './baseQuery';
 
 export const userApi = createApi({
   reducerPath: 'user/api',
-  baseQuery: fetchBaseQuery({
-    baseUrl: API_URL,
-
-    prepareHeaders: (headers) => {
-      const token = sessionStorage.getItem('token');
-      if (token) {
-        headers.set('authorization', `Bearer ${token}`);
-      }
-      return headers;
-    },
-  }),
+  baseQuery: baseQuery,
 
   endpoints: (build) => ({
     getUsers: build.query<IUser[], void>({

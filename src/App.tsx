@@ -1,20 +1,20 @@
 import React, { Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { Header } from './components/Header/Header';
+import { ToastContainer } from 'react-toastify';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'react-toastify/dist/ReactToastify.css';
 import './App.scss';
-
+import { Header } from './components/Header/Header';
 import { Footer } from './components/Footer/Footer';
 import { WelcomePage } from './pages/WelcomePage/WelcomePage';
 import { BoardsPage } from './pages/BoardsPage/BoardsPage';
 import { Board } from './components/Board/Board';
+import { Loader } from './components/Loader/Loader';
 import { RegistrationPage } from './pages/RegistrationPage/RegistrationPage';
 import { NotFoundPage } from './pages/NotFoundPage/NotFoundPage';
 import { LoginPage } from './pages/LoginPage/LoginPage';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import { EditProfilePage } from './pages/EditProfilePage/EditProfilePage';
-import { Loader } from './components/Loader/Loader';
+import { PrivateRoute } from './components/PrivateRoute/PrivateRoute';
 
 function App() {
   return (
@@ -25,11 +25,15 @@ function App() {
           <ToastContainer />
           <Routes>
             <Route path="/" element={<WelcomePage />} />
-            <Route path="/boards" element={<BoardsPage />}></Route>
-            <Route path="/boards/:id" element={<Board />}></Route>
-            <Route path="/registration" element={<RegistrationPage />}></Route>
-            <Route path="/login" element={<LoginPage />}></Route>
-            <Route path="/edit-profile" element={<EditProfilePage />}></Route>
+            <Route path="/" element={<PrivateRoute />}>
+              <Route path="/boards" element={<BoardsPage />} />
+            </Route>
+            <Route path="/boards/:id" element={<Board />} />
+            <Route path="/registration" element={<RegistrationPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/" element={<PrivateRoute />}>
+              <Route path="/edit-profile" element={<EditProfilePage />} />
+            </Route>
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Suspense>

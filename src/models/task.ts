@@ -8,3 +8,9 @@ export interface ITask {
   userId: number;
   users: [string];
 }
+
+export interface ITaskResp {
+  _id: string;
+  order: number;
+  columnId: string;
+}
