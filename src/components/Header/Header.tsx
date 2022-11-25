@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { changeLanguage } from 'i18next';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import { Navbar } from 'react-bootstrap';
+import { Button, Navbar } from 'react-bootstrap';
 import Logo from '../../assets/images/pm-logo.jpg';
 import { languages } from '../../utils/languages';
 import { AuthSection } from '../AuthSection/AuthSection';
@@ -37,7 +37,9 @@ export function Header() {
             ))}
           </NavDropdown>
         </Navbar.Collapse>
-
+        <NavLink className="mr-10 px-2" to="/test">
+          <Button variant="danger"> Test</Button>
+        </NavLink>
         <AuthSection />
       </div>
     </Navbar>

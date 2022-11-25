@@ -8,7 +8,7 @@ export const fileApi = createApi({
   baseQuery: baseQuery,
 
   endpoints: (build) => ({
-    getFile: build.mutation<IFile[], string>({
+    getFile: build.mutation<IFile[], void>({
       query: () => ({
         url: `file`,
         headers: {

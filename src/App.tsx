@@ -15,6 +15,7 @@ import { NotFoundPage } from './pages/NotFoundPage/NotFoundPage';
 import { LoginPage } from './pages/LoginPage/LoginPage';
 import { EditProfilePage } from './pages/EditProfilePage/EditProfilePage';
 import { PrivateRoute } from './components/PrivateRoute/PrivateRoute';
+import { TestPage } from './pages/TestPage';
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
             <Route path="/" element={<PrivateRoute />}>
               <Route path="/edit-profile" element={<EditProfilePage />} />
             </Route>
+            <Route path="test" element={<TestPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Suspense>
