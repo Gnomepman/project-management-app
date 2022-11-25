@@ -34,7 +34,6 @@ export const TestPage = () => {
   // Put Board
   const updMockId = '63809822c02777e984c58285';
   const updMockBoard: IBoard = {
-    _id: '63809822c02777e984c58285',
     title: 'UPD Add Redux, Redux Toolkit',
     owner: '636d6464c02777e984c57dc1',
     users: ['636d6464c02777e984c57dc1'],
