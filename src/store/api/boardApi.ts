@@ -7,26 +7,58 @@ export const boardApi = createApi({
   baseQuery: baseQuery,
 
   endpoints: (build) => ({
-    getBoards: build.query<IBoard[], string>({
+    getBoards: build.query<IBoard[], void>({
       query: () => ({
         url: `boards`,
-        headers: {
-          'Content-type': 'application/json; charset=UTF-8',
-        },
+      }),
+    }),
+
+    postBoards: build.mutation<IBoard, IBoard>({
+      query: (payload: IBoard) => ({
+        url: `boards`,
+        method: 'POST',
+        body: payload,
       }),
     }),
 
     getBoardById: build.query<IBoard, string>({
-      query: (id) => ({
-        url: `boards/${id}`,
+      query: (boardId) => ({
+        url: `boards/${boardId}`,
         query: {
-          id: id,
+          id: boardId,
         },
-        headers: {
-          'Content-type': 'application/json; charset=UTF-8',
+      }),
+    }),
+
+    putBoard: build.mutation<IBoard, { boardId: string; payload: IBoard }>({
+      query({ boardId, payload }) {
+        return {
+          url: `boards/${boardId}`,
+          method: 'PUT',
+          body: payload,
+          query: {
+            id: boardId,
+          },
+        };
+      },
+    }),
+
+    deleteBoard: build.mutation<IBoard, string>({
+      query: (boardId: string) => ({
+        url: `boards/${boardId}`,
+        method: 'DELETE',
+        query: {
+          id: boardId,
         },
       }),
     }),
   }),
 });
-export const { useGetBoardsQuery, useGetBoardByIdQuery } = boardApi;
+
+export const {
+  useGetBoardsQuery,
+  usePostBoardsMutation,
+  useGetBoardByIdQuery,
+  usePutBoardMutation,
+  useDeleteBoardMutation,
+} = boardApi;
