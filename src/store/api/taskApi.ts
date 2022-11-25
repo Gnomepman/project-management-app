@@ -1,5 +1,5 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
-import { ITask, ITaskResp } from '../../models';
+import { IColumn, ITask, ITaskResp } from '../../models';
 import { baseQuery } from './baseQuery';
 
 //Todo Recheck, fix and update
@@ -8,7 +8,16 @@ export const taskApi = createApi({
   baseQuery: baseQuery,
 
   endpoints: (build) => ({
-    getTasks: build.mutation<ITask[], void>({
+    getTasks: build.query<IColumn[], { boardId: string; columnId: string }>({
+      query: ({ boardId, columnId }) => ({
+        url: `boards/${boardId}/columns/${columnId}/tasks`,
+        query: {
+          id: boardId,
+        },
+      }),
+    }),
+
+    getTaskSet: build.mutation<ITask[], void>({
       query: () => ({
         url: `tasksSet`,
         headers: {
@@ -17,7 +26,7 @@ export const taskApi = createApi({
       }),
     }),
 
-    patchTasks: build.mutation<ITaskResp[], ITask>({
+    patchTaskSet: build.mutation<ITaskResp[], ITask>({
       query: (payload) => ({
         url: `tasksSet`,
         method: 'PATCH',
@@ -41,4 +50,4 @@ export const taskApi = createApi({
     }),
   }),
 });
-export const { useGetTasksMutation, usePatchTasksMutation, useGetTasksByBoardMutation } = taskApi;
+export const { useGetTasksQuery } = taskApi;

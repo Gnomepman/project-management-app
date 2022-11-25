@@ -9,6 +9,8 @@ import {
 import { IBoard, IErrorMessage } from '../models';
 import { Loader } from '../components/Loader/Loader';
 import { ErrorComponent } from '../components/Error/ErrorComponent';
+import { TestColumnPage } from './TestColumnPage';
+import { TestTaskPage } from './TestTaskPage';
 
 // TODO REMOVE BEFORE DEADLINE
 export const TestPage = () => {
@@ -42,8 +44,8 @@ export const TestPage = () => {
   const [putBoard] = usePutBoardMutation();
 
   // Delete board
-  const delMockId = '6380a62bc02777e984c582c4 ';
-  const [deleteUser] = useDeleteBoardMutation();
+  const delMockId = '6380cf06c02777e984c58388';
+  const [deleteBoard] = useDeleteBoardMutation();
 
   if (isLoading) return <Loader />;
   if (isError) return <ErrorComponent message={(error as IErrorMessage).data.message} />;
@@ -51,8 +53,8 @@ export const TestPage = () => {
   if (!boards) return <div>Missing boards</div>;
 
   return (
-    <div>
-      <h1 className="text-primary">Test</h1>
+    <>
+      <h1 className="text-primary">Boards</h1>
 
       <section>
         <h2 className="text-danger">Get Boards</h2>
@@ -102,12 +104,16 @@ export const TestPage = () => {
         <h2 className="text-danger">Delete Board</h2>
         <button
           onClick={() => {
-            deleteUser(delMockId);
+            deleteBoard(delMockId);
           }}
         >
           Delete mock Board
         </button>
       </section>
-    </div>
+      <hr></hr>
+      <TestColumnPage />
+      <hr></hr>
+      <TestTaskPage />
+    </>
   );
 };

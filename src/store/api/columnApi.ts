@@ -1,5 +1,5 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
-import { IColumn } from '../../models';
+import { IColumn, IColumnRes } from '../../models';
 import { baseQuery } from './baseQuery';
 
 //Todo Recheck, fix and update
@@ -8,29 +8,82 @@ export const columnApi = createApi({
   baseQuery: baseQuery,
 
   endpoints: (build) => ({
-    getColumns: build.query<IColumn[], void>({
+    getColumns: build.query<IColumn[], string>({
       query: (boardId) => ({
         url: `boards/${boardId}/columns`,
         query: {
           id: boardId,
         },
-        headers: {
-          'Content-type': 'application/json; charset=UTF-8',
+      }),
+    }),
+
+    postColumns: build.mutation<IColumnRes, { boardId: string; payload: IColumnRes }>({
+      query({ boardId, payload }) {
+        return {
+          url: `boards/${boardId}/columns`,
+          method: 'POST',
+          body: payload,
+          query: {
+            id: boardId,
+          },
+        };
+      },
+    }),
+
+    getColumnById: build.query<IColumn, Record<string, string>>({
+      query: ({ columnId, boardId }) => ({
+        url: `boards/${boardId}/columns/${columnId}`,
+        query: {
+          id: boardId,
         },
       }),
     }),
 
-    getColumnById: build.query<IColumn, string>({
-      query: (id) => ({
-        url: `columns/${id}`,
+    putColumn: build.mutation<IColumn, { boardId: string; columnId: string; payload: IColumnRes }>({
+      query({ boardId, columnId, payload }) {
+        return {
+          url: `boards/${boardId}/columns/${columnId}`,
+          method: 'PUT',
+          body: payload,
+          query: {
+            id: boardId,
+          },
+        };
+      },
+    }),
+
+    deleteColumn: build.mutation<IColumn, Record<string, string>>({
+      query: ({ boardId, columnId }) => ({
+        url: `boards/${boardId}/columns/${columnId}`,
+        method: 'DELETE',
         query: {
-          id: id,
+          id: boardId,
         },
-        headers: {
-          'Content-type': 'application/json; charset=UTF-8',
+      }),
+    }),
+
+    getColumnSet: build.query<IColumn[], void>({
+      query: () => ({
+        url: `columnsSet`,
+      }),
+    }),
+
+    getColumnSetById: build.query<IColumn, string>({
+      query: (boardId) => ({
+        url: `columnsSet/${boardId}`,
+        query: {
+          id: boardId,
         },
       }),
     }),
   }),
 });
-export const { useGetColumnsQuery, useGetColumnByIdQuery } = columnApi;
+export const {
+  useGetColumnsQuery,
+  usePostColumnsMutation,
+  useGetColumnByIdQuery,
+  usePutColumnMutation,
+  useDeleteColumnMutation,
+  useGetColumnSetQuery,
+  useGetColumnSetByIdQuery,
+} = columnApi;

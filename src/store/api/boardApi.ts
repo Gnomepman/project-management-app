@@ -52,6 +52,21 @@ export const boardApi = createApi({
         },
       }),
     }),
+
+    getBoardSet: build.query<IBoard[], void>({
+      query: () => ({
+        url: `boardsSet`,
+      }),
+    }),
+
+    getBoardSetById: build.query<IBoard, string>({
+      query: (boardId) => ({
+        url: `boardsSet/${boardId}`,
+        query: {
+          id: boardId,
+        },
+      }),
+    }),
   }),
 });
 
@@ -61,4 +76,6 @@ export const {
   useGetBoardByIdQuery,
   usePutBoardMutation,
   useDeleteBoardMutation,
+  useGetBoardSetQuery,
+  useGetBoardSetByIdQuery,
 } = boardApi;
