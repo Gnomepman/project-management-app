@@ -28,12 +28,24 @@ export const userApi = createApi({
       }),
     }),
 
-    putUser: build.mutation<IUser, { id: string; payload: IUser }>({
+    putUser: build.mutation<FormData, { id: string; payload: FormData }>({
+      // query: (id: string, payload: FormData) => ({
+      //   url: `users/${id}`,
+      //   method: 'PUT',
+      //   body: payload,
+      //   headers: {
+      //     'Content-type': 'application/json; charset=UTF-8',
+      //   },
+      // }),
       query({ id, payload }) {
         return {
           url: `/users/${id}`,
           method: 'PUT',
+          credentials: 'include',
           body: payload,
+          headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+          },
         };
       },
     }),
