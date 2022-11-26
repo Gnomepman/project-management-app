@@ -1,5 +1,5 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
-import { IColumn, ITask, ITaskResp } from '../../models';
+import { ITask, ITaskRes, ITaskResponse } from '../../models';
 import { baseQuery } from './baseQuery';
 
 //Todo Recheck, fix and update
@@ -8,7 +8,7 @@ export const taskApi = createApi({
   baseQuery: baseQuery,
 
   endpoints: (build) => ({
-    getTasks: build.query<IColumn[], { boardId: string; columnId: string }>({
+    getTasks: build.query<ITask[], { boardId: string; columnId: string }>({
       query: ({ boardId, columnId }) => ({
         url: `boards/${boardId}/columns/${columnId}/tasks`,
         query: {
@@ -17,23 +17,64 @@ export const taskApi = createApi({
       }),
     }),
 
-    getTaskSet: build.mutation<ITask[], void>({
-      query: () => ({
-        url: `tasksSet`,
-        headers: {
-          'Content-type': 'application/json; charset=UTF-8',
+    postTasks: build.mutation<ITaskRes, { boardId: string; columnId: string; payload: ITaskRes }>({
+      query({ boardId, columnId, payload }) {
+        return {
+          url: `boards/${boardId}/columns/${columnId}/tasks`,
+          method: 'POST',
+          body: payload,
+          query: {
+            id: boardId,
+          },
+        };
+      },
+    }),
+
+    getTaskById: build.query<ITask, Record<string, string>>({
+      query: ({ boardId, columnId, taskId }) => ({
+        url: `boards/${boardId}/columns/${columnId}/tasks/${taskId}`,
+        query: {
+          boardId: boardId,
+          columnId: columnId,
+          taskId: taskId,
         },
       }),
     }),
 
-    patchTaskSet: build.mutation<ITaskResp[], ITask>({
+    putTask: build.mutation<
+      ITaskResponse,
+      { boardId: string; columnId: string; taskId: string; payload: ITaskRes }
+    >({
+      query({ boardId, columnId, taskId, payload }) {
+        return {
+          url: `boards/${boardId}/columns/${columnId}/tasks/${taskId}`,
+          method: 'PUT',
+          body: payload,
+          query: {
+            id: boardId,
+          },
+        };
+      },
+    }),
+
+    deleteTask: build.mutation<ITask, Record<string, string>>({
+      query: ({ boardId, columnId, taskId }) => ({
+        url: `boards/${boardId}/columns/${columnId}/tasks/${taskId}`,
+        method: 'DELETE',
+      }),
+    }),
+
+    getTaskSet: build.mutation<ITask[], void>({
+      query: () => ({
+        url: `tasksSet`,
+      }),
+    }),
+
+    patchTaskSet: build.mutation<ITaskRes[], ITask>({
       query: (payload) => ({
         url: `tasksSet`,
         method: 'PATCH',
         body: payload,
-        headers: {
-          'Content-type': 'application/json; charset=UTF-8',
-        },
       }),
     }),
 
@@ -43,11 +84,17 @@ export const taskApi = createApi({
         query: {
           id: boardId,
         },
-        headers: {
-          'Content-type': 'application/json; charset=UTF-8',
-        },
       }),
     }),
   }),
 });
-export const { useGetTasksQuery } = taskApi;
+
+export const {
+  useGetTasksQuery,
+  usePostTasksMutation,
+  useGetTaskByIdQuery,
+  useGetTasksByBoardMutation,
+  usePutTaskMutation,
+  usePatchTaskSetMutation,
+  useDeleteTaskMutation,
+} = taskApi;

@@ -1,5 +1,5 @@
 export interface ITask {
-  id: string;
+  _id?: string;
   title: string;
   order: number;
   boardId: string;
@@ -9,8 +9,16 @@ export interface ITask {
   users: [string];
 }
 
-export interface ITaskResp {
-  _id: string;
+export interface ITaskRes {
+  title: string;
   order: number;
+}
+
+export interface ITaskResponse {
+  title: string;
+  order: number;
+  description: string;
   columnId: string;
+  userId: number;
+  users: [string];
 }
