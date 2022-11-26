@@ -35,6 +35,10 @@ a:hover {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background:rgb(164, 164, 164);
+  background: rgb(164, 164, 164);
   border-radius: 10px;
+}
+
+.app-container {
+  height: calc(100vh - 146px);
 }

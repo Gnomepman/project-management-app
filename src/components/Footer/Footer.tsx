@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 export const Footer = () => {
   const { t } = useTranslation();
+  const year = new Date().getFullYear();
 
   return (
     <footer className="bg-light">
@@ -15,7 +16,9 @@ export const Footer = () => {
               <img height="37" src={RSSLogo} alt="rss" />
             </a>
           </div>
-          <div className="text-center p-3">© {t('footer.rights')}</div>
+          <div className="text-center p-3">
+            © {year} | {t('footer.rights')}{' '}
+          </div>
         </section>
       </div>
     </footer>

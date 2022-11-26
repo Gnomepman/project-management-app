@@ -1,6 +1,5 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import './NotFoundPage.scss';
 import { NavLink } from 'react-router-dom';
 
 export const NotFoundPage = () => {

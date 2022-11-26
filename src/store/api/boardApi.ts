@@ -1,42 +1,64 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { createApi } from '@reduxjs/toolkit/query/react';
 import { IBoard } from '../../models';
-import { API_URL } from '../../constants';
+import { baseQuery } from './baseQuery';
 
 export const boardApi = createApi({
   reducerPath: 'board/api',
-  baseQuery: fetchBaseQuery({
-    baseUrl: API_URL,
-
-    prepareHeaders: (headers) => {
-      const token = sessionStorage.getItem('token');
-      if (token) {
-        headers.set('authorization', `Bearer ${token}`);
-      }
-      return headers;
-    },
-  }),
+  baseQuery: baseQuery,
 
   endpoints: (build) => ({
-    getBoards: build.mutation({
+    getBoards: build.query<IBoard[], void>({
       query: () => ({
         url: `boards`,
-        headers: {
-          'Content-type': 'application/json; charset=UTF-8',
-        },
+      }),
+    }),
+
+    postBoards: build.mutation<IBoard, IBoard>({
+      query: (payload: IBoard) => ({
+        url: `boards`,
+        method: 'POST',
+        body: payload,
       }),
     }),
 
     getBoardById: build.query<IBoard, string>({
-      query: (id) => ({
-        url: `boards/${id}`,
+      query: (boardId) => ({
+        url: `boards/${boardId}`,
         query: {
-          id: id,
+          id: boardId,
         },
-        headers: {
-          'Content-type': 'application/json; charset=UTF-8',
+      }),
+    }),
+
+    putBoard: build.mutation<IBoard, { boardId: string; payload: IBoard }>({
+      query({ boardId, payload }) {
+        return {
+          url: `boards/${boardId}`,
+          method: 'PUT',
+          body: payload,
+          query: {
+            id: boardId,
+          },
+        };
+      },
+    }),
+
+    deleteBoard: build.mutation<IBoard, string>({
+      query: (boardId: string) => ({
+        url: `boards/${boardId}`,
+        method: 'DELETE',
+        query: {
+          id: boardId,
         },
       }),
     }),
   }),
 });
-export const { useGetBoardsMutation, useGetBoardByIdQuery } = boardApi;
+
+export const {
+  useGetBoardsQuery,
+  usePostBoardsMutation,
+  useGetBoardByIdQuery,
+  usePutBoardMutation,
+  useDeleteBoardMutation,
+} = boardApi;
