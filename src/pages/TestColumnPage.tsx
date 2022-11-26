@@ -12,7 +12,7 @@ import { ErrorComponent } from '../components/Error/ErrorComponent';
 
 export const TestColumnPage = () => {
   const boardId = '63763bacc02777e984c57e3a';
-  const columnId = '6380d727c02777e984c583f3';
+  const columnId = '6380dac3c02777e984c58457';
 
   // Get Columns
   const { data: columns, isLoading, isError, error } = useGetColumnsQuery(boardId);
@@ -53,7 +53,7 @@ export const TestColumnPage = () => {
 
         {columns.map((item: IColumn) => (
           <p key={item._id}>
-            <b>Column:</b> <i className="text-secondary">{item._id}</i> {item.title}
+            <b>Column:</b> <i className="text-secondary">{item._id}</i> {item._id} {item.title}
           </p>
         ))}
         <h5 className="text-primary">Number of columns: {columns.length}</h5>
