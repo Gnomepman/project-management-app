@@ -1,13 +1,13 @@
 import React from 'react';
 import { FieldError, UseFormRegister } from 'react-hook-form';
-import { ILogin, IRegistration } from '../../models';
+import { EditUser, ILogin, IRegistration } from '../../models';
 import { FormErrorMessage } from '../FormErrorMessage/FormErrorMessage';
 import { useTranslation } from 'react-i18next';
 
 interface IInputProps {
   field: 'name' | 'login' | 'password';
   title: string;
-  register: UseFormRegister<ILogin | IRegistration>;
+  register: UseFormRegister<ILogin | IRegistration | EditUser>;
   errors: FieldError | undefined;
 }
 

@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { IUser } from '../../models';
+import { EditUser, IUser } from '../../models';
 import { API_URL } from '../../constants';
 
 export const userApi = createApi({
@@ -60,6 +60,16 @@ export const userApi = createApi({
       },
     }),
 
+    updatePost: build.mutation<EditUser>({
+      query(id) {
+        return {
+          url: `users/${id}`,
+          method: 'PUT',
+          body,
+        };
+      },
+    }),
+
     deleteUser: build.mutation<IUser, string>({
       query: (id) => ({
         url: `users/${id}`,
@@ -75,5 +85,10 @@ export const userApi = createApi({
   }),
 });
 
-export const { useGetUsersQuery, useGetUserByIdQuery, usePutUserMutation, useDeleteUserMutation } =
-  userApi;
+export const {
+  useUpdatePostMutation,
+  useGetUsersQuery,
+  useGetUserByIdQuery,
+  usePutUserMutation,
+  useDeleteUserMutation,
+} = userApi;
