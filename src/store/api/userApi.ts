@@ -32,7 +32,6 @@ export const userApi = createApi({
       query({ id, payload }) {
         return {
           url: `/users/${id}`,
-          mode: 'cors',
           method: 'PUT',
           body: payload,
         };

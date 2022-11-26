@@ -27,7 +27,7 @@ export const TestColumnPage = () => {
 
   // Get Column By ID
   const { data: column } = useGetColumnByIdQuery({ boardId, columnId });
-  console.log(column);
+
   // Put Column
   const updMockColumn: IColumnRes = {
     title: 'To fix issue',
