@@ -85,7 +85,7 @@ export const EditProfilePage = () => {
           </Button>
         </div>
       )}
-      <Modal show={modal} onHide={onClose}>
+      <Modal show={modal} onHide={onClose} size="lg">
         <div className="row d-flex pt-5 justify-content-center">
           <div className="col-md-4">
             <form onSubmit={handleSubmit(onSubmit)} data-testid="form">

@@ -18,15 +18,15 @@
     "submit": "Submit",
     "reg-success": "You have successfully registered",
     "login-success": "You successfully logged in",
-    "login-error":"Incorrectly entered data",
+    "login-error": "Incorrectly entered data",
     "about": "About",
     "add-boards": "Create new board",
     "edit-profile": "Edit profile",
     "sign-out": "Sign Out",
     "pass_error": "Enter the password",
     "name_error": "Enter your name",
-    "reg-error":"This user already exists",
-    "upd-success":"The changes were made successfully"
+    "reg-error": "This user already exists",
+    "upd-success": "The changes were made successfully"
   },
   "wp": {
     "description": "The work management tool for happy collaboration",
