@@ -11,6 +11,8 @@ import { Loader } from '../components/Loader/Loader';
 import { ErrorComponent } from '../components/Error/ErrorComponent';
 import { TestColumnPage } from './TestColumnPage';
 import { TestTaskPage } from './TestTaskPage';
+import { TestFilePage } from './TestFilePage';
+import { TestPointPage } from './TestPointPage';
 
 // TODO REMOVE BEFORE DEADLINE
 export const TestPage = () => {
@@ -19,8 +21,8 @@ export const TestPage = () => {
 
   const mockBoard: IBoard = {
     title: 'testNewBoard',
-    owner: '636d6464c02777e984c57dc1',
-    users: ['636d6464c02777e984c57dc1'],
+    owner: '6383a160c02777e984c5892c',
+    users: ['6383a160c02777e984c5892c'],
   };
 
   // Post Boards
@@ -114,6 +116,10 @@ export const TestPage = () => {
       <TestColumnPage />
       <hr></hr>
       <TestTaskPage />
+      <hr></hr>
+      <TestFilePage />
+      <hr></hr>
+      <TestPointPage />
     </>
   );
 };

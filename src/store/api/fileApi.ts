@@ -8,7 +8,7 @@ export const fileApi = createApi({
   baseQuery: baseQuery,
 
   endpoints: (build) => ({
-    getFile: build.mutation<IFile[], void>({
+    getFile: build.query<IFile[], void>({
       query: () => ({
         url: `file`,
         headers: {
@@ -17,16 +17,14 @@ export const fileApi = createApi({
       }),
     }),
 
-    postFile: build.query<IFile, string>({
-      query: (id) => ({
-        url: `columns/${id}`,
+    postFile: build.mutation<IFile, File>({
+      query: (payload) => ({
+        url: `file`,
         method: 'POST',
-        query: {
-          id: id,
-        },
         headers: {
           'Content-type': 'application/json; charset=UTF-8',
         },
+        body: payload,
       }),
     }),
 
@@ -42,7 +40,7 @@ export const fileApi = createApi({
       }),
     }),
 
-    deleteFile: build.query<IFile, string>({
+    deleteFile: build.mutation<IFile, string>({
       query: (fieldId) => ({
         url: `file/${fieldId}`,
         method: 'DELETE',
@@ -56,5 +54,5 @@ export const fileApi = createApi({
     }),
   }),
 });
-export const { useGetFileMutation, usePostFileQuery, useGetFileByIdQuery, useDeleteFileQuery } =
+export const { useGetFileQuery, usePostFileMutation, useGetFileByIdQuery, useDeleteFileMutation } =
   fileApi;

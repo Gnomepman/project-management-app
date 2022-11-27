@@ -5,3 +5,10 @@ export interface IFile {
   boardId: string;
   path: string;
 }
+
+export interface IFileRes {
+  name: string;
+  lastModified: number;
+  size: number;
+  type: string;
+}
