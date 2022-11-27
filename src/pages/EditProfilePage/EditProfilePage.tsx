@@ -81,7 +81,6 @@ export const EditProfilePage = () => {
           <Button
             onClick={() => {
               setModalData(true);
-              console.log(modal);
             }}
           >
             {t('auth.button-edit')}
