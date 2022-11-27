@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import Button from 'react-bootstrap/esm/Button';
 import { useActions } from '../../hooks/actions';
-import { IUser } from '../../models';
+import { IErrorMessage, IUser } from '../../models';
 import { useRegisterUserMutation } from '../../store/api/authApi';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { FormInput } from '../../components/FormInput/FormInput';
@@ -36,7 +36,7 @@ export function RegistrationPage() {
     }
 
     if (isError) {
-      toast.error(t('auth.reg-error'), {
+      toast.error((error as IErrorMessage).data.message, {
         position: 'top-right',
         autoClose: 2000,
       });
