@@ -71,18 +71,22 @@ export const EditProfilePage = () => {
     <>
       {data && (
         <div className="container">
-          <h5>Logged User:</h5>
-          <p>name: {data?.name}</p>
-          <p>login: {data?.login}</p>
+          <h5>{t('auth.logged')}:</h5>
+          <p>
+            {t('auth.name')}: {data?.name}
+          </p>
+          <p>
+            {t('auth.login')}: {data?.login}
+          </p>
           <Button
             onClick={() => {
               setModalData(true);
               console.log(modal);
             }}
           >
-            Change User data
+            {t('auth.button-edit')}
           </Button>
-          <Button onClick={() => setCheck(true)}>Delete user data</Button>
+          <Button onClick={() => setCheck(true)}>{t('auth.button-delete')}</Button>
         </div>
       )}
       <Modal show={check} onHide={onChecked}>
@@ -129,7 +133,7 @@ export const EditProfilePage = () => {
                   disabled={hasError()}
                   className={hasError() ? 'bg-secondary my-4' : 'bg-primary my-4'}
                 >
-                  {t('auth.submit')}
+                  {t('auth.edit')}
                 </Button>
               </div>
             </form>
