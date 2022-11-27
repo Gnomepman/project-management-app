@@ -1,5 +1,5 @@
 export interface IFile {
-  id: string;
+  _id: string;
   name: string;
   taskId: string;
   boardId: string;

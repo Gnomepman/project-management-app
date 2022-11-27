@@ -99,7 +99,7 @@ export const TestPointPage = () => {
         {point &&
           point.map((item: IPoint) => (
             <p key={item._id}>
-              <b>Point:</b> <i className="text-secondary">{item._id}</i> {item._id} {item.title}
+              <b>Point:</b> <i className="text-secondary">{item._id}</i> {item.title}
             </p>
           ))}
         <h5 className="text-primary">Number of points: {point?.length}</h5>

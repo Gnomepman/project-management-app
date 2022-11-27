@@ -2,21 +2,25 @@ import React from 'react';
 import {
   useGetFileQuery,
   usePostFileMutation,
-  useGetFileByIdQuery,
-  useDeleteFileMutation,
+  useGetFileByBoardIdQuery,
+  useDeleteFileByFieldIdMutation,
 } from '../store/api/fileApi';
-import { IErrorMessage, IFile, IFileRes, ILogin } from '../models';
+import { IErrorMessage } from '../models';
 import { Loader } from '../components/Loader/Loader';
 import { ErrorComponent } from '../components/Error/ErrorComponent';
-import { SubmitHandler, useForm } from 'react-hook-form';
 
 export const TestFilePage = () => {
   const boardId = '63763bacc02777e984c57e3a';
-  const fileId = '6382657dc02777e984c58585';
+  const taskId = '6383a1c5c02777e984c58950';
   const { id: userId } = JSON.parse(sessionStorage.getItem('user') || '');
 
-  // Get Files
-  const { data: files, isLoading, isError, error } = useGetFileQuery();
+  // Get File
+  const {
+    data: files,
+    isLoading,
+    isError,
+    error,
+  } = useGetFileQuery({ userId: userId, taskId: taskId });
   console.log(files);
 
   const [postFile] = usePostFileMutation();
@@ -25,15 +29,15 @@ export const TestFilePage = () => {
     postFile(files[0]);
   };
 
-  // Get File By ID
-  const { data: file } = useGetFileByIdQuery(boardId);
+  // Get File By Board ID
+  const { data: file } = useGetFileByBoardIdQuery(boardId);
 
-  // Delete column
+  // Delete file
   const delFileId = '638267d5c02777e984c585e5';
-  const [deleteFile] = useDeleteFileMutation();
+  const [deleteFile] = useDeleteFileByFieldIdMutation();
 
   if (isLoading) return <Loader />;
-  // if (isError) return <ErrorComponent message={(error as IErrorMessage).data.message} />;
+  if (isError) return <ErrorComponent message={(error as IErrorMessage).data.message} />;
 
   if (!files) return <div>Missing columns</div>;
 
@@ -46,38 +50,39 @@ export const TestFilePage = () => {
 
         {files.map((item) => (
           <p key={item.name}>
-            <b>File:</b> <i className="text-secondary">{item.name}</i> {item.name}
+            <b>File:</b> <i className="text-secondary">{item._id}</i> {item.name}
           </p>
         ))}
         <h5 className="text-primary">Number of files: {files.length}</h5>
       </section>
 
       <section>
-        <h2 className="text-danger">Add File</h2>
+        <h2 className="text-danger">Add File - HAVEN T WORK YET</h2>
         {/*Form better to do with react-hook-form*/}
         <input type="file" onChange={handleOnChange} placeholder="add file" />
       </section>
 
-      {/*<section>*/}
-      {/*  <h2 className="text-danger">Get File by Id</h2>*/}
-      {/*  {file && (*/}
-      {/*    <>*/}
-      {/*      <div>ID: {file._id}</div>*/}
-      {/*      <div>Title: {file.title}</div>*/}
-      {/*    </>*/}
-      {/*  )}*/}
-      {/*</section>*/}
+      <section>
+        <h2 className="text-danger">Get File by Board Id</h2>
+        {file &&
+          file.map((item) => (
+            <p key={item.name}>
+              <b>File:</b> <i className="text-secondary">{item._id}</i> {item.name}
+            </p>
+          ))}
+        <h5 className="text-primary">Number of files: {file?.length}</h5>
+      </section>
 
-      {/*<section>*/}
-      {/*  <h2 className="text-danger">Delete File</h2>*/}
-      {/*  <button*/}
-      {/*    onClick={() => {*/}
-      {/*      deleteFile(delFileId);*/}
-      {/*    }}*/}
-      {/*  >*/}
-      {/*    Delete mock File*/}
-      {/*  </button>*/}
-      {/*</section>*/}
+      <section>
+        <h2 className="text-danger">Delete File By Id</h2>
+        <button
+          onClick={() => {
+            deleteFile(delFileId);
+          }}
+        >
+          Delete mock File
+        </button>
+      </section>
     </>
   );
 };
