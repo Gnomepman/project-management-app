@@ -21,3 +21,9 @@ export interface ILogin {
   login: string;
   password: string;
 }
+
+export interface EditUser {
+  id: string;
+  name: string;
+  login: string;
+}
