@@ -2,6 +2,8 @@
   "error-main": "Oops! Page not found.",
   "error-description": "The page you’re looking for doesn’t exist.",
   "error-button": "Go Home",
+  "yes": "Yes",
+  "no": "No",
   "auth": {
     "enter": "Enter",
     "registration": "Sign Up",
@@ -26,7 +28,9 @@
     "pass_error": "Enter the password",
     "name_error": "Enter your name",
     "reg-error": "This user already exists",
-    "upd-success": "The changes were made successfully"
+    "upd-success": "The changes were made successfully",
+    "delete-user": "Deleting the user",
+    "warning": "Are you sure you want to delete the user?"
   },
   "wp": {
     "description": "The work management tool for happy collaboration",

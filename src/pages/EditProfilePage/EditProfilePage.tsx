@@ -16,6 +16,7 @@ import {
 
 export const EditProfilePage = () => {
   const [modal, setModalData] = useState(false);
+  const [check, setCheck] = useState(false);
   const { t } = useTranslation();
 
   const navigate = useNavigate();
@@ -65,6 +66,7 @@ export const EditProfilePage = () => {
   if (isLoading) return <Loader />;
   if (isError) return <ErrorComponent message={(error as IErrorMessage).data.message} />;
   const onClose = () => setModalData(false);
+  const onChecked = () => setCheck(false);
   return (
     <>
       {data && (
@@ -80,11 +82,23 @@ export const EditProfilePage = () => {
           >
             Change User data
           </Button>
-          <Button onClick={() => deleteUser(id).then(() => navigate('/login'))}>
-            Delete user data
-          </Button>
+          <Button onClick={() => setCheck(true)}>Delete user data</Button>
         </div>
       )}
+      <Modal show={check} onHide={onChecked}>
+        <Modal.Header>
+          <Modal.Title>{t('auth.delete-user')}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>{t('auth.warning')}</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => deleteUser(id).then(() => navigate('/login'))}>
+            {t('yes')}
+          </Button>
+          <Button variant="primary" onClick={() => setCheck(false)}>
+            {t('no')}
+          </Button>
+        </Modal.Footer>
+      </Modal>
       <Modal show={modal} onHide={onClose} size="lg">
         <div className="row d-flex pt-5 justify-content-center">
           <div className="col-md-4">
