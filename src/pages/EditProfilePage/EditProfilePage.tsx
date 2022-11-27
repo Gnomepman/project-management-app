@@ -1,35 +1,70 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { Button, Modal } from 'react-bootstrap';
+import { ErrorComponent } from '../../components/Error/ErrorComponent';
+import { IErrorMessage, IUser } from '../../models';
+import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
+import { FormInput } from '../../components/FormInput/FormInput';
+import { Loader } from '../../components/Loader/Loader';
 import {
+  useDeleteUserMutation,
   useGetUserByIdQuery,
   useGetUsersQuery,
-  useUpdatePostMutation,
+  usePutUserMutation,
 } from '../../store/api/userApi';
-import { Button } from 'react-bootstrap';
-import { ErrorComponent } from '../../components/Error/ErrorComponent';
-import { EditUser, IErrorMessage, IUser } from '../../models';
-import { useTranslation } from 'react-i18next';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import { FormInput } from '../../components/FormInput/FormInput';
 
 export const EditProfilePage = () => {
+  const { t } = useTranslation();
+
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<EditUser>({});
-  const { t } = useTranslation();
-  const id = '636d6464c02777e984c57dc1';
+    reset,
+  } = useForm<IUser>({});
 
-  const { isError, error, data } = useGetUserByIdQuery(id);
-  const { data: users } = useGetUsersQuery();
-  const [
-    updatePost, // This is the mutation trigger
-    { isLoading: isUpdating }, // This is the destructured mutation result
-  ] = useUpdatePostMutation();
+  const [putUser, { isLoading, isError, error, isSuccess }] = usePutUserMutation();
 
-  const onSubmit: SubmitHandler<EditUser> = (data: EditUser) => {
-    updatePost(data);
+  // Todo Refactor
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success(t('auth.upd-success'), {
+        position: 'top-right',
+        autoClose: 1000,
+      });
+    }
+
+    if (isError) {
+      toast.error((error as IErrorMessage).data.message, {
+        position: 'top-right',
+        autoClose: 2000,
+      });
+    }
+  }, [t, error, isError, isSuccess, navigate, isLoading]);
+
+  useEffect(() => {
+    if (!errors) {
+      reset();
+    }
+  }, [reset, errors]);
+
+  const { id } = JSON.parse(sessionStorage.getItem('user') || '');
+  const { data } = useGetUserByIdQuery(id);
+  const [deleteUser] = useDeleteUserMutation();
+  const onSubmit: SubmitHandler<IUser> = (data: IUser) => {
+    putUser({ id: id, payload: data });
   };
+
+  const hasError = () => {
+    return Object.keys(errors).length !== 0;
+  };
+
+  if (isLoading) return <Loader />;
+  if (isError) return <ErrorComponent message={(error as IErrorMessage).data.message} />;
+
   return (
     <>
       {data && (
@@ -37,25 +72,51 @@ export const EditProfilePage = () => {
           <h5>Logged User:</h5>
           <p>name: {data?.name}</p>
           <p>login: {data?.login}</p>
+          <Button>Change User data</Button>
+          <Button onClick={() => deleteUser(id).then(() => navigate('/login'))}>
+            Delete user data
+          </Button>
         </div>
       )}
-      {isError && <ErrorComponent message={(error as IErrorMessage).data.message} />}
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <FormInput
-          field="login"
-          title={t('auth.login')}
-          register={register}
-          errors={errors.login}
-        />
-        <FormInput field="name" title={t('auth.name')} register={register} errors={errors.name} />
-        <Button>Change User data</Button>
-      </form>
-      {users &&
-        users.map((item: IUser) => (
-          <span className="px-1" key={item.login}>
-            {item.login}
-          </span>
-        ))}
+      <Modal>
+        <div className="container app-container">
+          <div className="row d-flex pt-5 justify-content-center">
+            <div className="col-md-4">
+              <form onSubmit={handleSubmit(onSubmit)} data-testid="form">
+                <div className="form-outline mb-4">
+                  <FormInput
+                    field="login"
+                    title={t('auth.login')}
+                    register={register}
+                    errors={errors.login}
+                  />
+                  <FormInput
+                    field="name"
+                    title={t('auth.name')}
+                    register={register}
+                    errors={errors.name}
+                  />
+                  <FormInput
+                    field="password"
+                    title={t('auth.password')}
+                    register={register}
+                    errors={errors.password}
+                  />
+                  <Button
+                    type="submit"
+                    value="submit"
+                    data-testid="button-submit"
+                    disabled={hasError()}
+                    className={hasError() ? 'bg-secondary my-4' : 'bg-primary my-4'}
+                  >
+                    {t('auth.submit')}
+                  </Button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </Modal>
     </>
   );
 };

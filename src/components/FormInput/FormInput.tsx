@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 interface IInputProps {
   field: 'name' | 'login' | 'password';
   title: string;
-  register: UseFormRegister<ILogin | IRegistration | EditUser>;
+  register: UseFormRegister<ILogin | IRegistration>;
   errors: FieldError | undefined;
 }
 
