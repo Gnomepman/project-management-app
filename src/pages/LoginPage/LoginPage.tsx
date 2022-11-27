@@ -41,7 +41,7 @@ export function LoginPage() {
     }
 
     if (isError) {
-      toast.error((error as IErrorMessage).data.message, {
+      toast.error(t('auth.login-error'), {
         position: 'top-right',
         autoClose: 3000,
       });

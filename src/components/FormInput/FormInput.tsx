@@ -1,6 +1,6 @@
 import React from 'react';
 import { FieldError, UseFormRegister } from 'react-hook-form';
-import { EditUser, ILogin, IRegistration } from '../../models';
+import { ILogin, IRegistration } from '../../models';
 import { FormErrorMessage } from '../FormErrorMessage/FormErrorMessage';
 import { useTranslation } from 'react-i18next';
 

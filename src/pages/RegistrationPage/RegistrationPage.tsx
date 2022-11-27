@@ -36,7 +36,7 @@ export function RegistrationPage() {
     }
 
     if (isError) {
-      toast.error((error as IErrorMessage).data.message, {
+      toast.error(t('auth.reg-error'), {
         position: 'top-right',
         autoClose: 2000,
       });

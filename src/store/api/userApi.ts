@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { EditUser, IUser } from '../../models';
+import { IUser } from '../../models';
 import { API_URL } from '../../constants';
 import { baseQuery } from './baseQuery';
 
