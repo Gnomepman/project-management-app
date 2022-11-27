@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import { ErrorComponent } from '../../components/Error/ErrorComponent';
 import { IErrorMessage, IUser } from '../../models';
@@ -11,7 +11,6 @@ import { Loader } from '../../components/Loader/Loader';
 import {
   useDeleteUserMutation,
   useGetUserByIdQuery,
-  useGetUsersQuery,
   usePutUserMutation,
 } from '../../store/api/userApi';
 
