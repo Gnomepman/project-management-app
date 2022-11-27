@@ -5,7 +5,6 @@ import { baseQuery } from './baseQuery';
 export const userApi = createApi({
   reducerPath: 'user/api',
   baseQuery: baseQuery,
-
   endpoints: (build) => ({
     getUsers: build.query<IUser[], void>({
       query: () => ({
@@ -15,7 +14,6 @@ export const userApi = createApi({
         },
       }),
     }),
-
     getUserById: build.query<IUser, string>({
       query: (id) => ({
         url: `users/${id}`,
@@ -28,28 +26,16 @@ export const userApi = createApi({
       }),
     }),
 
-    putUser: build.mutation<FormData, { id: string; payload: FormData }>({
-      // query: (id: string, payload: FormData) => ({
-      //   url: `users/${id}`,
-      //   method: 'PUT',
-      //   body: payload,
-      //   headers: {
-      //     'Content-type': 'application/json; charset=UTF-8',
-      //   },
-      // }),
+    putUser: build.mutation<IUser, { id: string; payload: IUser }>({
       query({ id, payload }) {
         return {
           url: `/users/${id}`,
+          mode: 'cors',
           method: 'PUT',
-          credentials: 'include',
           body: payload,
-          headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-          },
         };
       },
     }),
-
     deleteUser: build.mutation<IUser, string>({
       query: (id) => ({
         url: `users/${id}`,
@@ -64,6 +50,5 @@ export const userApi = createApi({
     }),
   }),
 });
-
 export const { useGetUsersQuery, useGetUserByIdQuery, usePutUserMutation, useDeleteUserMutation } =
   userApi;
