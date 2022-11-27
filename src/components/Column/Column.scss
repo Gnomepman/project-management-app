@@ -1,11 +1,15 @@
 .column {
   padding: 5px;
-  width: 250px;
-  max-height: 76vh;
-  overflow-y: auto;
-  border-radius: 3px;
-  box-sizing: border-box;
+  min-width: 250px;
   height: fit-content;
+  max-height: 76vh;
+  overflow-y: hidden;
+  user-select: 'none';
+  border-radius: 5px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 
   &_header {
     display: flex;
@@ -14,13 +18,27 @@
     padding: 2px;
 
     span {
-      font-weight: 400;
-      font-size: 18px;
+      font-weight: 500;
+      font-size: 20px;
+    }
+
+    button{
+      $size: 35px;
+      width: $size;
+      height: $size;
     }
   }
 
   &_container {
     overflow-y: auto;
-    height: fit-content;
+    min-height: 50px;
+  }
+
+  &_footer{
+    display: flex;
+
+    *{
+      flex: 1;
+    }
   }
 }
