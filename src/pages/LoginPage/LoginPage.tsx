@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import Button from 'react-bootstrap/esm/Button';
 import { useActions } from '../../hooks/actions';
-import { ILogin } from '../../models';
+import { IErrorMessage, ILogin } from '../../models';
 import { useLoginUserMutation } from '../../store/api/authApi';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { FormInput } from '../../components/FormInput/FormInput';
@@ -41,7 +41,7 @@ export function LoginPage() {
     }
 
     if (isError) {
-      toast.error(t('auth.login-error'), {
+      toast.error((error as IErrorMessage).data.message, {
         position: 'top-right',
         autoClose: 3000,
       });
