@@ -5,14 +5,33 @@ import { Button, Navbar } from 'react-bootstrap';
 import Logo from '../../assets/images/pm-logo.jpg';
 import { languages } from '../../utils/languages';
 import { AuthSection } from '../AuthSection/AuthSection';
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
 export function Header() {
+  const [navBackground, setNavBackground] = useState(false);
+  const navRef = useRef();
   const { t } = useTranslation();
-
+  useEffect(() => {
+    const handleScroll = () => {
+      const show = window.scrollY > 10;
+      if (navRef.current !== show) {
+        setNavBackground(show);
+      }
+    };
+    document.addEventListener('scroll', handleScroll);
+    return () => {
+      document.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
   return (
-    <Navbar bg="light">
+    <Navbar
+      sticky="top"
+      style={{
+        transition: '1s ease',
+        backgroundColor: navBackground ? 'rgb(229, 197, 157)' : 'transparent',
+      }}
+    >
       <div className="container-xxl">
         <Navbar.Collapse>
           <NavLink to="/">
