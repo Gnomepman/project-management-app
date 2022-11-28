@@ -29,7 +29,7 @@ export function Header() {
       sticky="top"
       style={{
         transition: '1s ease',
-        backgroundColor: navBackground ? 'rgb(229, 197, 157)' : 'transparent',
+        backgroundColor: navBackground ? '#9BB3DA ' : 'transparent',
       }}
     >
       <div className="container-xxl">
