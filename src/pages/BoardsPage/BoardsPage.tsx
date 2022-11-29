@@ -14,17 +14,17 @@ export function BoardsPage() {
   const [postBoard] = usePostBoardsMutation();
   const [showModal, setShowModal] = useState(false);
   const [inputName, setInputName] = useState('');
-  const { data: boards, isLoading: areBoardsLoading, refetch } = useGetBoardsQuery();
+  const { data: boards, isLoading: areBoardsLoading, refetch } = useGetBoardsQuery(); //TODO: edit boardApi with tags and remove refetch
 
-  const handleSubmit = (e: { preventDefault: () => void }) => {
+  const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     const newBoard: IBoard = {
       title: inputName,
       owner: id,
       users: [id],
     };
-    postBoard(newBoard);
-    refetch();
+    await postBoard(newBoard);
+    refetch(); //TODO: edit boardApi with tags and remove refetch
     setInputName('');
   };
 
@@ -48,23 +48,33 @@ export function BoardsPage() {
               {t('boards.create')}
             </Button>
             {boards &&
-              boards!.map((elem, index) => {
+              boards!.map((elem) => {
                 return (
                   <>
-                    <Link to={`/boards/${elem._id}`} key={index}>
-                      <Button
-                        className="board"
-                        style={{
-                          backgroundImage: `linear-gradient(110deg, ${stringToColour(
-                            elem._id!
-                          )}, ${stringToColour(elem._id!.split('').reverse().join())}`,
-                          opacity: 0.8,
-                        }}
-                      >
-                        {/* add limit for the name, if length is to high - cut string and add '...' to the end */}
-                        <span className="board-name fw-semibold fs-5">{elem.title}</span>
-                      </Button>
-                    </Link>
+                    <div key={elem._id}>
+                      <Link to={`/boards/${elem._id}`}>
+                        <Button
+                          className="board"
+                          style={{
+                            backgroundImage: `linear-gradient(110deg, ${stringToColour(
+                              elem._id!
+                            )}, ${stringToColour(elem._id!.split('').reverse().join())}`,
+                            opacity: 0.8,
+                          }}
+                        >
+                          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                            <span className="board-name fw-semibold fs-5">
+                              {elem.title.length < 20
+                                ? elem.title
+                                : elem.title.slice(0, 20).trimEnd() + '...'}
+                            </span>
+                            <Button className="delete_button" variant="danger">
+                              X
+                            </Button>
+                          </div>
+                        </Button>
+                      </Link>
+                    </div>
                   </>
                 );
               })}
