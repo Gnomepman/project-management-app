@@ -9,9 +9,11 @@ import React, { useEffect, useRef, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
 export function Header() {
+  const { t } = useTranslation();
+
   const [navBackground, setNavBackground] = useState(false);
   const navRef = useRef();
-  const { t } = useTranslation();
+
   useEffect(() => {
     const handleScroll = () => {
       const show = window.scrollY > 10;
@@ -24,12 +26,13 @@ export function Header() {
       document.removeEventListener('scroll', handleScroll);
     };
   }, []);
+
   return (
     <Navbar
       sticky="top"
       style={{
         transition: '1s ease',
-        backgroundColor: navBackground ? '#9BB3DA ' : 'transparent',
+        backgroundColor: navBackground ? '#9BB3DA' : '#E0E6F3',
       }}
     >
       <div className="container-xxl">

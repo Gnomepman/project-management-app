@@ -9,6 +9,7 @@ import { FormInput } from '../../components/FormInput/FormInput';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { parseJwt } from '../../utils/parseJwt';
+import { Loader } from '../../components/Loader/Loader';
 
 export function LoginPage() {
   const { t } = useTranslation();
@@ -33,10 +34,10 @@ export function LoginPage() {
         position: 'top-right',
         autoClose: 800,
       });
-      sessionStorage.setItem('token', data?.token as string);
+      localStorage.setItem('token', data?.token as string);
       const userData = parseJwt(data?.token as string);
       setUser(userData);
-      sessionStorage.setItem('user', JSON.stringify(userData));
+      localStorage.setItem('user', JSON.stringify(userData));
       navigate('/boards');
     }
 
@@ -62,9 +63,11 @@ export function LoginPage() {
     return Object.keys(errors).length !== 0;
   };
 
+  if (isLoading) return <Loader />;
+
   return (
     <>
-      <div className="container app-container">
+      <div className="app-container">
         <div className="row d-flex pt-5 justify-content-center">
           <div className="col-md-4">
             <form onSubmit={handleSubmit(onSubmit)} data-testid="form">

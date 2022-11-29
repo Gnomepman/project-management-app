@@ -12,7 +12,7 @@ import { ErrorComponent } from '../components/Error/ErrorComponent';
 export const TestFilePage = () => {
   const boardId = '63763bacc02777e984c57e3a';
   const taskId = '6383a1c5c02777e984c58950';
-  const { id: userId } = JSON.parse(sessionStorage.getItem('user') || '');
+  const { id: userId } = JSON.parse(localStorage.getItem('user') || '');
 
   // Get File
   const {

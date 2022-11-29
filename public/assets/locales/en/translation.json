@@ -30,12 +30,11 @@
     "name_error": "Enter your name",
     "reg-error": "This user already exists",
     "upd-success": "The changes were made successfully",
-    "delete-user": "Deleting the user",
     "warning": "Are you sure you want to delete the user?",
-    "button-edit": "Edit",
-    "button-delete": "Delete the user",
+    "edit-user": "Edit user",
+    "delete-user": "Delete user",
     "edit": "Edit",
-    "edit-data": "Edit user data",
+    "edit-data": "Edit User data",
     "cancel": "Cancel"
   },
   "wp": {
