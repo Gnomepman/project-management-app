@@ -1,5 +1,5 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
-import { IBoard } from '../../models';
+import { IBoard, IBoardRes } from '../../models';
 import { baseQuery } from './baseQuery';
 
 export const boardApi = createApi({
@@ -15,7 +15,7 @@ export const boardApi = createApi({
       providesTags: ['Board'],
     }),
 
-    postBoards: build.mutation<IBoard, IBoard>({
+    postBoards: build.mutation<IBoard, IBoardRes>({
       query: (payload: IBoard) => ({
         url: `boards`,
         method: 'POST',
@@ -34,7 +34,7 @@ export const boardApi = createApi({
       providesTags: ['Board'],
     }),
 
-    putBoard: build.mutation<IBoard, { boardId: string; payload: IBoard }>({
+    putBoard: build.mutation<IBoard, { boardId: string; payload: IBoardRes }>({
       query({ boardId, payload }) {
         return {
           url: `boards/${boardId}`,
@@ -48,7 +48,7 @@ export const boardApi = createApi({
       invalidatesTags: ['Board'],
     }),
 
-    deleteBoard: build.mutation<IBoard, string>({
+    deleteBoard: build.mutation<IBoardRes, string>({
       query: (boardId: string) => ({
         url: `boards/${boardId}`,
         method: 'DELETE',

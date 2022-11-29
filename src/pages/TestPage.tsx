@@ -6,7 +6,7 @@ import {
   usePostBoardsMutation,
   usePutBoardMutation,
 } from '../store/api/boardApi';
-import { IBoard, IErrorMessage } from '../models';
+import { IBoard, IBoardRes, IErrorMessage } from '../models';
 import { Loader } from '../components/Loader/Loader';
 import { ErrorComponent } from '../components/Error/ErrorComponent';
 import { TestColumnPage } from './TestColumnPage';
@@ -19,7 +19,7 @@ export const TestPage = () => {
   // Get Boards
   const { data: boards, isLoading, isError, error } = useGetBoardsQuery();
 
-  const mockBoard: IBoard = {
+  const mockBoard: IBoardRes = {
     title: 'testNewBoard',
     owner: '6383a160c02777e984c5892c',
     users: ['6383a160c02777e984c5892c'],
@@ -37,7 +37,7 @@ export const TestPage = () => {
 
   // Put Board
   const updMockId = '6383a1b2c02777e984c58935';
-  const updMockBoard: IBoard = {
+  const updMockBoard: IBoardRes = {
     title: 'UPD Add Redux, Redux Toolkit',
     owner: '636d6464c02777e984c57dc1',
     users: ['636d6464c02777e984c57dc1'],
