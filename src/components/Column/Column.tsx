@@ -2,6 +2,7 @@ import React from 'react';
 import { Draggable, Droppable, DroppableProvided } from 'react-beautiful-dnd';
 import { Button } from 'react-bootstrap';
 import { useDeleteColumnMutation } from '../../store/api/columnApi';
+import { usePostTasksMutation } from '../../store/api/taskApi';
 import { column, task } from '../Board/initial-data';
 import { Task } from '../Task/Task';
 import './Column.scss';
@@ -14,10 +15,7 @@ export function Column(props: {
   boardId: string;
 }) {
   const [delColumn] = useDeleteColumnMutation();
-
-  const deleteColumn = async () => {
-    await delColumn({ boardId: props.boardId, columnId: props.column.id });
-  };
+  const [postTask] = usePostTasksMutation();
   return (
     <>
       <Draggable draggableId={props.column.id} index={props.index}>
@@ -34,7 +32,12 @@ export function Column(props: {
           >
             <div className="column_header" {...provided.dragHandleProps}>
               <span>{props.column.title}</span>
-              <Button variant="danger" onClick={deleteColumn}>
+              <Button
+                variant="danger"
+                onClick={async () =>
+                  await delColumn({ boardId: props.boardId, columnId: props.column.id })
+                }
+              >
                 X
               </Button>
             </div>
@@ -72,7 +75,21 @@ export function Column(props: {
               </Droppable>
             </div>
             <div className="column_footer">
-              <Button variant="outline-primary">Add task</Button>
+              <Button
+                variant="outline-primary"
+                onClick={async () => {
+                  await postTask({
+                    boardId: props.boardId,
+                    columnId: props.column.id,
+                    payload: {
+                      title: 'Drink tea',
+                      order: 0,
+                    },
+                  });
+                }}
+              >
+                Add task
+              </Button>
             </div>
           </div>
         )}

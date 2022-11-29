@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd';
 import { useParams } from 'react-router-dom';
 import { Column } from '../Column/Column';
@@ -6,15 +6,21 @@ import { column, initial, task } from './initial-data';
 import { useGetColumnsQuery, usePostColumnsMutation } from '../../store/api/columnApi';
 import { IColumn } from '../../models';
 import { Button } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store';
+import { useBoardActions } from '../../hooks/actions';
+import { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 
 export function Board() {
   const { id } = useParams();
-  const [state, setState] = useState({} as initial);
+  const board = useSelector((state: RootState) => state.board.board);
+  const { setBoard } = useBoardActions();
   const { data: columns, isLoading: columnsIsLoading } = useGetColumnsQuery(id!);
   const [postColumn] = usePostColumnsMutation();
 
   useEffect(() => {
-    setState(translateDataFromApiToStateObject(columns!)!);
+    setBoard(translateDataFromApiToStateObject(columns!)! as initial);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [columns]);
 
   const createColumn = async () => {
@@ -22,7 +28,7 @@ export function Board() {
       boardId: id!,
       payload: {
         title: 'testNewColumn', //TODO: get name from modal
-        order: state.columnOrder.length + 1,
+        order: board.columnOrder.length + 1,
       },
     });
   };
@@ -36,10 +42,10 @@ export function Board() {
 
   return (
     <>
-      <DragDropContext onDragEnd={(result) => onDragEnd(result, state, setState)}>
+      <DragDropContext onDragEnd={(result) => onDragEnd(result, board, setBoard)}>
         <Droppable droppableId="all-columns" direction="horizontal" type="column">
           {(provided) => {
-            if (!state) {
+            if (!board) {
               return <p>Loading</p>;
             }
             return (
@@ -51,14 +57,14 @@ export function Board() {
                   style={{ overflowX: 'scroll', height: 'maxContent' }}
                 >
                   <>
-                    {state.columnOrder &&
-                      state.columnOrder.map((columnId, index) => {
-                        const column = state.columns[columnId];
+                    {board.columnOrder &&
+                      board.columnOrder.map((columnId, index) => {
+                        const column = board.columns[columnId];
                         return (
                           <InnerList
                             key={column.id}
                             column={column}
-                            taskMap={state.tasks}
+                            taskMap={board.tasks}
                             index={index}
                             boardId={id!}
                           />
@@ -93,7 +99,7 @@ const InnerList = (props: {
 const onDragEnd = (
   result: DropResult,
   state: initial,
-  setState: Dispatch<SetStateAction<initial>>
+  setState: ActionCreatorWithPayload<initial, 'boardSlice/setBoard'>
 ) => {
   const { destination, source, draggableId, type } = result;
 
@@ -169,8 +175,8 @@ const onDragEnd = (
   setState(newState);
 };
 
-const translateDataFromApiToStateObject = (columns: IColumn[]) => {
-  if (!columns) return;
+const translateDataFromApiToStateObject = (columns: IColumn[]): initial | Record<string, never> => {
+  if (!columns) return {};
   const result: initial = {
     tasks: {
       'task-1': { id: 'task-1', content: 'Take out the garbage' },

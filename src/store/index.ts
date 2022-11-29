@@ -8,6 +8,7 @@ import { columnApi } from './api/columnApi';
 import { taskApi } from './api/taskApi';
 import { pointApi } from './api/pointApi';
 import { fileApi } from './api/fileApi';
+import { boardReducers } from './feature/boardSlice';
 
 export const store = configureStore({
   reducer: {
@@ -19,6 +20,7 @@ export const store = configureStore({
     [fileApi.reducerPath]: fileApi.reducer,
     [pointApi.reducerPath]: pointApi.reducer,
     user: userReducer,
+    board: boardReducers,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
