@@ -1,6 +1,7 @@
 import React from 'react';
 import { Draggable, Droppable, DroppableProvided } from 'react-beautiful-dnd';
 import { Button } from 'react-bootstrap';
+import { useDeleteColumnMutation } from '../../store/api/columnApi';
 import { column, task } from '../Board/initial-data';
 import { Task } from '../Task/Task';
 import './Column.scss';
@@ -10,7 +11,13 @@ export function Column(props: {
   column: column;
   tasks: task[];
   index: number;
+  boardId: string;
 }) {
+  const [delColumn] = useDeleteColumnMutation();
+
+  const deleteColumn = async () => {
+    await delColumn({ boardId: props.boardId, columnId: props.column.id });
+  };
   return (
     <>
       <Draggable draggableId={props.column.id} index={props.index}>
@@ -27,7 +34,9 @@ export function Column(props: {
           >
             <div className="column_header" {...provided.dragHandleProps}>
               <span>{props.column.title}</span>
-              <Button variant="danger">X</Button>
+              <Button variant="danger" onClick={deleteColumn}>
+                X
+              </Button>
             </div>
             <div className="column_container">
               <Droppable droppableId={props.column.id} type="task">
