@@ -9,13 +9,11 @@ interface TeamMemberProps {
 export const TeamMember = ({ item }: TeamMemberProps) => {
   return (
     <div className="col-4 justify-content-center rounded ">
-      <Card>
+      <Card style={{ width: '150px' }}>
         <a href={item.url} target="_blank" rel="noreferrer">
           <img height="30" src={GHLogo} alt="github-logo" />
           <Card.Title>{item.username}</Card.Title>
         </a>
-        <Card.Subtitle>{item.role}</Card.Subtitle>
-        <Card.Text>{item.description} </Card.Text>
       </Card>
     </div>
   );

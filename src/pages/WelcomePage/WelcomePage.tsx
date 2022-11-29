@@ -7,7 +7,6 @@ export const WelcomePage = () => {
     <>
       <Introduction />
       <Technologies />
-      <TeamMembers />
     </>
   );
 };
