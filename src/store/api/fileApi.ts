@@ -6,55 +6,55 @@ import { baseQuery } from './baseQuery';
 export const fileApi = createApi({
   reducerPath: 'file/api',
   baseQuery: baseQuery,
+  tagTypes: ['File'],
 
   endpoints: (build) => ({
-    getFile: build.mutation<IFile[], void>({
-      query: () => ({
-        url: `file`,
-        headers: {
-          'Content-type': 'application/json; charset=UTF-8',
-        },
-      }),
+    getFile: build.query<IFile[], { userId: string; taskId: string }>({
+      query: (arg) => {
+        const { userId, taskId } = arg;
+        return {
+          url: 'file/',
+          params: { userId, taskId },
+        };
+      },
+      providesTags: ['File'],
     }),
 
-    postFile: build.query<IFile, string>({
-      query: (id) => ({
-        url: `columns/${id}`,
+    postFile: build.mutation<IFile, File>({
+      query: (payload) => ({
+        url: 'file',
         method: 'POST',
-        query: {
-          id: id,
-        },
-        headers: {
-          'Content-type': 'application/json; charset=UTF-8',
-        },
+        body: payload,
       }),
+      invalidatesTags: ['File'],
     }),
 
-    getFileById: build.query<IFile, string>({
+    getFileByBoardId: build.query<IFile[], string>({
       query: (boardId) => ({
         url: `file/${boardId}`,
         query: {
           id: boardId,
         },
-        headers: {
-          'Content-type': 'application/json; charset=UTF-8',
-        },
       }),
+      providesTags: ['File'],
     }),
 
-    deleteFile: build.query<IFile, string>({
+    deleteFileByFieldId: build.mutation<IFile, string>({
       query: (fieldId) => ({
         url: `file/${fieldId}`,
         method: 'DELETE',
         query: {
           id: fieldId,
         },
-        headers: {
-          'Content-type': 'application/json; charset=UTF-8',
-        },
       }),
+      invalidatesTags: ['File'],
     }),
   }),
 });
-export const { useGetFileMutation, usePostFileQuery, useGetFileByIdQuery, useDeleteFileQuery } =
-  fileApi;
+
+export const {
+  useGetFileQuery,
+  usePostFileMutation,
+  useGetFileByBoardIdQuery,
+  useDeleteFileByFieldIdMutation,
+} = fileApi;

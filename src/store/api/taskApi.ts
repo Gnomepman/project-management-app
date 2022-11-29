@@ -6,6 +6,7 @@ import { baseQuery } from './baseQuery';
 export const taskApi = createApi({
   reducerPath: 'task/api',
   baseQuery: baseQuery,
+  tagTypes: ['Task'],
 
   endpoints: (build) => ({
     getTasks: build.query<ITask[], { boardId: string; columnId: string }>({
@@ -15,6 +16,7 @@ export const taskApi = createApi({
           id: boardId,
         },
       }),
+      providesTags: ['Task'],
     }),
 
     postTasks: build.mutation<ITaskRes, { boardId: string; columnId: string; payload: ITaskRes }>({
@@ -28,6 +30,7 @@ export const taskApi = createApi({
           },
         };
       },
+      invalidatesTags: ['Task'],
     }),
 
     getTaskById: build.query<ITask, Record<string, string>>({
@@ -39,6 +42,7 @@ export const taskApi = createApi({
           taskId: taskId,
         },
       }),
+      providesTags: ['Task'],
     }),
 
     putTask: build.mutation<
@@ -55,6 +59,7 @@ export const taskApi = createApi({
           },
         };
       },
+      invalidatesTags: ['Task'],
     }),
 
     deleteTask: build.mutation<ITask, Record<string, string>>({
@@ -62,9 +67,10 @@ export const taskApi = createApi({
         url: `boards/${boardId}/columns/${columnId}/tasks/${taskId}`,
         method: 'DELETE',
       }),
+      invalidatesTags: ['Task'],
     }),
 
-    getTaskSet: build.mutation<ITask[], void>({
+    getTaskSet: build.query<ITask[], void>({
       query: () => ({
         url: `tasksSet`,
       }),
@@ -78,7 +84,7 @@ export const taskApi = createApi({
       }),
     }),
 
-    getTasksByBoard: build.mutation<ITask, string>({
+    getTaskSetByBoard: build.mutation<ITask, string>({
       query: (boardId) => ({
         url: `tasksSet/${boardId}`,
         query: {
@@ -93,8 +99,9 @@ export const {
   useGetTasksQuery,
   usePostTasksMutation,
   useGetTaskByIdQuery,
-  useGetTasksByBoardMutation,
   usePutTaskMutation,
-  usePatchTaskSetMutation,
   useDeleteTaskMutation,
+  useGetTaskSetQuery,
+  usePatchTaskSetMutation,
+  useGetTaskSetByBoardMutation,
 } = taskApi;

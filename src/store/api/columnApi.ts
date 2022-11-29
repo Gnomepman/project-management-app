@@ -40,6 +40,7 @@ export const columnApi = createApi({
           id: boardId,
         },
       }),
+      providesTags: ['Column'],
     }),
 
     putColumn: build.mutation<IColumn, { boardId: string; columnId: string; payload: IColumnRes }>({
@@ -83,6 +84,7 @@ export const columnApi = createApi({
     }),
   }),
 });
+
 export const {
   useGetColumnsQuery,
   usePostColumnsMutation,

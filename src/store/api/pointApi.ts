@@ -1,87 +1,82 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
-import { IPoint } from '../../models';
+import { IPoint, IPointRes } from '../../models';
 import { baseQuery } from './baseQuery';
 
 //Todo Recheck, fix and update
 export const pointApi = createApi({
   reducerPath: 'point/api',
   baseQuery: baseQuery,
+  tagTypes: ['Point'],
 
   endpoints: (build) => ({
-    getPoints: build.mutation<IPoint[], string>({
+    getPoints: build.query<IPoint[], void>({
       query: () => ({
-        url: `tasks`,
-        headers: {
-          'Content-type': 'application/json; charset=UTF-8',
-        },
+        url: `points`,
       }),
+      providesTags: ['Point'],
     }),
 
-    postPoints: build.query<IPoint, string>({
-      query: () => ({
-        url: `tasks`,
+    postPoints: build.mutation<IPointRes, { taskId: string; payload: IPointRes }>({
+      query: ({ taskId, payload }) => ({
+        url: `points`,
         method: 'POST',
-        headers: {
-          'Content-type': 'application/json; charset=UTF-8',
-        },
-      }),
-    }),
-
-    patchPoints: build.mutation({
-      query: (payload: IPoint) => ({
-        url: `tasks`,
-        method: 'PATCH',
-        body: payload,
-        headers: {
-          'Content-type': 'application/json; charset=UTF-8',
-        },
-      }),
-    }),
-
-    getPointsById: build.query<IPoint, string>({
-      query: (taskId) => ({
-        url: `tasks/${taskId}`,
         query: {
           id: taskId,
         },
-        headers: {
-          'Content-type': 'application/json; charset=UTF-8',
-        },
+        body: payload,
       }),
+      invalidatesTags: ['Point'],
     }),
 
-    patchPointsById: build.query<IPoint, string>({
-      query: (pointId) => ({
-        url: `tasks/${pointId}`,
+    patchPoints: build.mutation<IPointRes[], IPointRes[]>({
+      query: (payload: IPointRes[]) => ({
+        url: `points`,
+        method: 'PATCH',
+        body: payload,
+      }),
+      invalidatesTags: ['Point'],
+    }),
+
+    getPointsByTaskId: build.query<IPoint[], string>({
+      query: (taskId) => ({
+        url: `points/${taskId}`,
+        query: {
+          id: taskId,
+        },
+      }),
+      providesTags: ['Point'],
+    }),
+
+    patchPointsByTaskId: build.mutation<IPoint, { pointId: string; payload: IPointRes }>({
+      query: ({ pointId, payload }) => ({
+        url: `points/${pointId}`,
         method: 'PATCH',
         query: {
           id: pointId,
         },
-        headers: {
-          'Content-type': 'application/json; charset=UTF-8',
-        },
+        body: payload,
       }),
+      invalidatesTags: ['Point'],
     }),
 
-    deletePoints: build.query<IPoint, string>({
+    deletePointsByTaskId: build.mutation<IPoint, string>({
       query: (pointId) => ({
-        url: `tasks/${pointId}`,
+        url: `points/${pointId}`,
         method: 'DELETE',
         query: {
           id: pointId,
         },
-        headers: {
-          'Content-type': 'application/json; charset=UTF-8',
-        },
       }),
+      invalidatesTags: ['Point'],
     }),
   }),
 });
+
 export const {
-  useGetPointsMutation,
-  usePostPointsQuery,
+  useGetPointsQuery,
+  usePostPointsMutation,
   usePatchPointsMutation,
-  useGetPointsByIdQuery,
-  usePatchPointsByIdQuery,
-  useDeletePointsQuery,
+  useGetPointsByTaskIdQuery,
+  usePatchPointsByTaskIdMutation,
+  useDeletePointsByTaskIdMutation,
 } = pointApi;

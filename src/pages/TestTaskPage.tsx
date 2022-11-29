@@ -13,7 +13,7 @@ import {
 export const TestTaskPage = () => {
   const boardId = '63763bacc02777e984c57e3a';
   const columnId = '63763ccdc02777e984c57e45';
-  const taskId = '6382657dc02777e984c58585';
+  const taskId = '6383a1c5c02777e984c58950';
 
   // Get Tasks
   const { data: tasks, isLoading, isError, error } = useGetTasksQuery({ boardId, columnId });
@@ -47,6 +47,12 @@ export const TestTaskPage = () => {
   // Delete column
   const delTaskId = '638267d5c02777e984c585e5';
   const [deleteTask] = useDeleteTaskMutation();
+
+  // useGetTaskSetQuery
+
+  // usePatchTaskSetMutation
+
+  // useGetTaskSetByBoardMutation
 
   if (isLoading) return <Loader />;
   if (isError) return <ErrorComponent message={(error as IErrorMessage).data.message} />;
@@ -110,6 +116,18 @@ export const TestTaskPage = () => {
         >
           Delete mock Task
         </button>
+      </section>
+
+      <section>
+        <h2 className="text-danger">useGetTaskSetQuery - not implemented</h2>
+      </section>
+
+      <section>
+        <h2 className="text-danger">usePatchTaskSetMutation - not implemented</h2>
+      </section>
+
+      <section>
+        <h2 className="text-danger">useGetTaskSetByBoardMutation - not implemented</h2>
       </section>
     </>
   );

@@ -22,7 +22,7 @@ export const FormInput = ({ field, title, register, errors }: IInputProps) => {
         className="form-control mt-1"
         id={field}
         data-testid={field}
-        placeholder={`${add} ${title}`}
+        placeholder={`${add} ${title.toLowerCase()}`}
         type="text"
         {...(register &&
           register(field, {
