@@ -10,7 +10,7 @@ export const Footer = () => {
     <footer className="bg-light">
       <div className="container-xxl">
         <section className="d-flex pb-1 pt-3 justify-content-between">
-          <div className="d-flex">
+          <div className="d-xl-flex d-md-flex d-none d-sm-block">
             <h3 className="px-2 text-center mt-2">{t('footer.created')}</h3>
             <a href="https://rs.school/" target="_blank" rel="noreferrer">
               <img height="37" src={RSSLogo} alt="rss" />
