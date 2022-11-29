@@ -5,12 +5,14 @@ import { baseQuery } from './baseQuery';
 export const boardApi = createApi({
   reducerPath: 'board/api',
   baseQuery: baseQuery,
+  tagTypes: ['Board'],
 
   endpoints: (build) => ({
     getBoards: build.query<IBoard[], void>({
       query: () => ({
         url: `boards`,
       }),
+      providesTags: ['Board'],
     }),
 
     postBoards: build.mutation<IBoard, IBoard>({
@@ -19,6 +21,7 @@ export const boardApi = createApi({
         method: 'POST',
         body: payload,
       }),
+      invalidatesTags: ['Board'],
     }),
 
     getBoardById: build.query<IBoard, string>({
@@ -28,6 +31,7 @@ export const boardApi = createApi({
           id: boardId,
         },
       }),
+      providesTags: ['Board'],
     }),
 
     putBoard: build.mutation<IBoard, { boardId: string; payload: IBoard }>({
@@ -41,6 +45,7 @@ export const boardApi = createApi({
           },
         };
       },
+      invalidatesTags: ['Board'],
     }),
 
     deleteBoard: build.mutation<IBoard, string>({
@@ -51,6 +56,7 @@ export const boardApi = createApi({
           id: boardId,
         },
       }),
+      invalidatesTags: ['Board'],
     }),
 
     getBoardSet: build.query<IBoard[], void>({
@@ -59,11 +65,11 @@ export const boardApi = createApi({
       }),
     }),
 
-    getBoardSetById: build.query<IBoard, string>({
-      query: (boardId) => ({
-        url: `boardsSet/${boardId}`,
+    getBoardSetByUserId: build.query<IBoard, string>({
+      query: (userId) => ({
+        url: `boardsSet/${userId}`,
         query: {
-          id: boardId,
+          id: userId,
         },
       }),
     }),
@@ -77,5 +83,5 @@ export const {
   usePutBoardMutation,
   useDeleteBoardMutation,
   useGetBoardSetQuery,
-  useGetBoardSetByIdQuery,
+  useGetBoardSetByUserIdQuery,
 } = boardApi;

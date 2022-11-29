@@ -6,12 +6,14 @@ import { baseQuery } from './baseQuery';
 export const pointApi = createApi({
   reducerPath: 'point/api',
   baseQuery: baseQuery,
+  tagTypes: ['Point'],
 
   endpoints: (build) => ({
     getPoints: build.query<IPoint[], void>({
       query: () => ({
         url: `points`,
       }),
+      providesTags: ['Point'],
     }),
 
     postPoints: build.mutation<IPointRes, { taskId: string; payload: IPointRes }>({
@@ -23,6 +25,7 @@ export const pointApi = createApi({
         },
         body: payload,
       }),
+      invalidatesTags: ['Point'],
     }),
 
     patchPoints: build.mutation<IPointRes[], IPointRes[]>({
@@ -30,10 +33,8 @@ export const pointApi = createApi({
         url: `points`,
         method: 'PATCH',
         body: payload,
-        headers: {
-          'Content-type': 'application/json; charset=UTF-8',
-        },
       }),
+      invalidatesTags: ['Point'],
     }),
 
     getPointsByTaskId: build.query<IPoint[], string>({
@@ -42,10 +43,8 @@ export const pointApi = createApi({
         query: {
           id: taskId,
         },
-        headers: {
-          'Content-type': 'application/json; charset=UTF-8',
-        },
       }),
+      providesTags: ['Point'],
     }),
 
     patchPointsByTaskId: build.mutation<IPoint, { pointId: string; payload: IPointRes }>({
@@ -56,10 +55,8 @@ export const pointApi = createApi({
           id: pointId,
         },
         body: payload,
-        headers: {
-          'Content-type': 'application/json; charset=UTF-8',
-        },
       }),
+      invalidatesTags: ['Point'],
     }),
 
     deletePointsByTaskId: build.mutation<IPoint, string>({
@@ -69,10 +66,8 @@ export const pointApi = createApi({
         query: {
           id: pointId,
         },
-        headers: {
-          'Content-type': 'application/json; charset=UTF-8',
-        },
       }),
+      invalidatesTags: ['Point'],
     }),
   }),
 });

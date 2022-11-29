@@ -6,6 +6,7 @@ import { baseQuery } from './baseQuery';
 export const fileApi = createApi({
   reducerPath: 'file/api',
   baseQuery: baseQuery,
+  tagTypes: ['File'],
 
   endpoints: (build) => ({
     getFile: build.query<IFile[], { userId: string; taskId: string }>({
@@ -16,6 +17,7 @@ export const fileApi = createApi({
           params: { userId, taskId },
         };
       },
+      providesTags: ['File'],
     }),
 
     postFile: build.mutation<IFile, File>({
@@ -24,6 +26,7 @@ export const fileApi = createApi({
         method: 'POST',
         body: payload,
       }),
+      invalidatesTags: ['File'],
     }),
 
     getFileByBoardId: build.query<IFile[], string>({
@@ -33,6 +36,7 @@ export const fileApi = createApi({
           id: boardId,
         },
       }),
+      providesTags: ['File'],
     }),
 
     deleteFileByFieldId: build.mutation<IFile, string>({
@@ -43,6 +47,7 @@ export const fileApi = createApi({
           id: fieldId,
         },
       }),
+      invalidatesTags: ['File'],
     }),
   }),
 });

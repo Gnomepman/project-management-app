@@ -12,7 +12,7 @@ import { Loader } from '../components/Loader/Loader';
 import { ErrorComponent } from '../components/Error/ErrorComponent';
 
 export const TestPointPage = () => {
-  const pointId = '6383a4c9c02777e984c58997';
+  const pointId = '6383a4c9c02777e984c5899a';
   const taskId = '6383a1c5c02777e984c58950';
 
   // Get Points

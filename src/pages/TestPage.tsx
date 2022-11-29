@@ -36,7 +36,7 @@ export const TestPage = () => {
   const { data: board } = useGetBoardByIdQuery(mockId);
 
   // Put Board
-  const updMockId = '63809822c02777e984c58285';
+  const updMockId = '6383a1b2c02777e984c58935';
   const updMockBoard: IBoard = {
     title: 'UPD Add Redux, Redux Toolkit',
     owner: '636d6464c02777e984c57dc1',
@@ -46,7 +46,7 @@ export const TestPage = () => {
   const [putBoard] = usePutBoardMutation();
 
   // Delete board
-  const delMockId = '6380cf06c02777e984c58388';
+  const delMockId = '6385e65bffda31def0424011';
   const [deleteBoard] = useDeleteBoardMutation();
 
   if (isLoading) return <Loader />;
@@ -112,6 +112,15 @@ export const TestPage = () => {
           Delete mock Board
         </button>
       </section>
+
+      <section>
+        <h2 className="text-danger">useGetBoardSetQuery - not implemented</h2>
+      </section>
+
+      <section>
+        <h2 className="text-danger">useGetBoardSetByUserIdQuery - not implemented</h2>
+      </section>
+
       <hr></hr>
       <TestColumnPage />
       <hr></hr>

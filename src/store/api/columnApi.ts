@@ -6,6 +6,7 @@ import { baseQuery } from './baseQuery';
 export const columnApi = createApi({
   reducerPath: 'column/api',
   baseQuery: baseQuery,
+  tagTypes: ['Column'],
 
   endpoints: (build) => ({
     getColumns: build.query<IColumn[], string>({
@@ -15,6 +16,7 @@ export const columnApi = createApi({
           id: boardId,
         },
       }),
+      providesTags: ['Column'],
     }),
 
     postColumns: build.mutation<IColumnRes, { boardId: string; payload: IColumnRes }>({
@@ -28,6 +30,7 @@ export const columnApi = createApi({
           },
         };
       },
+      invalidatesTags: ['Column'],
     }),
 
     getColumnById: build.query<IColumn, Record<string, string>>({
@@ -37,6 +40,7 @@ export const columnApi = createApi({
           id: boardId,
         },
       }),
+      providesTags: ['Column'],
     }),
 
     putColumn: build.mutation<IColumn, { boardId: string; columnId: string; payload: IColumnRes }>({
@@ -50,6 +54,7 @@ export const columnApi = createApi({
           },
         };
       },
+      invalidatesTags: ['Column'],
     }),
 
     deleteColumn: build.mutation<IColumn, Record<string, string>>({
@@ -60,6 +65,7 @@ export const columnApi = createApi({
           id: boardId,
         },
       }),
+      invalidatesTags: ['Column'],
     }),
 
     getColumnSet: build.query<IColumn[], void>({
@@ -78,6 +84,7 @@ export const columnApi = createApi({
     }),
   }),
 });
+
 export const {
   useGetColumnsQuery,
   usePostColumnsMutation,
