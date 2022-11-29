@@ -10,7 +10,7 @@ import './BoardsPage.scss';
 
 export function BoardsPage() {
   const { t } = useTranslation();
-  const { id } = JSON.parse(sessionStorage.getItem('user') || '');
+  const { id } = JSON.parse(localStorage.getItem('user') || '');
   const [postBoard] = usePostBoardsMutation();
   const [showModal, setShowModal] = useState(false);
   const [inputName, setInputName] = useState('');

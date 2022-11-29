@@ -1,3 +1,14 @@
+$primary: #5160a3;
+$secondary: #292b69;
+$success: #538645;
+$warning: #e3dd6c;
+$info: #e3786c;
+$light: #e0e6f3;
+$dark: #0e112f;
+$muted: #3c3f41;
+
+@import 'bootstrap';
+
 *,
 *::before,
 *::after {
@@ -16,11 +27,11 @@
 
 a {
   text-decoration: none;
-  color: #5160a3;
+  color: $primary;
 }
 
 a:hover {
-  color: #292b69;
+  color: $dark;
 }
 
 /* width */

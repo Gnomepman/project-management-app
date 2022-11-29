@@ -5,7 +5,7 @@ export const baseQuery = fetchBaseQuery({
   baseUrl: API_URL,
 
   prepareHeaders: (headers) => {
-    const token = sessionStorage.getItem('token');
+    const token = localStorage.getItem('token');
     if (token) {
       headers.set('authorization', `Bearer ${token}`);
     }
