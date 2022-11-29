@@ -78,13 +78,16 @@ export const EditProfilePage = () => {
           <p>
             {t('auth.login')}: {data?.login}
           </p>
+
           <Button
+            style={{ marginRight: '15px' }}
             onClick={() => {
               setModalData(true);
             }}
           >
             {t('auth.button-edit')}
           </Button>
+
           <Button onClick={() => setCheck(true)}>{t('auth.button-delete')}</Button>
         </div>
       )}
@@ -102,30 +105,34 @@ export const EditProfilePage = () => {
           </Button>
         </Modal.Footer>
       </Modal>
-      <Modal show={modal} onHide={onClose} size="lg">
-        <div className="row d-flex pt-5 justify-content-center">
-          <div className="col-md-4">
-            <form onSubmit={handleSubmit(onSubmit)} data-testid="form">
-              <div className="form-outline mb-4">
-                <FormInput
-                  field="login"
-                  title={t('auth.login')}
-                  register={register}
-                  errors={errors.login}
-                />
-                <FormInput
-                  field="name"
-                  title={t('auth.name')}
-                  register={register}
-                  errors={errors.name}
-                />
-                <FormInput
-                  field="password"
-                  title={t('auth.password')}
-                  register={register}
-                  errors={errors.password}
-                />
+      <Modal show={modal} onHide={onClose}>
+        <Modal.Header>
+          <Modal.Title>{t('auth.edit-data')}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <form onSubmit={handleSubmit(onSubmit)} data-testid="form">
+            <div className="form-outline mb-4">
+              <FormInput
+                field="login"
+                title={t('auth.login')}
+                register={register}
+                errors={errors.login}
+              />
+              <FormInput
+                field="name"
+                title={t('auth.name')}
+                register={register}
+                errors={errors.name}
+              />
+              <FormInput
+                field="password"
+                title={t('auth.password')}
+                register={register}
+                errors={errors.password}
+              />
+              <div>
                 <Button
+                  style={{ marginRight: '15px' }}
                   type="submit"
                   value="submit"
                   data-testid="button-submit"
@@ -134,10 +141,13 @@ export const EditProfilePage = () => {
                 >
                   {t('auth.edit')}
                 </Button>
+                <Button variant="primary" onClick={() => setModalData(false)}>
+                  {t('auth.cancel')}
+                </Button>
               </div>
-            </form>
-          </div>
-        </div>
+            </div>
+          </form>
+        </Modal.Body>
       </Modal>
     </>
   );
