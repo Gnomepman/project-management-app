@@ -12,7 +12,7 @@
     "sign-in": "Sign In",
     "login": "Login",
     "name": "Name",
-    "password": "password",
+    "password": "Password",
     "add": "Add",
     "required-field": "* required field",
     "min-length": "* minimum length - 4",
@@ -34,7 +34,9 @@
     "warning": "Are you sure you want to delete the user?",
     "button-edit": "Edit",
     "button-delete": "Delete the user",
-    "edit": "Edit"
+    "edit": "Edit",
+    "edit-data": "Edit user data",
+    "cancel": "Cancel"
   },
   "wp": {
     "description": "The work management tool for happy collaboration",

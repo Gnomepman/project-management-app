@@ -22,7 +22,7 @@
       font-size: 20px;
     }
 
-    button{
+    button {
       $size: 35px;
       width: $size;
       height: $size;
@@ -34,10 +34,10 @@
     min-height: 50px;
   }
 
-  &_footer{
+  &_footer {
     display: flex;
 
-    *{
+    * {
       flex: 1;
     }
   }
