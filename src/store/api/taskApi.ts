@@ -84,7 +84,7 @@ export const taskApi = createApi({
       }),
     }),
 
-    getTaskSetByBoard: build.mutation<ITask, string>({
+    getTaskSetByBoard: build.query<ITask[], string>({
       query: (boardId) => ({
         url: `tasksSet/${boardId}`,
         query: {
@@ -103,5 +103,5 @@ export const {
   useDeleteTaskMutation,
   useGetTaskSetQuery,
   usePatchTaskSetMutation,
-  useGetTaskSetByBoardMutation,
+  useGetTaskSetByBoardQuery,
 } = taskApi;
