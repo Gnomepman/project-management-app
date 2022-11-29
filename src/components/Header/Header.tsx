@@ -30,7 +30,7 @@ export function Header() {
   return (
     <Navbar
       collapseOnSelect
-      expand="lg"
+      expand="sm"
       sticky="top"
       style={{
         transition: '1s ease',
