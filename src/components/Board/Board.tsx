@@ -4,24 +4,26 @@ import { useParams } from 'react-router-dom';
 import { Column } from '../Column/Column';
 import { column, initial, task } from './initial-data';
 import { useGetColumnsQuery, usePostColumnsMutation } from '../../store/api/columnApi';
-import { IColumn } from '../../models';
+import { IColumn, ITask } from '../../models';
 import { Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import { useBoardActions } from '../../hooks/actions';
 import { ActionCreatorWithPayload } from '@reduxjs/toolkit';
+import { useGetTaskSetByBoardQuery } from '../../store/api/taskApi';
 
 export function Board() {
   const { id } = useParams();
   const board = useSelector((state: RootState) => state.board.board);
   const { setBoard } = useBoardActions();
   const { data: columns, isLoading: columnsIsLoading } = useGetColumnsQuery(id!);
+  const { data: tasks } = useGetTaskSetByBoardQuery(id!);
   const [postColumn] = usePostColumnsMutation();
 
   useEffect(() => {
-    setBoard(translateDataFromApiToStateObject(columns!)! as initial);
+    setBoard(translateDataFromApiToStateObject(columns!, tasks!)! as initial);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [columns]);
+  }, [columns, tasks]);
 
   const createColumn = async () => {
     await postColumn({
@@ -175,20 +177,14 @@ const onDragEnd = (
   setState(newState);
 };
 
-const translateDataFromApiToStateObject = (columns: IColumn[]): initial | Record<string, never> => {
+const translateDataFromApiToStateObject = (
+  columns: IColumn[],
+  tasks: ITask[]
+): initial | Record<string, never> => {
   if (!columns) return {};
+  console.log('calling changing state', Date.now().toLocaleString());
   const result: initial = {
-    tasks: {
-      'task-1': { id: 'task-1', content: 'Take out the garbage' },
-      'task-2': { id: 'task-2', content: 'Watch my favorite show' },
-      'task-3': { id: 'task-3', content: 'Charge my phone' },
-      'task-4': { id: 'task-4', content: 'Cook dinner' },
-      'task-5': { id: 'task-5', content: 'Watch my favorite show' },
-      'task-6': { id: 'task-6', content: 'Charge my phone' },
-      'task-7': { id: 'task-7', content: 'Cook dinner' },
-      'task-8': { id: 'task-8', content: 'Cook dinner' },
-      'task-9': { id: 'task-9', content: 'Cook dinner' },
-    },
+    tasks: {},
     columns: {},
     columnOrder: [],
   };
@@ -200,6 +196,18 @@ const translateDataFromApiToStateObject = (columns: IColumn[]): initial | Record
     }),
     {}
   );
+
   result.columnOrder = Array.from(Object.keys(result.columns));
+
+  result.tasks = tasks.reduce(
+    (obj, item: ITask) => ({
+      ...obj,
+      [item._id as string]: { id: item._id, content: item.description },
+    }),
+    {}
+  );
+  tasks.forEach((task) => {
+    if (result.columns[task.columnId]) result.columns[task.columnId].taskIds.push(task._id!);
+  });
   return result;
 };
