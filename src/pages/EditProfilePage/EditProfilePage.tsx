@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
-import { ErrorComponent } from '../../components/Error/ErrorComponent';
 import { IErrorMessage, IUser } from '../../models';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
@@ -52,9 +51,10 @@ export const EditProfilePage = () => {
     }
   }, [reset, errors]);
 
-  const { id } = JSON.parse(sessionStorage.getItem('user') || '');
+  const { id } = JSON.parse(localStorage.getItem('user') || '');
   const { data } = useGetUserByIdQuery(id);
   const [deleteUser] = useDeleteUserMutation();
+
   const onSubmit: SubmitHandler<IUser> = (data: IUser) => {
     putUser({ id: id, payload: data });
   };
@@ -63,55 +63,59 @@ export const EditProfilePage = () => {
     return Object.keys(errors).length !== 0;
   };
 
-  if (isLoading) return <Loader />;
-  if (isError) return <ErrorComponent message={(error as IErrorMessage).data.message} />;
   const onClose = () => setModalData(false);
   const onChecked = () => setCheck(false);
+
+  if (isLoading) return <Loader />;
+
   return (
     <>
-      {data && (
-        <div className="container">
-          <h5>{t('auth.logged')}:</h5>
-          <p>
-            {t('auth.name')}: {data?.name}
-          </p>
-          <p>
-            {t('auth.login')}: {data?.login}
-          </p>
+      <div className="app-container">
+        <h5 className="py-3">{t('auth.logged')}:</h5>
+        <p>
+          <b className="text-secondary">{t('auth.name')}:</b> {data?.name}
+        </p>
+        <p>
+          <b className="text-secondary">{t('auth.login')}:</b> {data?.login}
+        </p>
 
-          <Button
-            style={{ marginRight: '15px' }}
-            onClick={() => {
-              setModalData(true);
-            }}
-          >
-            {t('auth.button-edit')}
-          </Button>
+        <Button
+          variant="primary"
+          style={{ marginRight: '15px' }}
+          onClick={() => {
+            setModalData(true);
+          }}
+        >
+          {t('auth.edit-user')}
+        </Button>
 
-          <Button onClick={() => setCheck(true)}>{t('auth.button-delete')}</Button>
-        </div>
-      )}
+        <Button variant="danger" onClick={() => setCheck(true)}>
+          {t('auth.delete-user')}
+        </Button>
+      </div>
+
       <Modal show={check} onHide={onChecked}>
         <Modal.Header>
           <Modal.Title>{t('auth.delete-user')}</Modal.Title>
         </Modal.Header>
         <Modal.Body>{t('auth.warning')}</Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={() => deleteUser(id).then(() => navigate('/login'))}>
+          <Button variant="primary" onClick={() => deleteUser(id).then(() => navigate('/login'))}>
             {t('yes')}
           </Button>
-          <Button variant="primary" onClick={() => setCheck(false)}>
+          <Button variant="danger" onClick={() => setCheck(false)}>
             {t('no')}
           </Button>
         </Modal.Footer>
       </Modal>
+
       <Modal show={modal} onHide={onClose}>
         <Modal.Header>
           <Modal.Title>{t('auth.edit-data')}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <form onSubmit={handleSubmit(onSubmit)} data-testid="form">
-            <div className="form-outline mb-4">
+            <div className="form-outline">
               <FormInput
                 field="login"
                 title={t('auth.login')}
@@ -131,19 +135,22 @@ export const EditProfilePage = () => {
                 errors={errors.password}
               />
               <div>
-                <Button
-                  style={{ marginRight: '15px' }}
-                  type="submit"
-                  value="submit"
-                  data-testid="button-submit"
-                  disabled={hasError()}
-                  className={hasError() ? 'bg-secondary my-4' : 'bg-primary my-4'}
-                >
-                  {t('auth.edit')}
-                </Button>
-                <Button variant="primary" onClick={() => setModalData(false)}>
-                  {t('auth.cancel')}
-                </Button>
+                <Modal.Footer>
+                  <Button
+                    variant="primary"
+                    style={{ marginRight: '15px' }}
+                    type="submit"
+                    value="submit"
+                    data-testid="button-submit"
+                    disabled={hasError()}
+                    className={hasError() ? 'bg-secondary' : 'bg-primary'}
+                  >
+                    {t('auth.edit')}
+                  </Button>
+                  <Button variant="danger" onClick={() => setModalData(false)}>
+                    {t('auth.cancel')}
+                  </Button>
+                </Modal.Footer>
               </div>
             </div>
           </form>

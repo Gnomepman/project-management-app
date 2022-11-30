@@ -16,8 +16,8 @@ export const AuthSection = () => {
 
   const onClickHandler = () => {
     logout();
-    sessionStorage.removeItem('user');
-    sessionStorage.removeItem('token');
+    localStorage.removeItem('user');
+    localStorage.removeItem('token');
     navigate('/');
   };
 
@@ -40,7 +40,7 @@ export const AuthSection = () => {
             <Button variant="outline-danger"> {t('auth.add-boards')}</Button>
           </NavLink>
 
-          <NavLink className="px-2" to="/edit-profile">
+          <NavLink className="px-2 d-none d-sm-block" to="/edit-profile">
             Hi <span className="text-danger fw-bold">{user?.login} </span>
           </NavLink>
 

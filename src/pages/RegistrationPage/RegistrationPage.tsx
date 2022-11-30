@@ -8,6 +8,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { FormInput } from '../../components/FormInput/FormInput';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { Loader } from '../../components/Loader/Loader';
 
 export function RegistrationPage() {
   const { t } = useTranslation();
@@ -57,6 +58,8 @@ export function RegistrationPage() {
   const hasError = () => {
     return Object.keys(errors).length !== 0;
   };
+
+  if (isLoading) return <Loader />;
 
   return (
     <>

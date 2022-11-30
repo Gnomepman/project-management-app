@@ -70,14 +70,10 @@ export const taskApi = createApi({
       invalidatesTags: ['Task'],
     }),
 
-    getTaskSet: build.query<ITask[], string>({
-      query: (boardId) => ({
-        url: `tasksSet/${boardId}`,
-        query: {
-          id: boardId,
-        },
+    getTaskSet: build.query<ITask[], void>({
+      query: () => ({
+        url: `tasksSet`,
       }),
-      providesTags: ['Task'],
     }),
 
     patchTaskSet: build.mutation<ITaskRes[], ITask>({
@@ -88,7 +84,7 @@ export const taskApi = createApi({
       }),
     }),
 
-    getTaskSetByBoard: build.mutation<ITask, string>({
+    getTaskSetByBoard: build.query<ITask[], string>({
       query: (boardId) => ({
         url: `tasksSet/${boardId}`,
         query: {
@@ -107,5 +103,5 @@ export const {
   useDeleteTaskMutation,
   useGetTaskSetQuery,
   usePatchTaskSetMutation,
-  useGetTaskSetByBoardMutation,
+  useGetTaskSetByBoardQuery,
 } = taskApi;

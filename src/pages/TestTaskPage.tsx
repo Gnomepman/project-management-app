@@ -5,6 +5,7 @@ import { ErrorComponent } from '../components/Error/ErrorComponent';
 import {
   useDeleteTaskMutation,
   useGetTaskByIdQuery,
+  useGetTaskSetQuery,
   useGetTasksQuery,
   usePostTasksMutation,
   usePutTaskMutation,
@@ -53,6 +54,8 @@ export const TestTaskPage = () => {
   // usePatchTaskSetMutation
 
   // useGetTaskSetByBoardMutation
+
+  const { data: taskSet } = useGetTaskSetQuery(boardId);
 
   if (isLoading) return <Loader />;
   if (isError) return <ErrorComponent message={(error as IErrorMessage).data.message} />;
@@ -127,7 +130,14 @@ export const TestTaskPage = () => {
       </section>
 
       <section>
-        <h2 className="text-danger">useGetTaskSetByBoardMutation - not implemented</h2>
+        <h2 className="text-danger">useGetTaskSetByBoardMutation</h2>
+        {taskSet &&
+          taskSet.map((item: ITask) => (
+            <p key={item._id}>
+              <b>Task:</b> <i className="text-secondary">{item._id}</i> {item.title}
+            </p>
+          ))}
+        <h5 className="text-primary">Number of tasks: {taskSet?.length}</h5>
       </section>
     </>
   );

@@ -9,9 +9,11 @@ import React, { useEffect, useRef, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
 export function Header() {
+  const { t } = useTranslation();
+
   const [navBackground, setNavBackground] = useState(false);
   const navRef = useRef();
-  const { t } = useTranslation();
+
   useEffect(() => {
     const handleScroll = () => {
       const show = window.scrollY > 10;
@@ -24,12 +26,15 @@ export function Header() {
       document.removeEventListener('scroll', handleScroll);
     };
   }, []);
+
   return (
     <Navbar
+      collapseOnSelect
+      expand="sm"
       sticky="top"
       style={{
         transition: '1s ease',
-        backgroundColor: navBackground ? '#9BB3DA ' : 'transparent',
+        backgroundColor: navBackground ? '#9BB3DA' : '#E0E6F3',
       }}
     >
       <div className="container-xxl">
@@ -56,7 +61,7 @@ export function Header() {
             ))}
           </NavDropdown>
         </Navbar.Collapse>
-        <NavLink className="mr-10 px-2" to="/test">
+        <NavLink className="mr-10 px-2 d-none d-sm-block" to="/test">
           <Button variant="danger"> Test</Button>
         </NavLink>
         <AuthSection />

@@ -8,14 +8,14 @@ interface TeamMemberProps {
 
 export const TeamMember = ({ item }: TeamMemberProps) => {
   return (
-    <div className="col-4 justify-content-center rounded ">
+    <div className="col-lg-4 col-md-4 row-col-sm-3 rounded ">
       <Card>
         <a href={item.url} target="_blank" rel="noreferrer">
           <img height="30" src={GHLogo} alt="github-logo" />
           <Card.Title>{item.username}</Card.Title>
         </a>
-        <Card.Subtitle>{item.role}</Card.Subtitle>
-        <Card.Text>{item.description} </Card.Text>
+        <Card.Subtitle className="d-none">{item.role}</Card.Subtitle>
+        <Card.Text className="d-none">{item.description} </Card.Text>
       </Card>
     </div>
   );

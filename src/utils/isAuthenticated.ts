@@ -1,5 +1,5 @@
 export const isAuthenticated = () => {
-  const parsedToken = sessionStorage.getItem('user');
+  const parsedToken = localStorage.getItem('user');
 
   if (!parsedToken) return false;
 
