@@ -13,7 +13,7 @@ export const Footer = () => {
         <section className="d-flex pb-1 pt-3 justify-content-between align-items-center">
           <div className="d-xl-flex d-md-flex d-none d-sm-block">
             <h3 className="px-2 text-center mt-2">{t('footer.created')}</h3>
-            <a href="https://rs.school/" target="_blank" rel="noreferrer">
+            <a href="https://rs.school/react/" target="_blank" rel="noreferrer">
               <img height="37" src={RSSLogo} alt="rss" />
             </a>
           </div>
