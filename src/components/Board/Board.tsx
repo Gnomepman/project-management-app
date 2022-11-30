@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { Column } from '../Column/Column';
 import { column, initial, task } from './initial-data';
 import { useGetColumnsQuery, usePostColumnsMutation } from '../../store/api/columnApi';
@@ -11,6 +11,7 @@ import { RootState } from '../../store';
 import { useBoardActions } from '../../hooks/actions';
 import { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 import { useGetTaskSetByBoardQuery } from '../../store/api/taskApi';
+import { useGetBoardByIdQuery } from '../../store/api/boardApi';
 
 export function Board() {
   const { id } = useParams();
@@ -19,6 +20,7 @@ export function Board() {
   const { data: columns, isLoading: columnsIsLoading } = useGetColumnsQuery(id!);
   const { data: tasks } = useGetTaskSetByBoardQuery(id!);
   const [postColumn] = usePostColumnsMutation();
+  const { data } = useGetBoardByIdQuery(id!);
 
   useEffect(() => {
     setBoard(translateDataFromApiToStateObject(columns!, tasks!)! as initial);
@@ -53,9 +55,18 @@ export function Board() {
             return (
               <>
                 <div
+                  style={{ display: 'flex', gap: '10px', alignItems: 'center' }}
+                  className="py-2"
+                >
+                  <Link to="/boards">
+                    <Button>Back</Button>
+                  </Link>
+                  <div className="h4 m-0">{data?.title}</div>
+                </div>
+                <div
                   {...provided.droppableProps}
                   ref={provided.innerRef}
-                  className="container-xxl d-flex gap-4 p-3"
+                  className="container-xxl d-flex gap-4 p-0"
                   style={{ overflowX: 'scroll', height: 'maxContent' }}
                 >
                   <>
@@ -199,15 +210,17 @@ const translateDataFromApiToStateObject = (
 
   result.columnOrder = Array.from(Object.keys(result.columns));
 
-  result.tasks = tasks.reduce(
-    (obj, item: ITask) => ({
-      ...obj,
-      [item._id as string]: { id: item._id, content: item.description },
-    }),
-    {}
-  );
-  tasks.forEach((task) => {
-    if (result.columns[task.columnId]) result.columns[task.columnId].taskIds.push(task._id!);
-  });
+  if (tasks) {
+    result.tasks = tasks.reduce(
+      (obj, item: ITask) => ({
+        ...obj,
+        [item._id as string]: { id: item._id, content: item.description },
+      }),
+      {}
+    );
+    tasks.forEach((task) => {
+      if (result.columns[task.columnId]) result.columns[task.columnId].taskIds.push(task._id!);
+    });
+  }
   return result;
 };
