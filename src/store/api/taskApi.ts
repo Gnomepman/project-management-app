@@ -91,6 +91,7 @@ export const taskApi = createApi({
           id: boardId,
         },
       }),
+      providesTags: ['Task'],
     }),
   }),
 });
