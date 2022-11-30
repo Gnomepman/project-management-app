@@ -5,7 +5,7 @@ import { ErrorComponent } from '../components/Error/ErrorComponent';
 import {
   useDeleteTaskMutation,
   useGetTaskByIdQuery,
-  useGetTaskSetQuery,
+  useGetTaskSetByBoardQuery,
   useGetTasksQuery,
   usePostTasksMutation,
   usePutTaskMutation,
@@ -55,7 +55,7 @@ export const TestTaskPage = () => {
 
   // useGetTaskSetByBoardMutation
 
-  const { data: taskSet } = useGetTaskSetQuery(boardId);
+  const { data: taskSet } = useGetTaskSetByBoardQuery(boardId);
 
   if (isLoading) return <Loader />;
   if (isError) return <ErrorComponent message={(error as IErrorMessage).data.message} />;
