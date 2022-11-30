@@ -81,6 +81,7 @@ export const columnApi = createApi({
           id: boardId,
         },
       }),
+      providesTags: ['Column'],
     }),
   }),
 });
