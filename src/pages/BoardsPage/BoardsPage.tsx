@@ -11,14 +11,11 @@ import { BoardItem } from '../../components/BoardItem/BoardItem';
 
 export function BoardsPage() {
   const { t } = useTranslation();
-
   const { id } = JSON.parse(localStorage.getItem('user') || '');
-
   const [postBoard] = usePostBoardsMutation();
-
   const [showModal, setShowModal] = useState(false);
   const [inputName, setInputName] = useState('');
-  const { data, isLoading, refetch } = useGetBoardsQuery(); //TODO: edit boardApi with tags and remove refetch
+  const { data, isLoading } = useGetBoardsQuery(); //TODO: edit boardApi with tags and remove refetch
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
@@ -29,8 +26,7 @@ export function BoardsPage() {
       users: [id],
     };
 
-    await postBoard(newBoard);
-    refetch(); //TODO: edit boardApi with tags and remove refetch
+    postBoard(newBoard);
     setInputName('');
   };
 
@@ -44,7 +40,7 @@ export function BoardsPage() {
 
   return (
     <>
-      <div className="app-container">
+      <div className="app-container py-2">
         <div className="row">
           {data.map((item: IBoard) => (
             <BoardItem key={item._id} item={item} />
