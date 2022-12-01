@@ -59,7 +59,7 @@ export const taskApi = createApi({
           },
         };
       },
-      invalidatesTags: ['Task'],
+      // invalidatesTags: ['Task'],
     }),
 
     deleteTask: build.mutation<ITask, Record<string, string>>({
@@ -91,6 +91,7 @@ export const taskApi = createApi({
           id: boardId,
         },
       }),
+      providesTags: ['Task'],
     }),
   }),
 });

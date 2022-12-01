@@ -1,8 +1,10 @@
 import React from 'react';
 import { Draggable, Droppable, DroppableProvided } from 'react-beautiful-dnd';
 import { Button } from 'react-bootstrap';
+import { ITaskRes } from '../../models';
 import { useDeleteColumnMutation } from '../../store/api/columnApi';
-import { column, task } from '../Board/initial-data';
+import { usePostTasksMutation } from '../../store/api/taskApi';
+import { column, task } from '../../models/initial';
 import { Task } from '../Task/Task';
 import './Column.scss';
 
@@ -14,10 +16,9 @@ export function Column(props: {
   boardId: string;
 }) {
   const [delColumn] = useDeleteColumnMutation();
+  const [postTask] = usePostTasksMutation();
+  // const { id: userId } = JSON.parse(localStorage.getItem('user') || '');
 
-  const deleteColumn = async () => {
-    await delColumn({ boardId: props.boardId, columnId: props.column.id });
-  };
   return (
     <>
       <Draggable draggableId={props.column.id} index={props.index}>
@@ -34,7 +35,12 @@ export function Column(props: {
           >
             <div className="column_header" {...provided.dragHandleProps}>
               <span>{props.column.title}</span>
-              <Button variant="danger" onClick={deleteColumn}>
+              <Button
+                variant="danger"
+                onClick={async () =>
+                  await delColumn({ boardId: props.boardId, columnId: props.column.id })
+                }
+              >
                 X
               </Button>
             </div>
@@ -72,7 +78,24 @@ export function Column(props: {
               </Droppable>
             </div>
             <div className="column_footer">
-              <Button variant="outline-primary">Add task</Button>
+              <Button
+                variant="outline-primary"
+                onClick={async () => {
+                  await postTask({
+                    boardId: props.boardId,
+                    columnId: props.column.id,
+                    payload: {
+                      title: 'Column zero',
+                      order: props.column.taskIds.length + 1,
+                      description: 'Task 3',
+                      userId: 0,
+                      users: ['636d6464c02777e984c57dc1'],
+                    } as ITaskRes,
+                  });
+                }}
+              >
+                Add task
+              </Button>
             </div>
           </div>
         )}

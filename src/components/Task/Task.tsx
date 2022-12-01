@@ -1,6 +1,6 @@
 import { Draggable, DraggableProvided, DraggableStateSnapshot } from 'react-beautiful-dnd';
 // import { taskType } from '../Board/Board';
-import { task } from '../Board/initial-data';
+import { task } from '../../models/initial';
 import './Task.scss';
 
 export function Task(props: {
@@ -24,22 +24,13 @@ export function Task(props: {
               ...provided.draggableProps.style,
             }}
           >
-            {props.task.content}
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+              <span>{props.task.title}</span>
+              <span>{props.task.content}</span>
+            </div>
           </div>
         )}
       </Draggable>
-      {/* <div
-        ref={props.provided.innerRef}
-        {...props.provided.draggableProps}
-        {...props.provided.dragHandleProps}
-        className="task"
-        style={{
-          backgroundColor: props.snapshot.isDragging ? '#263B4A' : '#456C86',
-          ...props.provided.draggableProps.style,
-        }}
-      >
-        {props.task.description}
-      </div> */}
     </>
   );
 }
