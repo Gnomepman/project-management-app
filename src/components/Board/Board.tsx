@@ -56,7 +56,7 @@ export function Board() {
             }
             return (
               <div className="app-container">
-                <div className=" board-main">
+                <div className="board-main">
                   <div
                     style={{ display: 'flex', gap: '10px', alignItems: 'center' }}
                     className="py-2"
