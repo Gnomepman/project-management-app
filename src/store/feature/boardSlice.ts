@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { initial } from '../../components/Board/initial-data';
+import { initial } from '../../models/initial';
 
 const initialState = {
   board: {} as initial,

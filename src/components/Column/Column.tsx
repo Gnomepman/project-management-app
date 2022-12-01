@@ -4,7 +4,7 @@ import { Button } from 'react-bootstrap';
 import { ITaskRes } from '../../models';
 import { useDeleteColumnMutation } from '../../store/api/columnApi';
 import { usePostTasksMutation } from '../../store/api/taskApi';
-import { column, task } from '../Board/initial-data';
+import { column, task } from '../../models/initial';
 import { Task } from '../Task/Task';
 import './Column.scss';
 
@@ -17,7 +17,7 @@ export function Column(props: {
 }) {
   const [delColumn] = useDeleteColumnMutation();
   const [postTask] = usePostTasksMutation();
-  const { userId } = JSON.parse(localStorage.getItem('user') || '');
+  // const { id: userId } = JSON.parse(localStorage.getItem('user') || '');
 
   return (
     <>
@@ -85,9 +85,9 @@ export function Column(props: {
                     boardId: props.boardId,
                     columnId: props.column.id,
                     payload: {
-                      title: 'Drink tea',
+                      title: 'Column zero',
                       order: props.column.taskIds.length + 1,
-                      description: 'Drink hot coffee',
+                      description: 'Task 3',
                       userId: 0,
                       users: ['636d6464c02777e984c57dc1'],
                     } as ITaskRes,
