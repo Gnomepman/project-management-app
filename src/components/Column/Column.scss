@@ -1,6 +1,7 @@
 .column {
   padding: 5px;
   width: 250px;
+  min-width: 250px;
   height: fit-content;
   max-height: 76vh;
   overflow-y: hidden;
