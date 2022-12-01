@@ -2,9 +2,9 @@ import { useEffect } from 'react';
 import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd';
 import { Link, useParams } from 'react-router-dom';
 import { Column } from '../Column/Column';
-import { column, initial, task } from './initial-data';
+import { column, columnOrder, initial, task } from './initial-data';
 import { useGetColumnsQuery, usePostColumnsMutation } from '../../store/api/columnApi';
-import { IColumn, ITask } from '../../models';
+import { IColumn, IColumnRes, ITask } from '../../models';
 import { Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
@@ -12,6 +12,15 @@ import { useBoardActions } from '../../hooks/actions';
 import { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 import { useGetTaskSetByBoardQuery } from '../../store/api/taskApi';
 import { useGetBoardByIdQuery } from '../../store/api/boardApi';
+import { usePutColumnMutation } from '../../store/api/columnApi';
+import { MutationTrigger } from '@reduxjs/toolkit/dist/query/react/buildHooks';
+import {
+  BaseQueryFn,
+  FetchArgs,
+  FetchBaseQueryError,
+  FetchBaseQueryMeta,
+  MutationDefinition,
+} from '@reduxjs/toolkit/dist/query';
 
 export function Board() {
   const { id } = useParams();
@@ -21,6 +30,7 @@ export function Board() {
   const { data: tasks } = useGetTaskSetByBoardQuery(id!);
   const [postColumn] = usePostColumnsMutation();
   const { data } = useGetBoardByIdQuery(id!);
+  const [putColumn] = usePutColumnMutation();
 
   useEffect(() => {
     setBoard(translateDataFromApiToStateObject(columns!, tasks!)! as initial);
@@ -46,7 +56,7 @@ export function Board() {
 
   return (
     <>
-      <DragDropContext onDragEnd={(result) => onDragEnd(result, board, setBoard)}>
+      <DragDropContext onDragEnd={(result) => onDragEnd(result, board, setBoard, putColumn, id!)}>
         <Droppable droppableId="all-columns" direction="horizontal" type="column">
           {(provided) => {
             if (!board) {
@@ -112,7 +122,27 @@ const InnerList = (props: {
 const onDragEnd = (
   result: DropResult,
   state: initial,
-  setState: ActionCreatorWithPayload<initial, 'boardSlice/setBoard'>
+  setState: ActionCreatorWithPayload<initial, 'boardSlice/setBoard'>,
+  putColumn: MutationTrigger<
+    MutationDefinition<
+      {
+        boardId: string;
+        columnId: string;
+        payload: IColumnRes;
+      },
+      BaseQueryFn<
+        string | FetchArgs,
+        unknown,
+        FetchBaseQueryError,
+        Record<string, never>,
+        FetchBaseQueryMeta
+      >,
+      'Column',
+      IColumn,
+      'column/api'
+    >
+  >,
+  boardId: string
 ) => {
   const { destination, source, draggableId, type } = result;
 
@@ -128,8 +158,18 @@ const onDragEnd = (
     const newColumnOrder = Array.from(state.columnOrder);
     newColumnOrder.splice(source.index, 1);
     newColumnOrder.splice(destination.index, 0, draggableId);
+    newColumnOrder.slice(destination.index).forEach((elem) => {
+      putColumn({
+        boardId: boardId,
+        columnId: elem,
+        payload: {
+          title: state.columns[elem].title,
+          order: newColumnOrder.indexOf(elem),
+        },
+      });
+    });
 
-    const newState = {
+    const newState: initial = {
       ...state,
       columnOrder: newColumnOrder,
     };
@@ -193,7 +233,6 @@ const translateDataFromApiToStateObject = (
   tasks: ITask[]
 ): initial | Record<string, never> => {
   if (!columns) return {};
-  console.log('calling changing state', Date.now().toLocaleString());
   const result: initial = {
     tasks: {},
     columns: {},
@@ -208,13 +247,15 @@ const translateDataFromApiToStateObject = (
     {}
   );
 
-  result.columnOrder = Array.from(Object.keys(result.columns));
+  result.columnOrder = [...columns]
+    .sort((a, b) => a.order - b.order)
+    .map((elem) => elem._id) as columnOrder;
 
   if (tasks) {
     result.tasks = tasks.reduce(
       (obj, item: ITask) => ({
         ...obj,
-        [item._id as string]: { id: item._id, content: item.description },
+        [item._id as string]: { id: item._id, title: item.title, content: item.description },
       }),
       {}
     );

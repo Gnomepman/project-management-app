@@ -1,6 +1,7 @@
 import React from 'react';
 import { Draggable, Droppable, DroppableProvided } from 'react-beautiful-dnd';
 import { Button } from 'react-bootstrap';
+import { ITaskRes } from '../../models';
 import { useDeleteColumnMutation } from '../../store/api/columnApi';
 import { usePostTasksMutation } from '../../store/api/taskApi';
 import { column, task } from '../Board/initial-data';
@@ -16,6 +17,8 @@ export function Column(props: {
 }) {
   const [delColumn] = useDeleteColumnMutation();
   const [postTask] = usePostTasksMutation();
+  const { userId } = JSON.parse(localStorage.getItem('user') || '');
+
   return (
     <>
       <Draggable draggableId={props.column.id} index={props.index}>
@@ -83,8 +86,11 @@ export function Column(props: {
                     columnId: props.column.id,
                     payload: {
                       title: 'Drink tea',
-                      order: 0,
-                    },
+                      order: props.column.taskIds.length + 1,
+                      description: 'Drink hot coffee',
+                      userId: 0,
+                      users: ['636d6464c02777e984c57dc1'],
+                    } as ITaskRes,
                   });
                 }}
               >
