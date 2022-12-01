@@ -14,6 +14,7 @@ import { usePutColumnMutation } from '../../store/api/columnApi';
 import './Boards.scss';
 import { translateDataFromApiToStateObject } from '../../utils/translateDataFromApiToStateObject';
 import { onDragEnd } from '../../utils/onDragEnd';
+import { Loader } from '../Loader/Loader';
 
 export function Board() {
   const { id } = useParams();
@@ -41,12 +42,7 @@ export function Board() {
     });
   };
 
-  if (columnsIsLoading)
-    return (
-      <>
-        <p>loading...</p>
-      </>
-    );
+  if (columnsIsLoading) return <Loader />;
 
   return (
     <>
@@ -59,8 +55,8 @@ export function Board() {
               return <p>Loading</p>;
             }
             return (
-              <>
-                <div className="board-main">
+              <div className="app-container">
+                <div className=" board-main">
                   <div
                     style={{ display: 'flex', gap: '10px', alignItems: 'center' }}
                     className="py-2"
@@ -97,7 +93,7 @@ export function Board() {
                     </>
                   </div>
                 </div>
-              </>
+              </div>
             );
           }}
         </Droppable>

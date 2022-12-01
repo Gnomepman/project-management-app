@@ -51,5 +51,9 @@ a:hover {
 }
 
 .app-container {
-  height: calc(100vh - 146px);
+  height: calc(100vh - 156px);
+}
+
+.text-responsive {
+  font-size: calc(40% + 1vw);
 }
