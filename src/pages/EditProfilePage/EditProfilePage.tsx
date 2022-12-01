@@ -26,7 +26,7 @@ export const EditProfilePage = () => {
     reset,
   } = useForm<IUser>({});
 
-  const [putUser, { isLoading, isError, error, isSuccess }] = usePutUserMutation();
+  const [putUser, { isError, error, isSuccess }] = usePutUserMutation();
 
   // Todo Refactor
   useEffect(() => {
@@ -43,7 +43,7 @@ export const EditProfilePage = () => {
         autoClose: 2000,
       });
     }
-  }, [t, error, isError, isSuccess, navigate, isLoading]);
+  }, [t, error, isError, isSuccess, navigate]);
 
   useEffect(() => {
     if (!errors) {
@@ -52,7 +52,7 @@ export const EditProfilePage = () => {
   }, [reset, errors]);
 
   const { id } = JSON.parse(localStorage.getItem('user') || '');
-  const { data } = useGetUserByIdQuery(id);
+  const { data, isLoading } = useGetUserByIdQuery(id);
   const [deleteUser] = useDeleteUserMutation();
 
   const onSubmit: SubmitHandler<IUser> = (data: IUser) => {

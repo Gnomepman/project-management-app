@@ -1,6 +1,5 @@
 import React from 'react';
 import { useActions } from '../../hooks/actions';
-import { useAppSelector } from '../../hooks/redux';
 import { Button, Nav, Navbar } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { NavLink, useNavigate } from 'react-router-dom';
@@ -11,8 +10,7 @@ export const AuthSection = () => {
 
   const { logout } = useActions();
   const navigate = useNavigate();
-
-  const { user } = useAppSelector((store) => store.user);
+  const { login } = JSON.parse(localStorage.getItem('user') || '{}');
 
   const onClickHandler = () => {
     logout();
@@ -41,7 +39,7 @@ export const AuthSection = () => {
           </NavLink>
 
           <NavLink className="px-2 d-none d-sm-block" to="/edit-profile">
-            Hi <span className="text-danger fw-bold">{user?.login} </span>
+            Hi <span className="text-danger fw-bold">{login} </span>
           </NavLink>
 
           <NavLink className="px-2" to="/edit-profile">
