@@ -1,27 +1,19 @@
 import { useEffect } from 'react';
-import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd';
+import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { Link, useParams } from 'react-router-dom';
 import { Column } from '../Column/Column';
-import { column, columnOrder, initial, task } from './initial-data';
+import { column, initial, task } from '../../models/initial';
 import { useGetColumnsQuery, usePostColumnsMutation } from '../../store/api/columnApi';
-import { IColumn, IColumnRes, ITask, ITaskRes, ITaskResponse } from '../../models';
 import { Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import { useBoardActions } from '../../hooks/actions';
-import { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 import { useGetTaskSetByBoardQuery, usePutTaskMutation } from '../../store/api/taskApi';
 import { useGetBoardByIdQuery } from '../../store/api/boardApi';
 import { usePutColumnMutation } from '../../store/api/columnApi';
-import { MutationTrigger } from '@reduxjs/toolkit/dist/query/react/buildHooks';
-import {
-  BaseQueryFn,
-  FetchArgs,
-  FetchBaseQueryError,
-  FetchBaseQueryMeta,
-  MutationDefinition,
-} from '@reduxjs/toolkit/dist/query';
 import './Boards.scss';
+import { translateDataFromApiToStateObject } from '../../utils/translateDataFromApiToStateObject';
+import { onDragEnd } from '../../utils/onDragEnd';
 
 export function Board() {
   const { id } = useParams();
@@ -43,7 +35,7 @@ export function Board() {
     await postColumn({
       boardId: id!,
       payload: {
-        title: 'testNewColumn', //TODO: get name from modal
+        title: 'Test column name', //TODO: get name from modal
         order: board.columnOrder.length + 1,
       },
     });
@@ -86,7 +78,7 @@ export function Board() {
                   >
                     <>
                       {board.columnOrder &&
-                        board.columnOrder.map((columnId, index) => {
+                        board.columnOrder.map((columnId: string, index: number) => {
                           const column = board.columns[columnId];
                           return (
                             <InnerList
@@ -123,196 +115,4 @@ const InnerList = (props: {
   const { column, taskMap, index, boardId } = props;
   const tasks = column.taskIds.map((taskId) => taskMap[taskId]);
   return <Column column={column} tasks={tasks} index={index} key={index} boardId={boardId} />;
-};
-
-const onDragEnd = (
-  result: DropResult,
-  state: initial,
-  setState: ActionCreatorWithPayload<initial, 'boardSlice/setBoard'>,
-  putColumn: MutationTrigger<
-    MutationDefinition<
-      {
-        boardId: string;
-        columnId: string;
-        payload: IColumnRes;
-      },
-      BaseQueryFn<
-        string | FetchArgs,
-        unknown,
-        FetchBaseQueryError,
-        Record<string, never>,
-        FetchBaseQueryMeta
-      >,
-      'Column',
-      IColumn,
-      'column/api'
-    >
-  >,
-  putTask: MutationTrigger<
-    MutationDefinition<
-      {
-        boardId: string;
-        columnId: string;
-        taskId: string;
-        payload: ITaskRes;
-      },
-      BaseQueryFn<
-        string | FetchArgs,
-        unknown,
-        FetchBaseQueryError,
-        Record<string, never>,
-        FetchBaseQueryMeta
-      >,
-      'Task',
-      ITaskResponse,
-      'task/api'
-    >
-  >,
-  boardId: string
-) => {
-  const { destination, source, draggableId, type } = result;
-
-  if (!destination) {
-    return;
-  }
-
-  if (destination.droppableId === source.droppableId && destination.index === source.index) {
-    return;
-  }
-
-  if (type === 'column') {
-    const newColumnOrder = Array.from(state.columnOrder);
-    newColumnOrder.splice(source.index, 1);
-    newColumnOrder.splice(destination.index, 0, draggableId);
-    newColumnOrder.slice(destination.index).forEach((elem) => {
-      putColumn({
-        boardId: boardId,
-        columnId: elem,
-        payload: {
-          title: state.columns[elem].title,
-          order: newColumnOrder.indexOf(elem),
-        },
-      });
-    });
-
-    const newState: initial = {
-      ...state,
-      columnOrder: newColumnOrder,
-    };
-    setState(newState);
-    return;
-  }
-
-  const home = state.columns[source.droppableId];
-  const foreign = state.columns[destination.droppableId];
-
-  //if moving task in one column
-  if (home === foreign) {
-    const newTaskIds = Array.from(home.taskIds);
-    const userId = JSON.parse(localStorage.getItem('user')!).id!;
-    console.log(userId);
-    newTaskIds.splice(source.index, 1);
-    newTaskIds.splice(destination.index, 0, draggableId);
-
-    const newHome = {
-      ...home,
-      taskIds: newTaskIds,
-    };
-    newTaskIds.slice(destination.index).forEach((elem) => {
-      putTask({
-        boardId,
-        columnId: home.id,
-        taskId: elem,
-        payload: {
-          title: state.tasks[elem].title,
-          order: newTaskIds.indexOf(elem),
-          description: state.tasks[elem].content,
-          columnId: home.id,
-          userId: userId,
-          users: [userId],
-        } as ITaskRes,
-      });
-    });
-
-    const newState = {
-      ...state,
-      columns: {
-        ...state.columns,
-        [newHome.id]: newHome,
-      },
-    };
-
-    setState(newState);
-    return;
-  }
-
-  // moving from one list to another
-  const homeTaskIds = Array.from(home.taskIds);
-  homeTaskIds.splice(source.index, 1);
-  const newHome = {
-    ...home,
-    taskIds: homeTaskIds,
-  };
-
-  const foreignTaskIds = Array.from(foreign.taskIds);
-  foreignTaskIds.splice(destination.index, 0, draggableId);
-  const newForeign = {
-    ...foreign,
-    taskIds: foreignTaskIds,
-  };
-
-  const newState = {
-    ...state,
-    columns: {
-      ...state.columns,
-      [newHome.id]: newHome,
-      [newForeign.id]: newForeign,
-    },
-  };
-  setState(newState);
-};
-
-const translateDataFromApiToStateObject = (
-  columns: IColumn[],
-  tasks: ITask[]
-): initial | Record<string, never> => {
-  if (!columns) return {};
-  const result: initial = {
-    tasks: {},
-    columns: {},
-    columnOrder: [],
-  };
-
-  result.columns = columns.reduce(
-    (obj, item: IColumn) => ({
-      ...obj,
-      [item._id as string]: { id: item._id, title: item.title, taskIds: [] },
-    }),
-    {}
-  );
-
-  result.columnOrder = [...columns]
-    .sort((a, b) => a.order - b.order)
-    .map((elem) => elem._id) as columnOrder;
-
-  if (tasks) {
-    result.tasks = tasks.reduce(
-      (obj, item: ITask) => ({
-        ...obj,
-        [item._id as string]: { id: item._id, title: item.title, content: item.description },
-      }),
-      {}
-    );
-    tasks.forEach((task) => {
-      if (result.columns[task.columnId]) result.columns[task.columnId].taskIds.push(task._id!);
-    });
-  }
-
-  Object.keys(result.columns).forEach((columnId) => {
-    result.columns[columnId].taskIds.sort(
-      (a, b) =>
-        tasks.find((elem) => elem._id === a)!.order - tasks.find((elem) => elem._id === b)!.order
-    );
-  });
-  return result;
 };
