@@ -65,7 +65,6 @@ export const EditProfilePage = () => {
   };
 
   const onClose = () => setModalData(false);
-  const onChecked = () => setCheck(false);
 
   if (isLoading) return <Loader />;
 
@@ -94,21 +93,6 @@ export const EditProfilePage = () => {
           {t('auth.delete-user')}
         </Button>
       </div>
-
-      {/* <Modal show={check} onHide={onChecked}>
-        <Modal.Header>
-          <Modal.Title>{t('auth.delete-user')}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>{t('auth.warning')}</Modal.Body>
-        <Modal.Footer>
-          <Button variant="primary" onClick={() => deleteUser(id).then(() => navigate('/login'))}>
-            {t('yes')}
-          </Button>
-          <Button variant="danger" onClick={() => setCheck(false)}>
-            {t('no')}
-          </Button>
-        </Modal.Footer>
-      </Modal> */}
       <ModalDeleteComponent
         description={t('auth.warning-user')}
         title={t('auth.delete-user')}
