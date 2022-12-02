@@ -30,7 +30,6 @@ export function RegistrationPage() {
   useEffect(() => {
     if (isSuccess) {
       toast.success(t('auth.reg-success'), {
-        position: 'top-right',
         autoClose: 1000,
       });
       navigate('/login');
@@ -38,7 +37,6 @@ export function RegistrationPage() {
 
     if (isError) {
       toast.error((error as IErrorMessage).data.message, {
-        position: 'top-right',
         autoClose: 2000,
       });
     }

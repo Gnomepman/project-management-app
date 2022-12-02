@@ -14,11 +14,13 @@ import {
 } from '../../store/api/userApi';
 
 export const EditProfilePage = () => {
-  const [modal, setModalData] = useState(false);
-  const [check, setCheck] = useState(false);
   const { t } = useTranslation();
 
+  const [modal, setModalData] = useState(false);
+  const [check, setCheck] = useState(false);
+
   const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -32,14 +34,12 @@ export const EditProfilePage = () => {
   useEffect(() => {
     if (isSuccess) {
       toast.success(t('auth.upd-success'), {
-        position: 'top-right',
         autoClose: 1000,
       });
     }
 
     if (isError) {
       toast.error((error as IErrorMessage).data.message, {
-        position: 'top-right',
         autoClose: 2000,
       });
     }
@@ -52,11 +52,13 @@ export const EditProfilePage = () => {
   }, [reset, errors]);
 
   const { id } = JSON.parse(localStorage.getItem('user') || '');
+
   const { data, isLoading } = useGetUserByIdQuery(id);
   const [deleteUser] = useDeleteUserMutation();
 
   const onSubmit: SubmitHandler<IUser> = (data: IUser) => {
     putUser({ id: id, payload: data });
+    setModalData(false);
   };
 
   const hasError = () => {
@@ -70,7 +72,7 @@ export const EditProfilePage = () => {
 
   return (
     <>
-      <div className="app-container">
+      <div className="app-container py-3">
         <h5 className="py-3">{t('auth.logged')}:</h5>
         <p>
           <b className="text-secondary">{t('auth.name')}:</b> {data?.name}

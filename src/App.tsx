@@ -16,6 +16,7 @@ import { LoginPage } from './pages/LoginPage/LoginPage';
 import { EditProfilePage } from './pages/EditProfilePage/EditProfilePage';
 import { PrivateRoute } from './components/PrivateRoute/PrivateRoute';
 import { TestPage } from './pages/TestPage';
+import { IsLoggedRoute } from './components/PrivateRoute/IsLoggedRoute';
 
 function App() {
   return (
@@ -23,7 +24,7 @@ function App() {
       <Header />
       <div className="container-xxl">
         <Suspense fallback={<Loader />}>
-          <ToastContainer />
+          <ToastContainer position="top-right" hideProgressBar={true} theme="colored" />
           <Routes>
             <Route path="/" element={<WelcomePage />} />
             <Route path="/" element={<PrivateRoute />}>
@@ -31,8 +32,10 @@ function App() {
               <Route path="/edit-profile" element={<EditProfilePage />} />
             </Route>
             <Route path="/boards/:id" element={<Board />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/registration" element={<RegistrationPage />} />
+            <Route path="/" element={<IsLoggedRoute />}>
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/registration" element={<RegistrationPage />} />
+            </Route>
             <Route path="/" element={<PrivateRoute />}></Route>
             <Route path="test" element={<TestPage />} />
             <Route path="*" element={<NotFoundPage />} />

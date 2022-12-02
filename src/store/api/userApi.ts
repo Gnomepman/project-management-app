@@ -5,25 +5,24 @@ import { baseQuery } from './baseQuery';
 export const userApi = createApi({
   reducerPath: 'user/api',
   baseQuery: baseQuery,
+  tagTypes: ['User'],
+
   endpoints: (build) => ({
     getUsers: build.query<IUser[], void>({
       query: () => ({
         url: `users`,
-        headers: {
-          'Content-type': 'application/json; charset=UTF-8',
-        },
       }),
+      providesTags: ['User'],
     }),
+
     getUserById: build.query<IUser, string>({
       query: (id) => ({
         url: `users/${id}`,
         query: {
           id: id,
         },
-        headers: {
-          'Content-type': 'application/json; charset=UTF-8',
-        },
       }),
+      providesTags: ['User'],
     }),
 
     putUser: build.mutation<IUser, { id: string; payload: IUser }>({
@@ -35,7 +34,9 @@ export const userApi = createApi({
           body: payload,
         };
       },
+      invalidatesTags: ['User'],
     }),
+
     deleteUser: build.mutation<IUser, string>({
       query: (id) => ({
         url: `users/${id}`,
@@ -43,12 +44,11 @@ export const userApi = createApi({
         query: {
           id: id,
         },
-        headers: {
-          'Content-type': 'application/json; charset=UTF-8',
-        },
       }),
+      invalidatesTags: ['User'],
     }),
   }),
 });
+
 export const { useGetUsersQuery, useGetUserByIdQuery, usePutUserMutation, useDeleteUserMutation } =
   userApi;
