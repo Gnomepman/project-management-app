@@ -18,7 +18,7 @@ export const ModalDeleteComponent = ({
 }: IIcheck) => {
   return (
     <>
-      <Modal show={check} onHide={handleDelete}>
+      <Modal show={check} onHide={handleDelete} centered>
         <Modal.Header>
           <Modal.Title>{title}</Modal.Title>
         </Modal.Header>
