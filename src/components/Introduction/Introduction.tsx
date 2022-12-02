@@ -16,7 +16,7 @@ export const Introduction = () => {
           <Button variant="primary">{t('wp.button')}</Button>
         </NavLink>
       </div>
-      <div className="col-8 d-none d-sm-block px-2 py-1">
+      <div className="col-8 px-2 py-1">
         <img className="w-100" src={MainImage} alt="pm-guru" />
       </div>
     </section>
