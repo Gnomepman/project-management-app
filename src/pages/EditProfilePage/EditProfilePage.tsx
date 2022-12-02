@@ -1,72 +1,22 @@
-import { useEffect, useState } from 'react';
-import { Button, Modal } from 'react-bootstrap';
-import { IErrorMessage, IUser } from '../../models';
+import { useState } from 'react';
+import { Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import { toast } from 'react-toastify';
-import { FormInput } from '../../components/FormInput/FormInput';
+
 import { Loader } from '../../components/Loader/Loader';
-import {
-  useDeleteUserMutation,
-  useGetUserByIdQuery,
-  usePutUserMutation,
-} from '../../store/api/userApi';
+import { useGetUserByIdQuery } from '../../store/api/userApi';
+import { ModalComponent } from '../../components/ModalComponent/ModalComponent';
+import { DeleteUserModal } from '../../components/EditUser/DeleteUserModal';
+import { EditUserModal } from '../../components/EditUser/EditUserModal';
 
 export const EditProfilePage = () => {
   const { t } = useTranslation();
 
-  const [modal, setModalData] = useState(false);
-  const [check, setCheck] = useState(false);
-
-  const navigate = useNavigate();
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm<IUser>({});
-
-  const [putUser, { isError, error, isSuccess }] = usePutUserMutation();
-
-  // Todo Refactor
-  useEffect(() => {
-    if (isSuccess) {
-      toast.success(t('auth.upd-success'), {
-        autoClose: 1000,
-      });
-    }
-
-    if (isError) {
-      toast.error((error as IErrorMessage).data.message, {
-        autoClose: 2000,
-      });
-    }
-  }, [t, error, isError, isSuccess, navigate]);
-
-  useEffect(() => {
-    if (!errors) {
-      reset();
-    }
-  }, [reset, errors]);
+  const [editModal, setEditModal] = useState(false);
+  const [deleteModal, setDeleteModal] = useState(false);
 
   const { id } = JSON.parse(localStorage.getItem('user') || '');
 
   const { data, isLoading } = useGetUserByIdQuery(id);
-  const [deleteUser] = useDeleteUserMutation();
-
-  const onSubmit: SubmitHandler<IUser> = (data: IUser) => {
-    putUser({ id: id, payload: data });
-    setModalData(false);
-  };
-
-  const hasError = () => {
-    return Object.keys(errors).length !== 0;
-  };
-
-  const onClose = () => setModalData(false);
-  const onChecked = () => setCheck(false);
 
   if (isLoading) return <Loader />;
 
@@ -85,82 +35,34 @@ export const EditProfilePage = () => {
           variant="primary"
           style={{ marginRight: '15px' }}
           onClick={() => {
-            setModalData(true);
+            setEditModal(true);
           }}
         >
           {t('auth.edit-user')}
         </Button>
 
-        <Button variant="danger" onClick={() => setCheck(true)}>
+        <Button variant="danger" onClick={() => setDeleteModal(true)}>
           {t('auth.delete-user')}
         </Button>
       </div>
 
-      <Modal show={check} onHide={onChecked}>
-        <Modal.Header>
-          <Modal.Title>{t('auth.delete-user')}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>{t('auth.warning')}</Modal.Body>
-        <Modal.Footer>
-          <Button variant="primary" onClick={() => deleteUser(id).then(() => navigate('/login'))}>
-            {t('yes')}
-          </Button>
-          <Button variant="danger" onClick={() => setCheck(false)}>
-            {t('no')}
-          </Button>
-        </Modal.Footer>
-      </Modal>
+      <ModalComponent
+        title={t('auth.edit-data')}
+        show={deleteModal}
+        onHide={() => setDeleteModal(false)}
+        setModal={setDeleteModal}
+      >
+        <DeleteUserModal setDeleteModal={setDeleteModal} />
+      </ModalComponent>
 
-      <Modal show={modal} onHide={onClose}>
-        <Modal.Header>
-          <Modal.Title>{t('auth.edit-data')}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <form onSubmit={handleSubmit(onSubmit)} data-testid="form">
-            <div className="form-outline">
-              <FormInput
-                field="login"
-                type="text"
-                title={t('auth.login')}
-                register={register}
-                errors={errors.login}
-              />
-              <FormInput
-                field="name"
-                type="text"
-                title={t('auth.name')}
-                register={register}
-                errors={errors.name}
-              />
-              <FormInput
-                field="password"
-                type="password"
-                title={t('auth.password')}
-                register={register}
-                errors={errors.password}
-              />
-              <div>
-                <Modal.Footer>
-                  <Button
-                    variant="primary"
-                    style={{ marginRight: '15px' }}
-                    type="submit"
-                    value="submit"
-                    data-testid="button-submit"
-                    disabled={hasError()}
-                    className={hasError() ? 'bg-secondary' : 'bg-primary'}
-                  >
-                    {t('auth.edit')}
-                  </Button>
-                  <Button variant="danger" onClick={() => setModalData(false)}>
-                    {t('auth.cancel')}
-                  </Button>
-                </Modal.Footer>
-              </div>
-            </div>
-          </form>
-        </Modal.Body>
-      </Modal>
+      <ModalComponent
+        title={t('auth.edit-data')}
+        show={editModal}
+        onHide={() => setEditModal(false)}
+        setModal={setEditModal}
+      >
+        <EditUserModal setEditModal={setEditModal} />
+      </ModalComponent>
     </>
   );
 };
