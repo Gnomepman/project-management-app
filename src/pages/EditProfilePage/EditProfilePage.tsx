@@ -34,14 +34,12 @@ export const EditProfilePage = () => {
   useEffect(() => {
     if (isSuccess) {
       toast.success(t('auth.upd-success'), {
-        position: 'top-right',
         autoClose: 1000,
       });
     }
 
     if (isError) {
       toast.error((error as IErrorMessage).data.message, {
-        position: 'top-right',
         autoClose: 2000,
       });
     }

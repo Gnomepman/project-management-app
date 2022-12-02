@@ -31,7 +31,6 @@ export function LoginPage() {
   useEffect(() => {
     if (isSuccess) {
       toast.success(t('auth.login-success'), {
-        position: 'top-right',
         autoClose: 800,
       });
       localStorage.setItem('token', data?.token as string);
@@ -43,7 +42,6 @@ export function LoginPage() {
 
     if (isError) {
       toast.error((error as IErrorMessage).data.message, {
-        position: 'top-right',
         autoClose: 3000,
       });
     }

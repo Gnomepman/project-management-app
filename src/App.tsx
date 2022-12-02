@@ -24,7 +24,7 @@ function App() {
       <Header />
       <div className="container-xxl">
         <Suspense fallback={<Loader />}>
-          <ToastContainer />
+          <ToastContainer position="top-right" hideProgressBar={true} theme="colored" />
           <Routes>
             <Route path="/" element={<WelcomePage />} />
             <Route path="/" element={<PrivateRoute />}>
