@@ -7,7 +7,7 @@ interface TeamMemberProps {
 
 export const TeamMember = ({ item }: TeamMemberProps) => {
   return (
-    <div className="col-lg-4 col-md-4 row-col-sm-3">
+    <div className="col-lg-4 col-md-4 row-col-sm-3 card-hover">
       <a
         href={item.url}
         target="_blank"

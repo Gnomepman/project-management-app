@@ -74,12 +74,14 @@ export function LoginPage() {
               <div className="form-outline mb-4">
                 <FormInput
                   field="login"
+                  type="text"
                   title={t('auth.login')}
                   register={register}
                   errors={errors.login}
                 />
                 <FormInput
                   field="password"
+                  type="password"
                   title={t('auth.password')}
                   register={register}
                   errors={errors.password}

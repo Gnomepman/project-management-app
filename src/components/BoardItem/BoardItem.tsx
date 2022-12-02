@@ -13,7 +13,7 @@ export const BoardItem = ({ item }: IBoardItemProps) => {
   const [deleteBoard] = useDeleteBoardMutation();
 
   return (
-    <div key={item._id} className="col-xl-3 col-md-3 col-sm-4 col-xs-6">
+    <div key={item._id} className="col-xl-3 col-md-3 col-sm-4 col-6">
       <div
         className="board row rounded-3"
         style={{

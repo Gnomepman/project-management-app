@@ -1,13 +1,13 @@
-.card {
+.card-item {
   margin-bottom: 0.5em;
-  padding: 0.5em;
+  padding: 2px 0;
   border-radius: 1em;
   text-align: center;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   transition: all 0.2s ease;
 }
 
-.card:hover {
+.card-item:hover {
   box-shadow: 5px 6px 6px 2px #e9ecef;
   transform: scale(1.05);
 }

@@ -35,19 +35,23 @@ export const AuthSection = () => {
       {isAuthenticated() && (
         <Navbar>
           <NavLink className="mr-10 px-2" to="/boards">
-            <Button variant="outline-danger"> {t('auth.add-boards')}</Button>
+            <Button variant="outline-danger btn-overflow"> {t('auth.add-boards')}</Button>
           </NavLink>
 
-          <NavLink className="px-2 d-none d-sm-block" to="/edit-profile">
+          <NavLink className="px-2 d-none d-md-block lh-sm" to="/edit-profile">
             Hi <span className="text-danger fw-bold">{login} </span>
           </NavLink>
 
           <NavLink className="px-2" to="/edit-profile">
-            <Button variant="outline-secondary">{t('auth.edit-profile')}</Button>
+            <Button variant="outline-secondary w-max-25 btn-overflow">
+              {t('auth.edit-profile')}
+            </Button>
           </NavLink>
 
           <Nav.Item>
-            <Button onClick={onClickHandler}>{t('auth.sign-out')}</Button>
+            <Button className="btn-overflow" onClick={onClickHandler}>
+              {t('auth.sign-out')}
+            </Button>
           </Nav.Item>
         </Navbar>
       )}
