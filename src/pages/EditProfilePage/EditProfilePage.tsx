@@ -12,6 +12,7 @@ import {
   useGetUserByIdQuery,
   usePutUserMutation,
 } from '../../store/api/userApi';
+import { ModalDeleteComponent } from '../../components/DeleteModal/ModalDelete';
 
 export const EditProfilePage = () => {
   const [modal, setModalData] = useState(false);
@@ -94,7 +95,7 @@ export const EditProfilePage = () => {
         </Button>
       </div>
 
-      <Modal show={check} onHide={onChecked}>
+      {/* <Modal show={check} onHide={onChecked}>
         <Modal.Header>
           <Modal.Title>{t('auth.delete-user')}</Modal.Title>
         </Modal.Header>
@@ -107,7 +108,12 @@ export const EditProfilePage = () => {
             {t('no')}
           </Button>
         </Modal.Footer>
-      </Modal>
+      </Modal> */}
+      <ModalDeleteComponent
+        check={check}
+        setCheck={setCheck}
+        handleSubmit={() => deleteUser(id).then(() => navigate('/login'))}
+      />
 
       <Modal show={modal} onHide={onClose}>
         <Modal.Header>
