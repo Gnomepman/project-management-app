@@ -47,15 +47,27 @@
     "created": "Created in",
     "rights": "All Rights Reserved"
   },
+  "modal": {
+    "close": "Close",
+    "create": "Create"
+  },
   "boards": {
     "create": "CREATE NEW BOARD",
     "modal": {
       "creating": "Adding new board",
-      "close": "Close",
-      "create": "Create",
       "form": {
         "title": "Board name",
         "placeholder": "My cool board"
+      }
+    }
+  },
+  "columns": {
+    "create": "Create new column",
+    "modal": {
+      "creating": "Adding new column",
+      "form": {
+        "title": "Column name",
+        "placeholder": "New column"
       }
     }
   }

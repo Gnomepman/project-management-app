@@ -1,9 +1,9 @@
-import { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { Link, useParams } from 'react-router-dom';
 import { Column } from '../Column/Column';
 import { column, initial, task } from '../../models/initial';
-import { useGetColumnsQuery, usePostColumnsMutation } from '../../store/api/columnApi';
+import { useGetColumnsQuery } from '../../store/api/columnApi';
 import { Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
@@ -15,34 +15,30 @@ import './Boards.scss';
 import { translateDataFromApiToStateObject } from '../../utils/translateDataFromApiToStateObject';
 import { onDragEnd } from '../../utils/onDragEnd';
 import { Loader } from '../Loader/Loader';
+import { ModalComponent } from '../ModalComponent/ModalComponent';
+import { useTranslation } from 'react-i18next';
+import { CreateColumnModal } from '../CreateColumn/CreateColumnModal';
 
 export function Board() {
+  const { t } = useTranslation();
+
   const { id } = useParams();
   const board = useSelector((state: RootState) => state.board.board);
   const { setBoard } = useBoardActions();
-  const { data: columns, isLoading: columnsIsLoading } = useGetColumnsQuery(id!);
+  const { data: columns, isLoading } = useGetColumnsQuery(id!);
   const { data: tasks } = useGetTaskSetByBoardQuery(id!);
-  const [postColumn] = usePostColumnsMutation();
   const { data } = useGetBoardByIdQuery(id!);
   const [putColumn] = usePutColumnMutation();
   const [putTask] = usePutTaskMutation();
+
+  const [createColumnModal, setCreateColumnModal] = useState(false);
 
   useEffect(() => {
     setBoard(translateDataFromApiToStateObject(columns!, tasks!)! as initial);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [columns, tasks]);
 
-  const createColumn = async () => {
-    await postColumn({
-      boardId: id!,
-      payload: {
-        title: 'Test column name', //TODO: get name from modal
-        order: board.columnOrder.length + 1,
-      },
-    });
-  };
-
-  if (columnsIsLoading) return <Loader />;
+  if (isLoading) return <Loader />;
 
   return (
     <>
@@ -87,10 +83,22 @@ export function Board() {
                           );
                         })}
                       {provided.placeholder}
-                      <Button onClick={createColumn} style={{ minWidth: '200px', height: '50px' }}>
+                      <Button
+                        onClick={() => setCreateColumnModal(true)}
+                        style={{ minWidth: '200px', height: '50px' }}
+                      >
                         Create column
                       </Button>
                     </>
+
+                    <ModalComponent
+                      show={createColumnModal}
+                      title={t('columns.modal.creating')}
+                      onHide={() => setCreateColumnModal(false)}
+                      setModal={setCreateColumnModal}
+                    >
+                      <CreateColumnModal setCreateColumnModal={setCreateColumnModal} />
+                    </ModalComponent>
                   </div>
                 </div>
               </div>

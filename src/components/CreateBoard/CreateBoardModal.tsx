@@ -46,10 +46,10 @@ export const CreateBoardModal = ({ setCreateBoardModal }: ICreateBoardModalProps
         </Form.Group>
         <Modal.Footer>
           <Button variant="primary" onClick={() => setCreateBoardModal(false)} type="submit">
-            {t('boards.modal.create')}
+            {t('modal.create')}
           </Button>
           <Button variant="danger" onClick={() => setCreateBoardModal(false)}>
-            {t('boards.modal.close')}
+            {t('modal.close')}
           </Button>
         </Modal.Footer>
       </Form>
