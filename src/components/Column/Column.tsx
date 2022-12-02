@@ -111,9 +111,7 @@ const InnerListColumn = (props: { tasks: task[] }) => {
   return (
     <>
       {props.tasks.map((task, index) => (
-        <>
-          <Task key={task.id} task={task} index={index} />
-        </>
+        <Task key={task.id} task={task} index={index} />
       ))}
     </>
   );

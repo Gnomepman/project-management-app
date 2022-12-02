@@ -4,13 +4,16 @@ import { Link } from 'react-router-dom';
 import { stringToColour } from '../../utils/colorFromString';
 import { IBoard } from '../../models';
 import { useDeleteBoardMutation } from '../../store/api/boardApi';
+import { Loader } from '../Loader/Loader';
 
 interface IBoardItemProps {
   item: IBoard;
 }
 
 export const BoardItem = ({ item }: IBoardItemProps) => {
-  const [deleteBoard] = useDeleteBoardMutation();
+  const [deleteBoard, { isLoading }] = useDeleteBoardMutation();
+
+  if (isLoading) return <Loader />;
 
   return (
     <div key={item._id} className="col-xl-3 col-md-3 col-sm-4 col-6">

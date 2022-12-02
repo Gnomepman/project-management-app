@@ -1,4 +1,3 @@
-import { useTranslation } from 'react-i18next';
 import { changeLanguage } from 'i18next';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Button, Navbar } from 'react-bootstrap';
@@ -9,8 +8,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
 export function Header() {
-  const { t } = useTranslation();
-
   const [navBackground, setNavBackground] = useState(false);
   const navRef = useRef();
 
@@ -29,8 +26,6 @@ export function Header() {
 
   return (
     <Navbar
-      collapseOnSelect
-      expand="sm"
       sticky="top"
       style={{
         transition: '1s ease',
@@ -44,11 +39,11 @@ export function Header() {
               src={Logo}
               width="100"
               height="50"
-              className="d-inline-block align-top"
+              className="d-inline-block align-top d-none d-md-block"
               alt="pm-app-logo"
             />
           </NavLink>
-          <NavDropdown title={t('auth.language')} className="px-2">
+          <NavDropdown title={'🌐'} className="px-2">
             {languages.map(({ code, name }) => (
               <NavDropdown.Item
                 key={name}
