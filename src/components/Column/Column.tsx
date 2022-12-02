@@ -29,7 +29,7 @@ export function Column(props: {
             draggable={snapshot.isDragging}
             className="column"
             style={{
-              background: snapshot.draggingOver ? 'lightblue' : 'lightgrey',
+              background: snapshot.draggingOver ? 'rgb(224, 230, 243)' : 'rgb(222, 224, 231)',
               ...provided.draggableProps.style,
             }}
           >
@@ -44,39 +44,42 @@ export function Column(props: {
                 X
               </Button>
             </div>
-            <div className="column_container">
-              <Droppable droppableId={props.column.id} type="task">
-                {(provided, snapshot) => (
-                  <div
-                    className="column_container"
-                    ref={provided.innerRef}
-                    {...provided.droppableProps}
-                    draggable={snapshot.isDraggingOver}
-                    style={{ maxHeight: '400px', overflowY: 'scroll' }}
-                  >
-                    <>
-                      {props.tasks.length !== 0 ? (
-                        <InnerListColumn tasks={props.tasks} key={props.column.id} />
-                      ) : (
-                        <div
-                          style={{
-                            display: 'flex',
-                            border: '3px dashed black',
-                            minHeight: '50px',
-                            height: 'max-content',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                          }}
-                        >
-                          Drop here
-                        </div>
-                      )}
-                      {provided.placeholder}
-                    </>
-                  </div>
-                )}
-              </Droppable>
-            </div>
+            <Droppable droppableId={props.column.id} type="task">
+              {(provided, snapshot) => (
+                <div
+                  className="column_container"
+                  ref={provided.innerRef}
+                  {...provided.droppableProps}
+                  draggable={snapshot.isDraggingOver}
+                  style={{
+                    maxHeight: '410px',
+                    overflowY: 'scroll',
+                    paddingLeft: '5px',
+                  }}
+                >
+                  <>
+                    {props.tasks.length !== 0 ? (
+                      <InnerListColumn tasks={props.tasks} key={props.column.id} />
+                    ) : (
+                      <div
+                        style={{
+                          display: 'flex',
+                          border: '3px dashed black',
+                          minHeight: '50px',
+                          height: 'max-content',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          borderRadius: '4px',
+                        }}
+                      >
+                        Drop here
+                      </div>
+                    )}
+                    {provided.placeholder}
+                  </>
+                </div>
+              )}
+            </Droppable>
             <div className="column_footer">
               <Button
                 variant="outline-primary"
