@@ -10,7 +10,6 @@ export const AuthSection = () => {
 
   const { logout } = useActions();
   const navigate = useNavigate();
-  const { login } = JSON.parse(localStorage.getItem('user') || '{}');
 
   const onClickHandler = () => {
     logout();
@@ -38,8 +37,8 @@ export const AuthSection = () => {
             <Button variant="outline-danger btn-overflow"> {t('auth.add-boards')}</Button>
           </NavLink>
 
-          <NavLink className="px-2 d-none d-md-block lh-sm" to="/edit-profile">
-            Hi <span className="text-danger fw-bold">{login} </span>
+          <NavLink className="px-2 d-none d-md-block lh-sm" to="/">
+            <Button variant="outline-danger btn-overflow"> {t('auth.to-main-page')}</Button>
           </NavLink>
 
           <NavLink className="px-2" to="/edit-profile">
