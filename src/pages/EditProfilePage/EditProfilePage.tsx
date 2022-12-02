@@ -118,18 +118,21 @@ export const EditProfilePage = () => {
             <div className="form-outline">
               <FormInput
                 field="login"
+                type="text"
                 title={t('auth.login')}
                 register={register}
                 errors={errors.login}
               />
               <FormInput
                 field="name"
+                type="text"
                 title={t('auth.name')}
                 register={register}
                 errors={errors.name}
               />
               <FormInput
                 field="password"
+                type="password"
                 title={t('auth.password')}
                 register={register}
                 errors={errors.password}

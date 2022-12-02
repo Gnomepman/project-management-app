@@ -9,9 +9,10 @@ interface IInputProps {
   title: string;
   register: UseFormRegister<ILogin | IRegistration>;
   errors: FieldError | undefined;
+  type: string;
 }
 
-export const FormInput = ({ field, title, register, errors }: IInputProps) => {
+export const FormInput = ({ field, title, register, errors, type }: IInputProps) => {
   const { t } = useTranslation();
   const add = t('auth.add');
 
@@ -23,7 +24,7 @@ export const FormInput = ({ field, title, register, errors }: IInputProps) => {
         id={field}
         data-testid={field}
         placeholder={`${add} ${title.toLowerCase()}`}
-        type="text"
+        type={type}
         {...(register &&
           register(field, {
             required: {
