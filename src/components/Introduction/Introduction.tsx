@@ -8,17 +8,15 @@ export const Introduction = () => {
   const { t } = useTranslation();
 
   return (
-    <section className="row align-items-end h-auto my-1">
-      <div className="col-xl-3 col-lg-3 col-md-1 col-sm-1 mt-5 mt-md-0 mt-sm-0">
-        <h1 className="mt-lg-5 mt-md-3 fw-bold">PM Guru</h1>
+    <section className="row justify-content-between py-1">
+      <div className="col-lg-3 col-md-2 pt-5 pt-md-0 pt-sm-0">
+        <h1 className="pt-lg-5 pt-md-3 fw-bold">PM Guru</h1>
         <h4 className="py-2 py-sm-2">{t('wp.description')}</h4>
         <NavLink to="/boards">
-          <Button className="mt-5 mt-md-0 mt-sm-0" color="secondary">
-            {t('wp.button')}
-          </Button>
+          <Button variant="primary">{t('wp.button')}</Button>
         </NavLink>
       </div>
-      <div className="col-8 d-none d-sm-block d-md-block">
+      <div className="col-8 d-none d-sm-block px-2">
         <img className="w-100" src={MainImage} alt="pm-guru" />
       </div>
     </section>

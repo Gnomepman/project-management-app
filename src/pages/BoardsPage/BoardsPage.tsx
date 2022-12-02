@@ -45,7 +45,7 @@ export function BoardsPage() {
           {data.map((item: IBoard) => (
             <BoardItem key={item._id} item={item} />
           ))}
-          <div className="col-xl-3 col-md-3 col-sm-4 col-xs-6">
+          <div className="col-xl-3 col-md-3 col-sm-4 col-6">
             <div className="board row rounded-3">
               <Button className="fw-semibold" variant="outline-info" onClick={handleModalShow}>
                 {t('boards.create')}

@@ -52,4 +52,18 @@ export const TechnologiesData: ITechnology[] = [
     url: 'https://sass-lang.com/',
     logo_url: 'https://cdn-icons-png.flaticon.com/512/5968/5968550.png',
   },
+  {
+    id: '9',
+    title: 'Beautiful DND',
+    url: 'https://github.com/atlassian/react-beautiful-dnd',
+    logo_url:
+      'https://user-images.githubusercontent.com/2182637/53611918-54c1ff80-3c24-11e9-9917-66ac3cef513d.png',
+  },
+  {
+    id: '10',
+    title: 'Toastify',
+    url: 'https://www.npmjs.com/package/react-toastify',
+    logo_url:
+      'https://user-images.githubusercontent.com/35040146/100720655-54036200-33e4-11eb-9b08-357077675ff2.png',
+  },
 ];

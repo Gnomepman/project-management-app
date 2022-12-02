@@ -62,3 +62,7 @@ a:hover {
   overflow-y: hidden;
   height: 38px !important;
 }
+
+.card-hover:hover {
+  transform: scale(1.1);
+}
