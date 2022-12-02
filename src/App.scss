@@ -57,3 +57,8 @@ a:hover {
 .text-responsive {
   font-size: calc(40% + 1vw);
 }
+
+.btn-overflow {
+  overflow-y: hidden;
+  height: 38px !important;
+}

@@ -28,13 +28,12 @@ function App() {
             <Route path="/" element={<WelcomePage />} />
             <Route path="/" element={<PrivateRoute />}>
               <Route path="/boards" element={<BoardsPage />} />
+              <Route path="/edit-profile" element={<EditProfilePage />} />
             </Route>
             <Route path="/boards/:id" element={<Board />} />
             <Route path="/registration" element={<RegistrationPage />} />
             <Route path="/login" element={<LoginPage />} />
-            <Route path="/" element={<PrivateRoute />}>
-              <Route path="/edit-profile" element={<EditProfilePage />} />
-            </Route>
+            <Route path="/" element={<PrivateRoute />}></Route>
             <Route path="test" element={<TestPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>

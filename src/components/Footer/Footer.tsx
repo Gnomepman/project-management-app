@@ -10,8 +10,8 @@ export const Footer = () => {
   return (
     <footer className="bg-light">
       <div className="container-xxl">
-        <section className="d-flex py-2 justify-content-between align-items-center">
-          <div className="d-xl-flex d-md-flex col-3 py-1">
+        <section className="d-flex justify-content-between align-items-center">
+          <div className="d-xl-flex d-md-flex col-3 pb-2 pt-3">
             <a href="https://rs.school/react/" target="_blank" rel="noreferrer">
               <img height="35" src={RSSLogo} alt="rss" />
             </a>
@@ -19,8 +19,9 @@ export const Footer = () => {
           <div className="col-6">
             <TeamMembers />
           </div>
-          <span className="text-center col-3">
-            © {year} | {t('footer.rights')}{' '}
+          <span className="text-center col-3 lh-sm">
+            © {year}
+            <span className="d-none d-sm-inline d-md-inline"> | {t('footer.rights')}</span>
           </span>
         </section>
       </div>
