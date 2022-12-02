@@ -69,7 +69,7 @@ export function Board() {
                   <div
                     {...provided.droppableProps}
                     ref={provided.innerRef}
-                    className="container-xxl d-flex gap-4 p-0"
+                    className="container-xxl d-flex gap-4 p-0 h-100 mb-1"
                     style={{ overflowX: 'scroll', height: 'maxContent' }}
                   >
                     <>
