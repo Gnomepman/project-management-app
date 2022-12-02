@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 import { Draggable, Droppable, DroppableProvided } from 'react-beautiful-dnd';
 import { Button } from 'react-bootstrap';
 import { ITaskRes } from '../../models';
@@ -6,7 +6,9 @@ import { useDeleteColumnMutation } from '../../store/api/columnApi';
 import { usePostTasksMutation } from '../../store/api/taskApi';
 import { column, task } from '../../models/initial';
 import { Task } from '../Task/Task';
+import { ModalDeleteComponent } from '../../components/DeleteModal/ModalDelete';
 import './Column.scss';
+import { useTranslation } from 'react-i18next';
 
 export function Column(props: {
   provided?: DroppableProvided;
@@ -17,6 +19,8 @@ export function Column(props: {
 }) {
   const [delColumn] = useDeleteColumnMutation();
   const [postTask] = usePostTasksMutation();
+  const [check, setCheck] = useState(false);
+  const { t } = useTranslation();
   // const { id: userId } = JSON.parse(localStorage.getItem('user') || '');
 
   return (
@@ -35,12 +39,7 @@ export function Column(props: {
           >
             <div className="column_header" {...provided.dragHandleProps}>
               <span>{props.column.title}</span>
-              <Button
-                variant="danger"
-                onClick={async () =>
-                  await delColumn({ boardId: props.boardId, columnId: props.column.id })
-                }
-              >
+              <Button variant="danger" onClick={() => setCheck(true)}>
                 X
               </Button>
             </div>
@@ -100,6 +99,13 @@ export function Column(props: {
           </div>
         )}
       </Draggable>
+      <ModalDeleteComponent
+        description={t('auth.warning-task')}
+        title={t('auth.delete-task')}
+        check={check}
+        setCheck={setCheck}
+        handleDelete={() => delColumn({ boardId: props.boardId, columnId: props.column.id })}
+      />
     </>
   );
 }

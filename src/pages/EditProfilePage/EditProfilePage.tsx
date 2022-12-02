@@ -110,9 +110,11 @@ export const EditProfilePage = () => {
         </Modal.Footer>
       </Modal> */}
       <ModalDeleteComponent
+        description={t('auth.warning-user')}
+        title={t('auth.delete-user')}
         check={check}
         setCheck={setCheck}
-        handleSubmit={() => deleteUser(id).then(() => navigate('/login'))}
+        handleDelete={() => deleteUser(id).then(() => navigate('/login'))}
       />
 
       <Modal show={modal} onHide={onClose}>
