@@ -6,7 +6,7 @@ import { useDeleteColumnMutation } from '../../store/api/columnApi';
 import { usePostTasksMutation } from '../../store/api/taskApi';
 import { column, task } from '../../models/initial';
 import { Task } from '../Task/Task';
-import { ModalDeleteComponent } from '../../components/DeleteModal/ModalDelete';
+import { DeleteModal } from '../DeleteModal/DeleteModal';
 import './Column.scss';
 import { useTranslation } from 'react-i18next';
 
@@ -17,10 +17,10 @@ export function Column(props: {
   index: number;
   boardId: string;
 }) {
+  const { t } = useTranslation();
   const [delColumn] = useDeleteColumnMutation();
   const [postTask] = usePostTasksMutation();
   const [check, setCheck] = useState(false);
-  const { t } = useTranslation();
   // const { id: userId } = JSON.parse(localStorage.getItem('user') || '');
 
   return (
@@ -99,7 +99,7 @@ export function Column(props: {
           </div>
         )}
       </Draggable>
-      <ModalDeleteComponent
+      <DeleteModal
         description={t('auth.warning-task')}
         title={t('auth.delete-task')}
         check={check}

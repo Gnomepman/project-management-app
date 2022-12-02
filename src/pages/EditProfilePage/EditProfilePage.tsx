@@ -12,7 +12,7 @@ import {
   useGetUserByIdQuery,
   usePutUserMutation,
 } from '../../store/api/userApi';
-import { ModalDeleteComponent } from '../../components/DeleteModal/ModalDelete';
+import { DeleteModal } from '../../components/DeleteModal/DeleteModal';
 
 export const EditProfilePage = () => {
   const [modal, setModalData] = useState(false);
@@ -93,7 +93,7 @@ export const EditProfilePage = () => {
           {t('auth.delete-user')}
         </Button>
       </div>
-      <ModalDeleteComponent
+      <DeleteModal
         description={t('auth.warning-user')}
         title={t('auth.delete-user')}
         check={check}

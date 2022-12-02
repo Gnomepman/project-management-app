@@ -1,7 +1,8 @@
 import { t } from 'i18next';
 import React, { Dispatch, SetStateAction } from 'react';
 import { Modal, Button } from 'react-bootstrap';
-interface IIcheck {
+
+interface IDeleteModalProps {
   title: string;
   description: string;
   check: boolean;
@@ -9,13 +10,13 @@ interface IIcheck {
   handleDelete: () => void;
 }
 
-export const ModalDeleteComponent = ({
+export const DeleteModal = ({
   description,
   title,
   handleDelete,
   setCheck,
   check,
-}: IIcheck) => {
+}: IDeleteModalProps) => {
   return (
     <>
       <Modal show={check} onHide={handleDelete} centered>

@@ -4,16 +4,17 @@ import { Link } from 'react-router-dom';
 import { stringToColour } from '../../utils/colorFromString';
 import { IBoard } from '../../models';
 import { useDeleteBoardMutation } from '../../store/api/boardApi';
-import { ModalDeleteComponent } from '../DeleteModal/ModalDelete';
+import { DeleteModal } from '../DeleteModal/DeleteModal';
 import { useTranslation } from 'react-i18next';
 interface IBoardItemProps {
   item: IBoard;
 }
 
 export const BoardItem = ({ item }: IBoardItemProps) => {
+  const { t } = useTranslation();
   const [deleteBoard] = useDeleteBoardMutation();
   const [check, setCheck] = useState(false);
-  const { t } = useTranslation();
+
   return (
     <div key={item._id} className="col-xl-3 col-md-3 col-sm-4 col-xs-6">
       <div
@@ -40,7 +41,7 @@ export const BoardItem = ({ item }: IBoardItemProps) => {
           </Button>
         </div>
       </div>
-      <ModalDeleteComponent
+      <DeleteModal
         description={t('auth.warning-board')}
         title={t('auth.delete-board')}
         check={check}
