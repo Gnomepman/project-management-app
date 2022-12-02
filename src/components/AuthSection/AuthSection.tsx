@@ -47,7 +47,7 @@ export const AuthSection = () => {
               </Button>
             </NavLink>
 
-            <NavLink className="px-2 d-none d-md-block lh-sm" to="/">
+            <NavLink className="px-2 lh-sm" to="/">
               <Button variant="outline-danger btn-overflow"> {t('auth.to-main-page')}</Button>
             </NavLink>
 
@@ -63,6 +63,7 @@ export const AuthSection = () => {
               </Button>
             </Nav.Item>
           </Navbar>
+
           <ModalComponent
             show={createBoardModal}
             title={t('boards.modal.creating')}
