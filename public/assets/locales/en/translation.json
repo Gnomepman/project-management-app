@@ -87,6 +87,7 @@
     "back": "Back",
     "dropPlaceholder": "Drop here",
     "taskCreation": "Add task",
-    "columnCreation": "Add column"
+    "columnCreation": "Add column",
+    "editName": "New board name"
   }
 }

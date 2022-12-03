@@ -88,6 +88,7 @@
     "back": "Назад",
     "dropPlaceholder": "Перетени сюда",
     "taskCreation": "Добавить задание",
-    "columnCreation": "Добавить колонку"
+    "columnCreation": "Добавить колонку",
+    "editName": "Новое название доски"
   }
 }
