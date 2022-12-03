@@ -36,7 +36,11 @@ export const BoardItem = ({ item }: IBoardItemProps) => {
           </Link>
         </div>
         <div className="col-1">
-          <Button className="delete_button" variant="outline-dark" onClick={() => setCheck(true)}>
+          <Button
+            className="delete_button"
+            variant="outline-dark"
+            onClick={() => deleteBoard(item._id)}
+          >
             X
           </Button>
         </div>
@@ -46,7 +50,7 @@ export const BoardItem = ({ item }: IBoardItemProps) => {
         title={t('auth.delete-board')}
         check={check}
         setCheck={setCheck}
-        handleDelete={() => deleteBoard(item._id)}
+        handleDelete={() => console.log('delete')}
       />
     </div>
   );

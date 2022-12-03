@@ -39,7 +39,10 @@ export function Column(props: {
           >
             <div className="column_header" {...provided.dragHandleProps}>
               <span>{props.column.title}</span>
-              <Button variant="danger" onClick={() => setCheck(true)}>
+              <Button
+                variant="danger"
+                onClick={() => delColumn({ boardId: props.boardId, columnId: props.column.id })}
+              >
                 X
               </Button>
             </div>
@@ -104,7 +107,7 @@ export function Column(props: {
         title={t('auth.delete-task')}
         check={check}
         setCheck={setCheck}
-        handleDelete={() => delColumn({ boardId: props.boardId, columnId: props.column.id })}
+        handleDelete={() => console.log('delete')}
       />
     </>
   );

@@ -89,7 +89,7 @@ export const EditProfilePage = () => {
           {t('auth.edit-user')}
         </Button>
 
-        <Button variant="danger" onClick={() => setCheck(true)}>
+        <Button variant="danger" onClick={() => deleteUser(id).then(() => navigate('/login'))}>
           {t('auth.delete-user')}
         </Button>
       </div>
@@ -98,7 +98,7 @@ export const EditProfilePage = () => {
         title={t('auth.delete-user')}
         check={check}
         setCheck={setCheck}
-        handleDelete={() => deleteUser(id).then(() => navigate('/login'))}
+        handleDelete={() => console.log('delete')}
       />
 
       <Modal show={modal} onHide={onClose}>
