@@ -8,6 +8,8 @@ import './Column.scss';
 import { ModalComponent } from '../ModalComponent/ModalComponent';
 import { CreateTaskModal } from '../CreateTaskModal/CreateTaskModal';
 import { useTranslation } from 'react-i18next';
+import Delete from '../../assets/images/icons/delete.png';
+import Edit from '../../assets/images/icons/edit.png';
 
 export function Column(props: {
   provided?: DroppableProvided;
@@ -37,13 +39,17 @@ export function Column(props: {
           >
             <div className="column_header" {...provided.dragHandleProps}>
               <span>{props.column.title}</span>
+              <Button className="action_button" onClick={() => alert('Todo: edit column')}>
+                <img src={Edit} alt="edit" />
+              </Button>
               <Button
                 variant="danger"
                 onClick={async () =>
                   await delColumn({ boardId: props.boardId, columnId: props.column.id })
                 }
+                className="action_button"
               >
-                X
+                <img src={Delete} alt="delete" />
               </Button>
             </div>
             <Droppable droppableId={props.column.id} type="task">
