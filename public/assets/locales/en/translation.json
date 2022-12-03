@@ -24,7 +24,7 @@
     "login-error": "Incorrectly entered data",
     "about": "About",
     "add-boards": "Create new board",
-    "to-main-page": "Go to Main Page",
+    "to-main-page": "Main Page",
     "edit-profile": "Edit profile",
     "sign-out": "Sign Out",
     "pass_error": "Enter the password",
@@ -55,6 +55,8 @@
     "create": "Create new board",
     "modal": {
       "creating": "Creating new board",
+      "editing": "Editing board",
+      "confirm": "Edit",
       "form": {
         "title": "Board name",
         "placeholder": "My cool board"

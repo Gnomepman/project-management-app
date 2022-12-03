@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { stringToColour } from '../../utils/colorFromString';
@@ -7,6 +7,9 @@ import { useDeleteBoardMutation } from '../../store/api/boardApi';
 import { Loader } from '../Loader/Loader';
 import Delete from '../../assets/images/icons/delete.png';
 import Edit from '../../assets/images/icons/edit.png';
+import { ModalComponent } from '../ModalComponent/ModalComponent';
+import { EditBoardModal } from '../EditBoardModal/EditBoardModal';
+import { t } from 'i18next';
 
 interface IBoardItemProps {
   item: IBoard;
@@ -14,6 +17,7 @@ interface IBoardItemProps {
 
 export const BoardItem = ({ item }: IBoardItemProps) => {
   const [deleteBoard, { isLoading }] = useDeleteBoardMutation();
+  const [editBoardModal, setEditBoardModal] = useState(false);
 
   if (isLoading) return <Loader />;
 
@@ -35,9 +39,10 @@ export const BoardItem = ({ item }: IBoardItemProps) => {
                 <div className="board-name fw-semibold fs-5 text-white">{item.title}</div>
                 <Button
                   className="action_button"
-                  onClick={(e) => {
+                  onClick={(e: React.MouseEvent<Element, MouseEvent>) => {
+                    setEditBoardModal(true);
                     e.preventDefault();
-                    alert('Todo: edit board');
+                    e.nativeEvent.stopImmediatePropagation();
                   }}
                 >
                   <img src={Edit} alt="edit" />
@@ -46,6 +51,7 @@ export const BoardItem = ({ item }: IBoardItemProps) => {
                   variant="danger"
                   onClick={(e) => {
                     e.preventDefault();
+                    e.nativeEvent.stopImmediatePropagation();
                     deleteBoard(item._id);
                   }}
                   className="action_button"
@@ -54,6 +60,17 @@ export const BoardItem = ({ item }: IBoardItemProps) => {
                 </Button>
               </div>
             </div>
+            <ModalComponent
+              show={editBoardModal}
+              title={t('boards.modal.editing')}
+              onHide={() => setEditBoardModal(false)}
+              setModal={setEditBoardModal}
+            >
+              <EditBoardModal
+                setEditBoardModal={setEditBoardModal}
+                boardId={item._id}
+              ></EditBoardModal>
+            </ModalComponent>
           </div>
         </div>
       </Link>

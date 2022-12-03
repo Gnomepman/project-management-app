@@ -11,7 +11,14 @@ interface IModalProps {
 
 export const ModalComponent = ({ children, title, show, onHide }: IModalProps) => {
   return (
-    <Modal show={show} onHide={onHide}>
+    <Modal
+      show={show}
+      onHide={onHide}
+      onClick={(e: React.MouseEvent<Element, MouseEvent>) => {
+        e.preventDefault();
+        e.nativeEvent.stopImmediatePropagation();
+      }}
+    >
       <div className="" />
 
       <Modal.Header>
