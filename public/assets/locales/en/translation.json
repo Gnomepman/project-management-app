@@ -52,9 +52,9 @@
     "create": "Create"
   },
   "boards": {
-    "create": "CREATE NEW BOARD",
+    "create": "Create new board",
     "modal": {
-      "creating": "Adding new board",
+      "creating": "Creating new board",
       "form": {
         "title": "Board name",
         "placeholder": "My cool board"
@@ -64,10 +64,22 @@
   "columns": {
     "create": "Create new column",
     "modal": {
-      "creating": "Adding new column",
+      "creating": "Creating new column",
       "form": {
         "title": "Column name",
         "placeholder": "New column"
+      }
+    }
+  },
+  "tasks": {
+    "create": "Add task",
+    "modal": {
+      "creating": "Creating new task",
+      "form": {
+        "title": "Task name",
+        "titlePlaceholder": "Give your task a name",
+        "description": "Task description",
+        "descriptionPlaceholder": "Give your task a description"
       }
     }
   }

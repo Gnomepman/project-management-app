@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Draggable, Droppable, DroppableProvided } from 'react-beautiful-dnd';
 import { Button } from 'react-bootstrap';
-import { ITaskRes } from '../../models';
 import { useDeleteColumnMutation } from '../../store/api/columnApi';
-import { usePostTasksMutation } from '../../store/api/taskApi';
 import { column, task } from '../../models/initial';
 import { Task } from '../Task/Task';
 import './Column.scss';
+import { ModalComponent } from '../ModalComponent/ModalComponent';
+import { CreateTaskModal } from '../CreateTaskModal/CreateTaskModal';
+import { useTranslation } from 'react-i18next';
 
 export function Column(props: {
   provided?: DroppableProvided;
@@ -16,8 +17,9 @@ export function Column(props: {
   boardId: string;
 }) {
   const [delColumn] = useDeleteColumnMutation();
-  const [postTask] = usePostTasksMutation();
-  // const { id: userId } = JSON.parse(localStorage.getItem('user') || '');
+  const [createTaskModal, setCreateTaskModal] = useState(false);
+  const { id: userId } = JSON.parse(localStorage.getItem('user') || '');
+  const { t } = useTranslation();
 
   return (
     <>
@@ -81,24 +83,22 @@ export function Column(props: {
               )}
             </Droppable>
             <div className="column_footer">
-              <Button
-                variant="outline-primary"
-                onClick={async () => {
-                  await postTask({
-                    boardId: props.boardId,
-                    columnId: props.column.id,
-                    payload: {
-                      title: 'Column zero',
-                      order: props.column.taskIds.length + 1,
-                      description: 'Task 3',
-                      userId: 0,
-                      users: ['636d6464c02777e984c57dc1'],
-                    } as ITaskRes,
-                  });
-                }}
-              >
+              <Button variant="outline-primary" onClick={() => setCreateTaskModal(true)}>
                 Add task
               </Button>
+              <ModalComponent
+                show={createTaskModal}
+                title={t('tasks.modal.creating')}
+                onHide={() => setCreateTaskModal(false)}
+                setModal={setCreateTaskModal}
+              >
+                <CreateTaskModal
+                  setCreateTaskModal={setCreateTaskModal}
+                  columnId={props.column.id}
+                  order={props.column.taskIds.length + 1}
+                  userId={userId}
+                />
+              </ModalComponent>
             </div>
           </div>
         )}

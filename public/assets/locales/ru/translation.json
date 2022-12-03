@@ -71,5 +71,17 @@
         "placeholder": "Новая колонка"
       }
     }
+  },
+  "tasks": {
+    "create": "Добавить задание",
+    "modal": {
+      "creating": "Добавление задания",
+      "form": {
+        "title": "Название задания",
+        "titlePlaceholder": "Назовите своё задание",
+        "description": "Описание задания",
+        "descriptionPlaceholder": "Опишите своё задание"
+      }
+    }
   }
 }
