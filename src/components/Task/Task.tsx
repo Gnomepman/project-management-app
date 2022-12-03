@@ -24,8 +24,19 @@ export function Task(props: {
             }}
           >
             <div style={{ display: 'flex', flexDirection: 'column' }}>
-              <span style={{ fontSize: '19px', fontWeight: '500' }}>{props.task.title}</span>
-              <span style={{ fontSize: '13px' }}>{props.task.content}</span>
+              <span
+                style={{
+                  fontSize: '19px',
+                  fontWeight: '500',
+                  textOverflow: 'ellipsis',
+                  overflow: 'hidden',
+                }}
+              >
+                {props.task.title}
+              </span>
+              <span style={{ fontSize: '13px', textOverflow: 'ellipsis', overflow: 'hidden' }}>
+                {props.task.content}
+              </span>
             </div>
           </div>
         )}
