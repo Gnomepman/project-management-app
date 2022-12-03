@@ -83,5 +83,11 @@
         "descriptionPlaceholder": "Опишите своё задание"
       }
     }
+  },
+  "board": {
+    "back": "Назад",
+    "dropPlaceholder": "Перетени сюда",
+    "taskCreation": "Добавить задание",
+    "columnCreation": "Добавить колонку"
   }
 }

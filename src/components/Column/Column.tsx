@@ -74,7 +74,7 @@ export function Column(props: {
                           borderRadius: '4px',
                         }}
                       >
-                        Drop here
+                        {t('board.dropPlaceholder')}
                       </div>
                     )}
                     {provided.placeholder}
@@ -84,7 +84,7 @@ export function Column(props: {
             </Droppable>
             <div className="column_footer">
               <Button variant="outline-primary" onClick={() => setCreateTaskModal(true)}>
-                Add task
+                {t('board.taskCreation')}
               </Button>
               <ModalComponent
                 show={createTaskModal}

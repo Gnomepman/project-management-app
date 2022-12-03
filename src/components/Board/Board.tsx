@@ -21,7 +21,6 @@ import { CreateColumnModal } from '../CreateColumn/CreateColumnModal';
 
 export function Board() {
   const { t } = useTranslation();
-
   const { id } = useParams();
   const board = useSelector((state: RootState) => state.board.board);
   const { setBoard } = useBoardActions();
@@ -30,7 +29,6 @@ export function Board() {
   const { data } = useGetBoardByIdQuery(id!);
   const [putColumn] = usePutColumnMutation();
   const [putTask] = usePutTaskMutation();
-
   const [createColumnModal, setCreateColumnModal] = useState(false);
 
   useEffect(() => {
@@ -47,9 +45,6 @@ export function Board() {
       >
         <Droppable droppableId="all-columns" direction="horizontal" type="column">
           {(provided) => {
-            if (!board) {
-              return <p>Loading</p>;
-            }
             return (
               <div className="app-container">
                 <div className="board-main">
@@ -58,7 +53,7 @@ export function Board() {
                     className="py-2"
                   >
                     <Link to="/boards">
-                      <Button>Back</Button>
+                      <Button>{t('board.back')}</Button>
                     </Link>
                     <div className="h4 m-0">{data?.title}</div>
                   </div>
@@ -87,7 +82,7 @@ export function Board() {
                         onClick={() => setCreateColumnModal(true)}
                         style={{ minWidth: '200px', height: '50px' }}
                       >
-                        Create column
+                        {t('board.columnCreation')}
                       </Button>
                     </>
 

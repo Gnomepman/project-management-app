@@ -82,5 +82,11 @@
         "descriptionPlaceholder": "Give your task a description"
       }
     }
+  },
+  "board": {
+    "back": "Back",
+    "dropPlaceholder": "Drop here",
+    "taskCreation": "Add task",
+    "columnCreation": "Add column"
   }
 }
