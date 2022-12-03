@@ -18,6 +18,7 @@ import { Loader } from '../Loader/Loader';
 import { ModalComponent } from '../ModalComponent/ModalComponent';
 import { useTranslation } from 'react-i18next';
 import { CreateColumnModal } from '../CreateColumn/CreateColumnModal';
+import Back from '../../assets/images/icons/back.png';
 
 export function Board() {
   const { t } = useTranslation();
@@ -53,7 +54,10 @@ export function Board() {
                     className="py-2"
                   >
                     <Link to="/boards">
-                      <Button>{t('board.back')}</Button>
+                      <Button style={{ display: 'flex', gap: '5px' }} className="action_button">
+                        <img src={Back} height="20px"></img>
+                        {t('board.back')}
+                      </Button>
                     </Link>
                     <div className="h4 m-0">{data?.title}</div>
                   </div>
