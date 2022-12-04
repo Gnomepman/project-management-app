@@ -24,7 +24,7 @@ export const CreateColumnModal = ({ setCreateColumnModal }: ICreateColumnModalPr
     e.preventDefault();
 
     if (inputName.length < 4) {
-      toast.error(t('column.min-length'), {
+      toast.error(t('columns.min-length'), {
         autoClose: 2000,
       });
       return;

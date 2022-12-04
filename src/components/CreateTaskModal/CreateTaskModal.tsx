@@ -29,7 +29,7 @@ export const CreateTaskModal = ({
     e.preventDefault();
 
     if (inputTitle.length < 4 || inputDescription.length < 4) {
-      toast.error(t('column.min-length'), {
+      toast.error(t('tasks.min-length'), {
         autoClose: 2000,
       });
       return;
