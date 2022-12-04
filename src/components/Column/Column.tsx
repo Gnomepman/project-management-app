@@ -10,6 +10,7 @@ import { CreateTaskModal } from '../CreateTaskModal/CreateTaskModal';
 import { useTranslation } from 'react-i18next';
 import Delete from '../../assets/images/icons/delete.png';
 import Edit from '../../assets/images/icons/edit.png';
+import { DeleteModal } from '../DeleteModal/DeleteModal';
 
 export function Column(props: {
   provided?: DroppableProvided;
@@ -22,6 +23,7 @@ export function Column(props: {
   const [createTaskModal, setCreateTaskModal] = useState(false);
   const { id: userId } = JSON.parse(localStorage.getItem('user') || '');
   const { t } = useTranslation();
+  const [check, setCheck] = useState(false);
 
   return (
     <>
@@ -109,6 +111,13 @@ export function Column(props: {
           </div>
         )}
       </Draggable>
+      <DeleteModal
+        description={t('auth.warning-task')}
+        title={t('auth.delete-task')}
+        check={check}
+        setCheck={setCheck}
+        handleDelete={() => console.log('delete')}
+      />
     </>
   );
 }

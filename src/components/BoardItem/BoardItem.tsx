@@ -10,6 +10,7 @@ import Edit from '../../assets/images/icons/edit.png';
 import { ModalComponent } from '../ModalComponent/ModalComponent';
 import { EditBoardModal } from '../EditBoardModal/EditBoardModal';
 import { t } from 'i18next';
+import { DeleteModal } from '../DeleteModal/DeleteModal';
 
 interface IBoardItemProps {
   item: IBoard;
@@ -18,6 +19,7 @@ interface IBoardItemProps {
 export const BoardItem = ({ item }: IBoardItemProps) => {
   const [deleteBoard, { isLoading }] = useDeleteBoardMutation();
   const [editBoardModal, setEditBoardModal] = useState(false);
+  const [check, setCheck] = useState(false);
 
   if (isLoading) return <Loader />;
 
@@ -74,6 +76,13 @@ export const BoardItem = ({ item }: IBoardItemProps) => {
           </div>
         </div>
       </Link>
+      <DeleteModal
+        description={t('auth.warning-board')}
+        title={t('auth.delete-board')}
+        check={check}
+        setCheck={setCheck}
+        handleDelete={() => console.log('delete')}
+      />
     </div>
   );
 };
