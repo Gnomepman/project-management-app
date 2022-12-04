@@ -68,7 +68,7 @@
       "confirm": "Edit",
       "form": {
         "title": "Board name",
-        "placeholder": "My cool board"
+        "placeholder": "My board"
       }
     }
   },
