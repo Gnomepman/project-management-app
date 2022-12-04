@@ -3,10 +3,12 @@ import { IUser } from '../../models';
 
 interface IUserState {
   user: IUser | null;
+  snow: boolean;
 }
 
 const initialState: IUserState = {
   user: null,
+  snow: true,
 };
 
 export const userSlice = createSlice({
@@ -18,6 +20,10 @@ export const userSlice = createSlice({
     },
     logout: (state) => {
       state.user = null;
+    },
+    toggleSnow: (state) => {
+      state.snow = !state.snow;
+      console.log('2', state.snow);
     },
   },
 });

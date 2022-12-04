@@ -1,13 +1,18 @@
 import { Introduction } from '../../components/Introduction/Introduction';
 import { Technologies } from '../../components/Technologies/Technologies';
 import Snowfall from 'react-snowfall';
-import React, { useReducer } from 'react';
+import React from 'react';
 import { Button } from 'react-bootstrap';
+import { useActions } from '../../hooks/actions';
+import { useAppSelector } from '../../hooks/redux';
 
 export const WelcomePage = () => {
-  const initSnowflakeCount = 200;
-  const changeSnowflakeCount = (initSnowflakeCount: number) => (initSnowflakeCount === 0 ? 200 : 0);
-  const [snowflakeCount, setSnowflakeCount] = useReducer(changeSnowflakeCount, initSnowflakeCount);
+  const { snow } = useAppSelector((store) => store.user);
+  const { toggleSnow } = useActions();
+
+  const snowflakeCount = () => {
+    return snow ? 200 : 0;
+  };
 
   return (
     <>
@@ -15,13 +20,15 @@ export const WelcomePage = () => {
         <Button
           variant="none"
           className="card-hover border-0 position-absolute top-0 end-0"
-          onClick={setSnowflakeCount}
+          onClick={() => {
+            toggleSnow();
+          }}
         >
           {'❄'}
         </Button>
       </div>
       <Snowfall
-        snowflakeCount={snowflakeCount}
+        snowflakeCount={snowflakeCount()}
         style={{
           position: 'fixed',
           width: '100vw',
