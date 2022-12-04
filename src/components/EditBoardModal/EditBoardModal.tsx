@@ -42,9 +42,6 @@ export const EditBoardModal = ({ setEditBoardModal, boardId }: IEditBoardModalPr
             />
           </Form.Group>
           <Modal.Footer style={{ paddingRight: '0px' }}>
-            <Button variant="danger" onClick={() => setEditBoardModal(false)}>
-              {t('modal.close')}
-            </Button>
             <Button
               variant="primary"
               onClick={(e) => {
@@ -54,6 +51,9 @@ export const EditBoardModal = ({ setEditBoardModal, boardId }: IEditBoardModalPr
               type="submit"
             >
               {t('boards.modal.confirm')}
+            </Button>
+            <Button variant="danger" onClick={() => setEditBoardModal(false)}>
+              {t('modal.close')}
             </Button>
           </Modal.Footer>
         </Form>

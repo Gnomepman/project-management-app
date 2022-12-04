@@ -62,11 +62,11 @@ export const CreateTaskModal = ({
           />
         </Form.Group>
         <Modal.Footer style={{ paddingRight: '0px' }}>
-          <Button variant="danger" onClick={() => setCreateTaskModal(false)}>
-            {t('modal.close')}
-          </Button>
           <Button variant="primary" onClick={() => setCreateTaskModal(false)} type="submit">
             {t('modal.create')}
+          </Button>
+          <Button variant="danger" onClick={() => setCreateTaskModal(false)}>
+            {t('modal.close')}
           </Button>
         </Modal.Footer>
       </Form>

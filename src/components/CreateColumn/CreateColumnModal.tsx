@@ -44,11 +44,11 @@ export const CreateColumnModal = ({ setCreateColumnModal }: ICreateColumnModalPr
           />
         </Form.Group>
         <Modal.Footer style={{ paddingRight: '0px' }}>
-          <Button variant="danger" onClick={() => setCreateColumnModal(false)}>
-            {t('modal.close')}
-          </Button>
           <Button variant="primary" onClick={() => setCreateColumnModal(false)} type="submit">
             {t('modal.create')}
+          </Button>
+          <Button variant="danger" onClick={() => setCreateColumnModal(false)}>
+            {t('modal.close')}
           </Button>
         </Modal.Footer>
       </Form>
