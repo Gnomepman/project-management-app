@@ -11,6 +11,7 @@ import { useTranslation } from 'react-i18next';
 import Delete from '../../assets/images/icons/delete.png';
 import Edit from '../../assets/images/icons/edit.png';
 import { DeleteModal } from '../DeleteModal/DeleteModal';
+import { EditColumnModal } from '../EditColumnModal/EditColumnModal';
 
 export function Column(props: {
   provided?: DroppableProvided;
@@ -21,6 +22,7 @@ export function Column(props: {
 }) {
   const [delColumn] = useDeleteColumnMutation();
   const [createTaskModal, setCreateTaskModal] = useState(false);
+  const [editColumnModal, setEditColumnModal] = useState(false);
   const { id: userId } = JSON.parse(localStorage.getItem('user') || '');
   const { t } = useTranslation();
   const [showColumnDeleteModal, setShowColumnDeleteModal] = useState(false);
@@ -41,7 +43,7 @@ export function Column(props: {
           >
             <div className="column_header" {...provided.dragHandleProps}>
               <span>{props.column.title}</span>
-              <Button className="action_button" onClick={() => alert('Todo: edit column')}>
+              <Button className="action_button" onClick={() => setEditColumnModal(true)}>
                 <img src={Edit} alt="edit" />
               </Button>
               <Button
@@ -123,6 +125,18 @@ export function Column(props: {
         setCheck={setShowColumnDeleteModal}
         handleDelete={() => delColumn({ boardId: props.boardId, columnId: props.column.id })}
       />
+      <ModalComponent
+        show={editColumnModal}
+        title={t('boards.modal.editing')}
+        onHide={() => setEditColumnModal(false)}
+        setModal={setEditColumnModal}
+      >
+        <EditColumnModal
+          setEditColumnModal={setEditColumnModal}
+          boardId={props.boardId}
+          columnId={props.column.id}
+        ></EditColumnModal>
+      </ModalComponent>
     </>
   );
 }

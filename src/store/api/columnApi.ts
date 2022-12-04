@@ -54,7 +54,7 @@ export const columnApi = createApi({
           },
         };
       },
-      // invalidatesTags: ['Column'],
+      invalidatesTags: ['Column'],
     }),
 
     deleteColumn: build.mutation<IColumn, Record<string, string>>({
