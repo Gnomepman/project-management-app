@@ -16,7 +16,7 @@ export const languages = [
   },
   {
     code: 'uk',
-    name: 'україський',
+    name: 'Україський',
     className: 'flag-united-kingdom flag',
   },
 ];
