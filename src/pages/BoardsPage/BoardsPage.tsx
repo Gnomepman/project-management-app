@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { IBoard } from '../../models';
@@ -11,11 +11,8 @@ import { CreateBoardModal } from '../../components/CreateBoard/CreateBoardModal'
 
 export function BoardsPage() {
   const { t } = useTranslation();
-
   const [createBoardModal, setCreateBoardModal] = useState(false);
-  const { data, isLoading } = useGetBoardsQuery(); //TODO: edit boardApi with tags and remove refetch
-
-  useEffect(() => {}, [data]);
+  const { data, isLoading } = useGetBoardsQuery();
 
   if (isLoading) return <Loader />;
   if (!data) return <p>No boards</p>;
