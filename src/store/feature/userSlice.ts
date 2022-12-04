@@ -23,7 +23,6 @@ export const userSlice = createSlice({
     },
     toggleSnow: (state) => {
       state.snow = !state.snow;
-      console.log('2', state.snow);
     },
   },
 });
