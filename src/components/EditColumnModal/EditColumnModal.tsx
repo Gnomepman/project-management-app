@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction, useState } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { IColumnRes } from '../../models';
-import { usePutColumnMutation } from '../../store/api/columnApi';
+import { usePutColumnWithoutRefetchMutation } from '../../store/api/columnApi';
 import { Loader } from '../Loader/Loader';
 
 interface IEditColumnModalProps {
@@ -19,7 +19,7 @@ export const EditColumnModal = ({
   order,
 }: IEditColumnModalProps) => {
   const { t } = useTranslation();
-  const [putColumn, { isLoading }] = usePutColumnMutation();
+  const [putColumn, { isLoading }] = usePutColumnWithoutRefetchMutation();
   const [inputName, setInputName] = useState('');
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {

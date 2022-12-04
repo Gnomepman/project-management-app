@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction, useState } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { ITaskResponse } from '../../models';
-import { usePutTaskMutation } from '../../store/api/taskApi';
+import { usePutTaskWihoutRefetchMutation } from '../../store/api/taskApi';
 import { Loader } from '../Loader/Loader';
 
 interface IEditTaskModalProps {
@@ -22,7 +22,7 @@ export const EditTaskModal = ({
 }: IEditTaskModalProps) => {
   const { t } = useTranslation();
   const { id: userId } = JSON.parse(localStorage.getItem('user') || '');
-  const [putTask, { isLoading }] = usePutTaskMutation();
+  const [putTask, { isLoading }] = usePutTaskWihoutRefetchMutation();
   const [inputName, setInputName] = useState('');
   const [inputDescription, setInputDescription] = useState('');
 
@@ -53,23 +53,21 @@ export const EditTaskModal = ({
       <Modal.Body>
         <Form onSubmit={handleSubmit}>
           <Form.Group>
-            <Form.Label>{t('boards.modal.form.title')}</Form.Label>
+            <Form.Label>{t('tasks.modal.form.title')}</Form.Label>
             <Form.Control
               type="name"
-              placeholder={String(t('boards.modal.form.placeholder'))}
+              placeholder={String(t('tasks.modal.form.placeholder'))}
               value={inputName}
               onChange={(e) => setInputName(e.target.value)}
-              required={true}
             />
           </Form.Group>
           <Form.Group>
-            <Form.Label>{t('boards.modal.form.title')}</Form.Label>
+            <Form.Label>{t('tasks.modal.form.title')}</Form.Label>
             <Form.Control
               type="name"
-              placeholder={String(t('boards.modal.form.placeholder'))}
+              placeholder={String(t('tasks.modal.form.placeholder'))}
               value={inputDescription}
               onChange={(e) => setInputDescription(e.target.value)}
-              required={true}
             />
           </Form.Group>
           <Modal.Footer style={{ paddingRight: '0px' }}>
