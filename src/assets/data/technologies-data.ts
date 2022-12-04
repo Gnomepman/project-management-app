@@ -27,12 +27,6 @@ export const TechnologiesData: ITechnology[] = [
     url: 'https://react-redux.js.org/',
     logo_url: 'https://cdn.iconscout.com/icon/free/png-256/redux-3445829-2878755.png',
   },
-  // {
-  //   id: '5',
-  //   title: 'React-Toolkit',
-  //   url: 'https://redux-toolkit.js.org/',
-  //   logo_url: 'https://raw.githubusercontent.com/reduxjs/redux/master/logo/logo.png',
-  // },
   {
     id: '6',
     title: 'i18next',
