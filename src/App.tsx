@@ -15,7 +15,6 @@ import { NotFoundPage } from './pages/NotFoundPage/NotFoundPage';
 import { LoginPage } from './pages/LoginPage/LoginPage';
 import { EditProfilePage } from './pages/EditProfilePage/EditProfilePage';
 import { PrivateRoute } from './components/PrivateRoute/PrivateRoute';
-import { TestPage } from './pages/TestPage';
 import { IsLoggedRoute } from './components/PrivateRoute/IsLoggedRoute';
 
 function App() {
@@ -37,7 +36,6 @@ function App() {
               <Route path="/registration" element={<RegistrationPage />} />
             </Route>
             <Route path="/" element={<PrivateRoute />}></Route>
-            <Route path="test" element={<TestPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Suspense>
