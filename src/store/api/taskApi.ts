@@ -59,6 +59,7 @@ export const taskApi = createApi({
           },
         };
       },
+      invalidatesTags: ['Task'],
     }),
 
     putTaskWihoutRefetch: build.mutation<
@@ -75,7 +76,6 @@ export const taskApi = createApi({
           },
         };
       },
-      invalidatesTags: ['Task'],
     }),
 
     deleteTask: build.mutation<ITask, Record<string, string>>({

@@ -8,9 +8,12 @@ import { Button, Form } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import { useBoardActions } from '../../hooks/actions';
-import { useGetTaskSetByBoardQuery, usePutTaskMutation } from '../../store/api/taskApi';
+import {
+  useGetTaskSetByBoardQuery,
+  usePutTaskWihoutRefetchMutation,
+} from '../../store/api/taskApi';
 import { useGetBoardByIdQuery, usePutBoardMutation } from '../../store/api/boardApi';
-import { usePutColumnMutation } from '../../store/api/columnApi';
+import { usePutColumnWithoutRefetchMutation } from '../../store/api/columnApi';
 import './Boards.scss';
 import { translateDataFromApiToStateObject } from '../../utils/translateDataFromApiToStateObject';
 import { onDragEnd } from '../../utils/onDragEnd';
@@ -32,8 +35,8 @@ export function Board() {
   const { data: columns, isLoading } = useGetColumnsQuery(id!);
   const { data: tasks } = useGetTaskSetByBoardQuery(id!);
   const { data } = useGetBoardByIdQuery(id!);
-  const [putColumn] = usePutColumnMutation();
-  const [putTask] = usePutTaskMutation();
+  const [putColumn] = usePutColumnWithoutRefetchMutation();
+  const [putTask] = usePutTaskWihoutRefetchMutation();
   const [createColumnModal, setCreateColumnModal] = useState(false);
   const [toggle, setToggle] = useState(true);
   const [boardName, setBoardName] = useState(data?.title);

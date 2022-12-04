@@ -3,7 +3,7 @@ import { Button, Form, Modal } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import { ITaskResponse } from '../../models';
-import { usePutTaskWihoutRefetchMutation } from '../../store/api/taskApi';
+import { usePutTaskMutation } from '../../store/api/taskApi';
 import { Loader } from '../Loader/Loader';
 
 interface IEditTaskModalProps {
@@ -23,7 +23,7 @@ export const EditTaskModal = ({
 }: IEditTaskModalProps) => {
   const { t } = useTranslation();
   const { id: userId } = JSON.parse(localStorage.getItem('user') || '');
-  const [putTask, { isLoading }] = usePutTaskWihoutRefetchMutation();
+  const [putTask, { isLoading }] = usePutTaskMutation();
   const [inputName, setInputName] = useState('');
   const [inputDescription, setInputDescription] = useState('');
 
