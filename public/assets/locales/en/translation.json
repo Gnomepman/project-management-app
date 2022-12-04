@@ -19,7 +19,6 @@
     "min-length": "* minimum length - 4",
     "max-length": "* maximum length - 20",
     "submit": "Submit",
-    "logged": "Logged User",
     "reg-success": "You have successfully registered",
     "login-success": "You successfully logged in",
     "login-error": "Incorrectly entered data",
@@ -38,6 +37,12 @@
     "edit": "Edit",
     "edit-data": "Edit User data",
     "cancel": "Cancel"
+  },
+  "edit": {
+    "greeting": "Hello Dear Customer",
+    "support": "Thank you for signing up! Thank you for choosing our product. If you have any questions or problems signing in, please reach out.",
+    "help": "We are happy to assist.",
+    "logged": "You are logged in as User"
   },
   "wp": {
     "description": "The work management tool for happy collaboration",
