@@ -1,6 +1,7 @@
 import { Dispatch, SetStateAction, useState } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
 import { IBoardRes } from '../../models';
 import { usePutBoardMutation } from '../../store/api/boardApi';
 import { Loader } from '../Loader/Loader';
@@ -18,6 +19,13 @@ export const EditBoardModal = ({ setEditBoardModal, boardId }: IEditBoardModalPr
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
+
+    if (inputName.length < 4) {
+      toast.error(t('boards.min-length'), {
+        autoClose: 2000,
+      });
+      return;
+    }
 
     putBoard({
       boardId: boardId!,

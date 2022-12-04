@@ -5,6 +5,7 @@ import { IBoardRes } from '../../models';
 import { useTranslation } from 'react-i18next';
 import { usePostBoardsMutation } from '../../store/api/boardApi';
 import { Loader } from '../Loader/Loader';
+import { toast } from 'react-toastify';
 
 interface ICreateBoardModalProps {
   setCreateBoardModal: Dispatch<SetStateAction<boolean>>;
@@ -19,6 +20,13 @@ export const CreateBoardModal = ({ setCreateBoardModal }: ICreateBoardModalProps
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
+
+    if (inputName.length < 4) {
+      toast.error(t('boards.min-length'), {
+        autoClose: 2000,
+      });
+      return;
+    }
 
     const newBoard: IBoardRes = {
       title: inputName,

@@ -6,6 +6,7 @@ import { usePostColumnsMutation } from '../../store/api/columnApi';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
+import { toast } from 'react-toastify';
 
 interface ICreateColumnModalProps {
   setCreateColumnModal: Dispatch<SetStateAction<boolean>>;
@@ -21,6 +22,13 @@ export const CreateColumnModal = ({ setCreateColumnModal }: ICreateColumnModalPr
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
+
+    if (inputName.length < 4) {
+      toast.error(t('column.min-length'), {
+        autoClose: 2000,
+      });
+      return;
+    }
 
     await postColumn({
       boardId: id!,

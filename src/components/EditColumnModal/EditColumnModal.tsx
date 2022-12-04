@@ -1,6 +1,7 @@
 import { Dispatch, SetStateAction, useState } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
 import { IColumnRes } from '../../models';
 import { usePutColumnWithoutRefetchMutation } from '../../store/api/columnApi';
 import { Loader } from '../Loader/Loader';
@@ -24,6 +25,13 @@ export const EditColumnModal = ({
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
+
+    if (inputName.length < 4) {
+      toast.error(t('column.min-length'), {
+        autoClose: 2000,
+      });
+      return;
+    }
 
     putColumn({
       boardId: boardId,

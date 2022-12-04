@@ -22,6 +22,7 @@ import Back from '../../assets/images/icons/back.png';
 import Tick from '../../assets/images/icons/tick.png';
 import Cross from '../../assets/images/icons/cross.png';
 import { IBoardRes } from '../../models';
+import { toast } from 'react-toastify';
 
 export function Board() {
   const { t } = useTranslation();
@@ -46,6 +47,13 @@ export function Board() {
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setToggle(true);
+    if (boardName!.length < 4) {
+      toast.error(t('boards.min-length'), {
+        autoClose: 2000,
+      });
+      setBoardName(data?.title);
+      return;
+    }
     if (boardName === data?.title) {
       return;
     }

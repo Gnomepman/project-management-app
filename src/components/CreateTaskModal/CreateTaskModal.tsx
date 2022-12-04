@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import { ITaskRes } from '../../models';
 import { usePostTasksMutation } from '../../store/api/taskApi';
+import { toast } from 'react-toastify';
 
 interface ICreateTaskModalProps {
   setCreateTaskModal: Dispatch<SetStateAction<boolean>>;
@@ -26,6 +27,13 @@ export const CreateTaskModal = ({
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
+
+    if (inputTitle.length < 4 || inputDescription.length < 4) {
+      toast.error(t('column.min-length'), {
+        autoClose: 2000,
+      });
+      return;
+    }
 
     await postTask({
       boardId: id!,
