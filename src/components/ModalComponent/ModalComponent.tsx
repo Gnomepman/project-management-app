@@ -15,8 +15,7 @@ export const ModalComponent = ({ children, title, show, onHide }: IModalProps) =
       show={show}
       onHide={onHide}
       onClick={(e: React.MouseEvent<Element, MouseEvent>) => {
-        e.preventDefault();
-        e.nativeEvent.stopImmediatePropagation();
+        e.stopPropagation();
       }}
     >
       <div className="" />
