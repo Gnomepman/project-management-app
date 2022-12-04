@@ -23,7 +23,8 @@ export function Column(props: {
   const [createTaskModal, setCreateTaskModal] = useState(false);
   const { id: userId } = JSON.parse(localStorage.getItem('user') || '');
   const { t } = useTranslation();
-  const [check, setCheck] = useState(false);
+  // const [check, setCheck] = useState(false);
+  const [showColumnDeleteModal, setShowColumnDeleteModal] = useState(false);
 
   return (
     <>
@@ -46,9 +47,9 @@ export function Column(props: {
               </Button>
               <Button
                 variant="danger"
-                onClick={async () =>
-                  await delColumn({ boardId: props.boardId, columnId: props.column.id })
-                }
+                onClick={async () => {
+                  setShowColumnDeleteModal(true);
+                }}
                 className="action_button"
               >
                 <img src={Delete} alt="delete" />
@@ -112,11 +113,11 @@ export function Column(props: {
         )}
       </Draggable>
       <DeleteModal
-        description={t('auth.warning-task')}
-        title={t('auth.delete-task')}
-        check={check}
-        setCheck={setCheck}
-        handleDelete={() => console.log('delete')}
+        description={t('auth.warning-column')}
+        title={t('auth.delete-column')}
+        check={showColumnDeleteModal}
+        setCheck={setShowColumnDeleteModal}
+        handleDelete={() => delColumn({ boardId: props.boardId, columnId: props.column.id })}
       />
     </>
   );
