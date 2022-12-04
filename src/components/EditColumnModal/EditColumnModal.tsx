@@ -43,10 +43,10 @@ export const EditColumnModal = ({
       <Modal.Body>
         <Form onSubmit={handleSubmit}>
           <Form.Group>
-            <Form.Label>{t('boards.modal.form.title')}</Form.Label>
+            <Form.Label>{t('columns.modal.form.title')}</Form.Label>
             <Form.Control
               type="name"
-              placeholder={String(t('boards.modal.form.placeholder'))}
+              placeholder={String(t('columns.modal.form.placeholderEdit'))}
               value={inputName}
               onChange={(e) => setInputName(e.target.value)}
             />

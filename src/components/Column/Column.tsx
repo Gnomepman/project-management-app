@@ -127,7 +127,7 @@ export function Column(props: {
       />
       <ModalComponent
         show={editColumnModal}
-        title={t('boards.modal.editing')}
+        title={t('columns.editing')}
         onHide={() => setEditColumnModal(false)}
         setModal={setEditColumnModal}
       >
