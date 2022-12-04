@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { stringToColour } from '../../utils/colorFromString';
 import { IBoard } from '../../models';
 import { useDeleteBoardMutation } from '../../store/api/boardApi';
 import { Loader } from '../Loader/Loader';
+import Delete from '../../assets/images/icons/delete.png';
+import Edit from '../../assets/images/icons/edit.png';
+import { ModalComponent } from '../ModalComponent/ModalComponent';
+import { EditBoardModal } from '../EditBoardModal/EditBoardModal';
+import { t } from 'i18next';
 
 interface IBoardItemProps {
   item: IBoard;
@@ -12,39 +17,63 @@ interface IBoardItemProps {
 
 export const BoardItem = ({ item }: IBoardItemProps) => {
   const [deleteBoard, { isLoading }] = useDeleteBoardMutation();
+  const [editBoardModal, setEditBoardModal] = useState(false);
 
   if (isLoading) return <Loader />;
 
   return (
     <div key={item._id} className="col-xl-3 col-md-3 col-sm-4 col-6">
-      <div
-        className="board row rounded-3"
-        style={{
-          backgroundImage: `linear-gradient(110deg, ${stringToColour(item._id!)}, ${stringToColour(
-            item._id!.split('').reverse().join()
-          )}`,
-          opacity: 0.8,
-        }}
-      >
-        <div className="col-10">
-          <Link to={`/boards/${item._id}`}>
+      <Link to={`/boards/${item._id}`}>
+        <div
+          className="board row rounded-2"
+          style={{
+            backgroundImage: `linear-gradient(110deg, ${stringToColour(
+              item._id!
+            )}, ${stringToColour(item._id!.split('').reverse().join())}`,
+            opacity: 0.8,
+          }}
+        >
+          <div className="col-12 p-0">
             <div className="board-item">
-              <span className="board-name fw-semibold fs-5 text-white">
-                {item.title.length < 20 ? item.title : item.title.slice(0, 20).trimEnd() + '...'}
-              </span>
+              <div className="d-flex w-100 h-25p gap-1 board-item-wrapper p-2">
+                <div className="board-name fw-semibold fs-5 text-white">{item.title}</div>
+                <Button
+                  className="action_button"
+                  onClick={(e: React.MouseEvent<Element, MouseEvent>) => {
+                    setEditBoardModal(true);
+                    e.preventDefault();
+                    e.nativeEvent.stopImmediatePropagation();
+                  }}
+                >
+                  <img src={Edit} alt="edit" />
+                </Button>
+                <Button
+                  variant="danger"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.nativeEvent.stopImmediatePropagation();
+                    deleteBoard(item._id);
+                  }}
+                  className="action_button"
+                >
+                  <img src={Delete} alt="delete" />
+                </Button>
+              </div>
             </div>
-          </Link>
+            <ModalComponent
+              show={editBoardModal}
+              title={t('boards.modal.editing')}
+              onHide={() => setEditBoardModal(false)}
+              setModal={setEditBoardModal}
+            >
+              <EditBoardModal
+                setEditBoardModal={setEditBoardModal}
+                boardId={item._id}
+              ></EditBoardModal>
+            </ModalComponent>
+          </div>
         </div>
-        <div className="col-1">
-          <Button
-            className="delete_button"
-            variant="outline-dark"
-            onClick={() => deleteBoard(item._id)}
-          >
-            X
-          </Button>
-        </div>
-      </div>
+      </Link>
     </div>
   );
 };

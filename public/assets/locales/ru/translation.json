@@ -55,7 +55,8 @@
     "create": "Создать доску",
     "modal": {
       "creating": "Добавление новой доски",
-
+      "editing": "Изменения доски",
+      "confirm": "Изменить",
       "form": {
         "title": "Название доски",
         "placeholder": "Моя крутая доска"
@@ -71,5 +72,24 @@
         "placeholder": "Новая колонка"
       }
     }
+  },
+  "tasks": {
+    "create": "Добавить задание",
+    "modal": {
+      "creating": "Добавление задания",
+      "form": {
+        "title": "Название задания",
+        "titlePlaceholder": "Назовите своё задание",
+        "description": "Описание задания",
+        "descriptionPlaceholder": "Опишите своё задание"
+      }
+    }
+  },
+  "board": {
+    "back": "Назад",
+    "dropPlaceholder": "Перетени сюда",
+    "taskCreation": "Добавить задание",
+    "columnCreation": "Добавить колонку",
+    "editName": "Новое название доски"
   }
 }

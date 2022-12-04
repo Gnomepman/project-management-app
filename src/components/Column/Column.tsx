@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Draggable, Droppable, DroppableProvided } from 'react-beautiful-dnd';
 import { Button } from 'react-bootstrap';
-import { ITaskRes } from '../../models';
 import { useDeleteColumnMutation } from '../../store/api/columnApi';
-import { usePostTasksMutation } from '../../store/api/taskApi';
 import { column, task } from '../../models/initial';
 import { Task } from '../Task/Task';
 import './Column.scss';
+import { ModalComponent } from '../ModalComponent/ModalComponent';
+import { CreateTaskModal } from '../CreateTaskModal/CreateTaskModal';
+import { useTranslation } from 'react-i18next';
+import Delete from '../../assets/images/icons/delete.png';
+import Edit from '../../assets/images/icons/edit.png';
 
 export function Column(props: {
   provided?: DroppableProvided;
@@ -16,8 +19,9 @@ export function Column(props: {
   boardId: string;
 }) {
   const [delColumn] = useDeleteColumnMutation();
-  const [postTask] = usePostTasksMutation();
-  // const { id: userId } = JSON.parse(localStorage.getItem('user') || '');
+  const [createTaskModal, setCreateTaskModal] = useState(false);
+  const { id: userId } = JSON.parse(localStorage.getItem('user') || '');
+  const { t } = useTranslation();
 
   return (
     <>
@@ -35,13 +39,17 @@ export function Column(props: {
           >
             <div className="column_header" {...provided.dragHandleProps}>
               <span>{props.column.title}</span>
+              <Button className="action_button" onClick={() => alert('Todo: edit column')}>
+                <img src={Edit} alt="edit" />
+              </Button>
               <Button
                 variant="danger"
                 onClick={async () =>
                   await delColumn({ boardId: props.boardId, columnId: props.column.id })
                 }
+                className="action_button"
               >
-                X
+                <img src={Delete} alt="delete" />
               </Button>
             </div>
             <Droppable droppableId={props.column.id} type="task">
@@ -72,7 +80,7 @@ export function Column(props: {
                           borderRadius: '4px',
                         }}
                       >
-                        Drop here
+                        {t('board.dropPlaceholder')}
                       </div>
                     )}
                     {provided.placeholder}
@@ -81,24 +89,22 @@ export function Column(props: {
               )}
             </Droppable>
             <div className="column_footer">
-              <Button
-                variant="outline-primary"
-                onClick={async () => {
-                  await postTask({
-                    boardId: props.boardId,
-                    columnId: props.column.id,
-                    payload: {
-                      title: 'Column zero',
-                      order: props.column.taskIds.length + 1,
-                      description: 'Task 3',
-                      userId: 0,
-                      users: ['636d6464c02777e984c57dc1'],
-                    } as ITaskRes,
-                  });
-                }}
-              >
-                Add task
+              <Button variant="outline-primary" onClick={() => setCreateTaskModal(true)}>
+                {t('board.taskCreation')}
               </Button>
+              <ModalComponent
+                show={createTaskModal}
+                title={t('tasks.modal.creating')}
+                onHide={() => setCreateTaskModal(false)}
+                setModal={setCreateTaskModal}
+              >
+                <CreateTaskModal
+                  setCreateTaskModal={setCreateTaskModal}
+                  columnId={props.column.id}
+                  order={props.column.taskIds.length + 1}
+                  userId={userId}
+                />
+              </ModalComponent>
             </div>
           </div>
         )}

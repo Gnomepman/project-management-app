@@ -44,7 +44,7 @@ export const CreateBoardModal = ({ setCreateBoardModal }: ICreateBoardModalProps
             onChange={(e) => setInputName(e.target.value)}
           />
         </Form.Group>
-        <Modal.Footer>
+        <Modal.Footer style={{ paddingRight: '0px' }}>
           <Button variant="primary" onClick={() => setCreateBoardModal(false)} type="submit">
             {t('modal.create')}
           </Button>

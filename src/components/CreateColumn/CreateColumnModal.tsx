@@ -43,7 +43,7 @@ export const CreateColumnModal = ({ setCreateColumnModal }: ICreateColumnModalPr
             onChange={(e) => setInputName(e.target.value)}
           />
         </Form.Group>
-        <Modal.Footer>
+        <Modal.Footer style={{ paddingRight: '0px' }}>
           <Button variant="primary" onClick={() => setCreateColumnModal(false)} type="submit">
             {t('modal.create')}
           </Button>

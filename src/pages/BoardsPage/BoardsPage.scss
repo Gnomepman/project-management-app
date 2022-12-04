@@ -1,15 +1,29 @@
 .board {
-  box-shadow: rgba(0, 0, 0, 0.25) 0 25 50 -12;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
   margin: 4px 0;
-  height: 100px;
+  height: 120px;
 
-  .board-name {
-    text-overflow: ellipsis;
+  &:hover{
+    transform: scale(1.01);
   }
 }
 
 .board-item {
-  height: 100px;
+  display: flex;
+
+  &-wrapper{
+    .board-name {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      width: 100%;
+    }
+
+    button{
+      width: 35px;
+      height: 35px;
+    }
+  }
 }
 
 .delete_button {
@@ -21,4 +35,15 @@
   justify-content: center;
   border: none;
   opacity: 0.9;
+}
+
+.action_button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    height: 25px;
+    filter: invert(100%) sepia(95%) saturate(0%) hue-rotate(131deg) brightness(105%) contrast(105%);
+  }
 }
