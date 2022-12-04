@@ -18,8 +18,6 @@ export const EditProfilePage = () => {
 
   const { data, isLoading } = useGetUserByIdQuery(id);
 
-  if (isLoading) return <Loader />;
-
   return (
     <>
       <div className="app-container">
@@ -30,29 +28,32 @@ export const EditProfilePage = () => {
               <p className="lead">{t('edit.support')}</p>
               <p className="lead">{t('edit.help')}</p>
             </section>
-            <div className="mt-5">
-              <h5 className="py-3">{t('edit.logged')}:</h5>
-              <p className="pb-1">
-                <b className="text-secondary">{t('auth.name')}:</b> {data?.name}
-              </p>
-              <p className="pb-1">
-                <b className="text-secondary">{t('auth.login')}:</b> {data?.login}
-              </p>
+            {isLoading && <Loader />}
+            {data && (
+              <section className="mt-5">
+                <h5 className="py-3">{t('edit.logged')}:</h5>
+                <p className="pb-1">
+                  <b className="text-secondary">{t('auth.name')}:</b> {data?.name}
+                </p>
+                <p className="pb-1">
+                  <b className="text-secondary">{t('auth.login')}:</b> {data?.login}
+                </p>
 
-              <Button
-                variant="primary"
-                style={{ marginRight: '15px' }}
-                onClick={() => {
-                  setEditModal(true);
-                }}
-              >
-                {t('auth.edit-user')}
-              </Button>
+                <Button
+                  variant="primary"
+                  style={{ marginRight: '15px' }}
+                  onClick={() => {
+                    setEditModal(true);
+                  }}
+                >
+                  {t('auth.edit-user')}
+                </Button>
 
-              <Button variant="danger" onClick={() => setDeleteModal(true)}>
-                {t('auth.delete-user')}
-              </Button>
-            </div>
+                <Button variant="danger" onClick={() => setDeleteModal(true)}>
+                  {t('auth.delete-user')}
+                </Button>
+              </section>
+            )}
           </article>
         </div>
       </div>
