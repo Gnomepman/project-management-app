@@ -8,6 +8,8 @@ import { useState } from 'react';
 import { DeleteModal } from '../DeleteModal/DeleteModal';
 import { useTranslation } from 'react-i18next';
 import { useDeleteTaskMutation } from '../../store/api/taskApi';
+import { ModalComponent } from '../ModalComponent/ModalComponent';
+import { EditTaskModal } from '../EditTaskModal/EditTaskModal';
 
 export function Task(props: {
   provided?: DraggableProvided;
@@ -21,6 +23,7 @@ export function Task(props: {
   const [isHoveringOverTask, setIsHoveringOverTask] = useState(false);
   const [showTaskDeleteModal, setShowTaskDeleteModal] = useState(false);
   const [deleteTask] = useDeleteTaskMutation();
+  const [editTaskModal, setEditTaskModal] = useState(false);
 
   const handleMouseOver = () => {
     setIsHoveringOverTask(true);
@@ -63,7 +66,7 @@ export function Task(props: {
                   <>
                     <Button
                       className="action_button"
-                      onClick={() => alert('Todo: edit task')}
+                      onClick={() => setEditTaskModal(true)}
                       variant="outline-primary"
                     >
                       <img src={Edit} alt="edit" />
@@ -96,6 +99,20 @@ export function Task(props: {
           deleteTask({ boardId: props.boardId, columnId: props.columnId, taskId: props.task.id })
         }
       />
+      <ModalComponent
+        show={editTaskModal}
+        title={t('boards.modal.editing')}
+        onHide={() => setEditTaskModal(false)}
+        setModal={setEditTaskModal}
+      >
+        <EditTaskModal
+          setEditTaskModal={setEditTaskModal}
+          boardId={props.boardId}
+          columnId={props.columnId}
+          order={props.index}
+          taskId={props.task.id}
+        ></EditTaskModal>
+      </ModalComponent>
     </>
   );
 }
