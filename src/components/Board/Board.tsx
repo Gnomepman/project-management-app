@@ -8,9 +8,12 @@ import { Button, Form } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import { useBoardActions } from '../../hooks/actions';
-import { useGetTaskSetByBoardQuery, usePutTaskMutation } from '../../store/api/taskApi';
+import {
+  useGetTaskSetByBoardQuery,
+  usePutTaskWihoutRefetchMutation,
+} from '../../store/api/taskApi';
 import { useGetBoardByIdQuery, usePutBoardMutation } from '../../store/api/boardApi';
-import { usePutColumnMutation } from '../../store/api/columnApi';
+import { usePutColumnWithoutRefetchMutation } from '../../store/api/columnApi';
 import './Boards.scss';
 import { translateDataFromApiToStateObject } from '../../utils/translateDataFromApiToStateObject';
 import { onDragEnd } from '../../utils/onDragEnd';
@@ -22,6 +25,7 @@ import Back from '../../assets/images/icons/back.png';
 import Tick from '../../assets/images/icons/tick.png';
 import Cross from '../../assets/images/icons/cross.png';
 import { IBoardRes } from '../../models';
+import { toast } from 'react-toastify';
 
 export function Board() {
   const { t } = useTranslation();
@@ -31,8 +35,8 @@ export function Board() {
   const { data: columns, isLoading } = useGetColumnsQuery(id!);
   const { data: tasks } = useGetTaskSetByBoardQuery(id!);
   const { data } = useGetBoardByIdQuery(id!);
-  const [putColumn] = usePutColumnMutation();
-  const [putTask] = usePutTaskMutation();
+  const [putColumn] = usePutColumnWithoutRefetchMutation();
+  const [putTask] = usePutTaskWihoutRefetchMutation();
   const [createColumnModal, setCreateColumnModal] = useState(false);
   const [toggle, setToggle] = useState(true);
   const [boardName, setBoardName] = useState(data?.title);
@@ -46,6 +50,13 @@ export function Board() {
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setToggle(true);
+    if (boardName!.length < 4) {
+      toast.error(t('boards.min-length'), {
+        autoClose: 2000,
+      });
+      setBoardName(data?.title);
+      return;
+    }
     if (boardName === data?.title) {
       return;
     }

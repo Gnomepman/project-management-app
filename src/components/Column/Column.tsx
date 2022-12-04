@@ -11,6 +11,7 @@ import { useTranslation } from 'react-i18next';
 import Delete from '../../assets/images/icons/delete.png';
 import Edit from '../../assets/images/icons/edit.png';
 import { DeleteModal } from '../DeleteModal/DeleteModal';
+import { EditColumnModal } from '../EditColumnModal/EditColumnModal';
 
 export function Column(props: {
   provided?: DroppableProvided;
@@ -21,9 +22,10 @@ export function Column(props: {
 }) {
   const [delColumn] = useDeleteColumnMutation();
   const [createTaskModal, setCreateTaskModal] = useState(false);
+  const [editColumnModal, setEditColumnModal] = useState(false);
   const { id: userId } = JSON.parse(localStorage.getItem('user') || '');
   const { t } = useTranslation();
-  const [check, setCheck] = useState(false);
+  const [showColumnDeleteModal, setShowColumnDeleteModal] = useState(false);
 
   return (
     <>
@@ -41,14 +43,14 @@ export function Column(props: {
           >
             <div className="column_header" {...provided.dragHandleProps}>
               <span>{props.column.title}</span>
-              <Button className="action_button" onClick={() => alert('Todo: edit column')}>
+              <Button className="action_button" onClick={() => setEditColumnModal(true)}>
                 <img src={Edit} alt="edit" />
               </Button>
               <Button
                 variant="danger"
-                onClick={async () =>
-                  await delColumn({ boardId: props.boardId, columnId: props.column.id })
-                }
+                onClick={async () => {
+                  setShowColumnDeleteModal(true);
+                }}
                 className="action_button"
               >
                 <img src={Delete} alt="delete" />
@@ -69,7 +71,12 @@ export function Column(props: {
                 >
                   <>
                     {props.tasks.length !== 0 ? (
-                      <InnerListColumn tasks={props.tasks} key={props.column.id} />
+                      <InnerListColumn
+                        tasks={props.tasks}
+                        key={props.column.id}
+                        boardId={props.boardId}
+                        columnId={props.column.id}
+                      />
                     ) : (
                       <div
                         style={{
@@ -112,21 +119,40 @@ export function Column(props: {
         )}
       </Draggable>
       <DeleteModal
-        description={t('auth.warning-task')}
-        title={t('auth.delete-task')}
-        check={check}
-        setCheck={setCheck}
-        handleDelete={() => console.log('delete')}
+        description={t('columns.modal.warning')}
+        title={t('columns.modal.deleting')}
+        check={showColumnDeleteModal}
+        setCheck={setShowColumnDeleteModal}
+        handleDelete={() => delColumn({ boardId: props.boardId, columnId: props.column.id })}
       />
+      <ModalComponent
+        show={editColumnModal}
+        title={t('columns.modal.editing')}
+        onHide={() => setEditColumnModal(false)}
+        setModal={setEditColumnModal}
+      >
+        <EditColumnModal
+          setEditColumnModal={setEditColumnModal}
+          boardId={props.boardId}
+          columnId={props.column.id}
+          order={props.index}
+        ></EditColumnModal>
+      </ModalComponent>
     </>
   );
 }
 
-const InnerListColumn = (props: { tasks: task[] }) => {
+const InnerListColumn = (props: { tasks: task[]; boardId: string; columnId: string }) => {
   return (
     <>
       {props.tasks.map((task, index) => (
-        <Task key={task.id} task={task} index={index} />
+        <Task
+          key={task.id}
+          task={task}
+          index={index}
+          boardId={props.boardId}
+          columnId={props.columnId}
+        />
       ))}
     </>
   );

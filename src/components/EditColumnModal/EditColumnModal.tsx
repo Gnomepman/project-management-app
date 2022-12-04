@@ -2,34 +2,44 @@ import { Dispatch, SetStateAction, useState } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
-import { IBoardRes } from '../../models';
-import { usePutBoardMutation } from '../../store/api/boardApi';
+import { IColumnRes } from '../../models';
+import { usePutColumnMutation } from '../../store/api/columnApi';
 import { Loader } from '../Loader/Loader';
 
-interface IEditBoardModalProps {
-  setEditBoardModal: Dispatch<SetStateAction<boolean>>;
+interface IEditColumnModalProps {
+  setEditColumnModal: Dispatch<SetStateAction<boolean>>;
   boardId: string;
+  columnId: string;
+  order: number;
 }
 
-export const EditBoardModal = ({ setEditBoardModal, boardId }: IEditBoardModalProps) => {
+export const EditColumnModal = ({
+  setEditColumnModal,
+  boardId,
+  columnId,
+  order,
+}: IEditColumnModalProps) => {
   const { t } = useTranslation();
-  const { id: userId } = JSON.parse(localStorage.getItem('user') || '');
-  const [putBoard, { isLoading }] = usePutBoardMutation();
+  const [putColumn, { isLoading }] = usePutColumnMutation();
   const [inputName, setInputName] = useState('');
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
 
     if (inputName.length < 4) {
-      toast.error(t('boards.min-length'), {
+      toast.error(t('column.min-length'), {
         autoClose: 2000,
       });
       return;
     }
 
-    putBoard({
-      boardId: boardId!,
-      payload: { title: inputName, owner: userId, users: [userId] } as IBoardRes,
+    putColumn({
+      boardId: boardId,
+      columnId: columnId,
+      payload: {
+        title: inputName,
+        order: order,
+      } as IColumnRes,
     });
     setInputName('');
   };
@@ -41,10 +51,10 @@ export const EditBoardModal = ({ setEditBoardModal, boardId }: IEditBoardModalPr
       <Modal.Body>
         <Form onSubmit={handleSubmit}>
           <Form.Group>
-            <Form.Label>{t('boards.modal.form.title')}</Form.Label>
+            <Form.Label>{t('columns.modal.form.title')}</Form.Label>
             <Form.Control
               type="name"
-              placeholder={String(t('boards.modal.form.placeholder'))}
+              placeholder={String(t('columns.modal.form.placeholderEdit'))}
               value={inputName}
               onChange={(e) => setInputName(e.target.value)}
             />
@@ -54,13 +64,13 @@ export const EditBoardModal = ({ setEditBoardModal, boardId }: IEditBoardModalPr
               variant="primary"
               onClick={(e) => {
                 handleSubmit(e);
-                setEditBoardModal(false);
+                setEditColumnModal(false);
               }}
               type="submit"
             >
               {t('boards.modal.confirm')}
             </Button>
-            <Button variant="danger" onClick={() => setEditBoardModal(false)}>
+            <Button variant="danger" onClick={() => setEditColumnModal(false)}>
               {t('modal.close')}
             </Button>
           </Modal.Footer>

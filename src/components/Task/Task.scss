@@ -6,4 +6,16 @@
   border-radius: 5px;
   user-select: none;
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+
+  &_header{
+    display: flex;
+    gap: 5px;
+    span{
+      width: 100%;
+    }
+    button{
+      width: 28px;
+      height: 28px;
+    }
+  }
 }

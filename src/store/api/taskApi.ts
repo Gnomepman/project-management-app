@@ -59,7 +59,23 @@ export const taskApi = createApi({
           },
         };
       },
-      // invalidatesTags: ['Task'],
+      invalidatesTags: ['Task'],
+    }),
+
+    putTaskWihoutRefetch: build.mutation<
+      ITaskResponse,
+      { boardId: string; columnId: string; taskId: string; payload: ITaskRes }
+    >({
+      query({ boardId, columnId, taskId, payload }) {
+        return {
+          url: `boards/${boardId}/columns/${columnId}/tasks/${taskId}`,
+          method: 'PUT',
+          body: payload,
+          query: {
+            id: boardId,
+          },
+        };
+      },
     }),
 
     deleteTask: build.mutation<ITask, Record<string, string>>({
@@ -105,4 +121,5 @@ export const {
   useGetTaskSetQuery,
   usePatchTaskSetMutation,
   useGetTaskSetByBoardQuery,
+  usePutTaskWihoutRefetchMutation,
 } = taskApi;

@@ -19,7 +19,7 @@ interface IBoardItemProps {
 export const BoardItem = ({ item }: IBoardItemProps) => {
   const [deleteBoard, { isLoading }] = useDeleteBoardMutation();
   const [editBoardModal, setEditBoardModal] = useState(false);
-  const [check, setCheck] = useState(false);
+  const [showBoardDeleteModal, setShowBoardDeleteModal] = useState(false);
 
   if (isLoading) return <Loader />;
 
@@ -54,7 +54,7 @@ export const BoardItem = ({ item }: IBoardItemProps) => {
                   onClick={(e) => {
                     e.preventDefault();
                     e.nativeEvent.stopImmediatePropagation();
-                    deleteBoard(item._id);
+                    setShowBoardDeleteModal(true);
                   }}
                   className="action_button"
                 >
@@ -77,11 +77,11 @@ export const BoardItem = ({ item }: IBoardItemProps) => {
         </div>
       </Link>
       <DeleteModal
-        description={t('auth.warning-board')}
-        title={t('auth.delete-board')}
-        check={check}
-        setCheck={setCheck}
-        handleDelete={() => console.log('delete')}
+        description={t('boards.modal.warning')}
+        title={t('boards.modal.deleting')}
+        check={showBoardDeleteModal}
+        setCheck={setShowBoardDeleteModal}
+        handleDelete={() => deleteBoard(item._id)}
       />
     </div>
   );
