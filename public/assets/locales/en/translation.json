@@ -1,4 +1,5 @@
 {
+  "title": "PM Guru",
   "error-main": "Oops! Page not found.",
   "error-description": "The page you’re looking for doesn’t exist.",
   "error-button": "Go Home",
@@ -41,7 +42,7 @@
   "wp": {
     "description": "The work management tool for happy collaboration",
     "button": "Try it now",
-    "created": "Created with"
+    "created": "Application created with the most appropriate technology for Web Development"
   },
   "footer": {
     "created": "Created in",
