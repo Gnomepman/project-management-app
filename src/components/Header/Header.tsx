@@ -9,6 +9,7 @@ import { NavLink } from 'react-router-dom';
 
 export function Header() {
   const [navBackground, setNavBackground] = useState(false);
+
   const navRef = useRef();
 
   useEffect(() => {
@@ -57,8 +58,12 @@ export function Header() {
           </NavDropdown>
         </Navbar.Collapse>
         <NavLink className="mr-10 px-2 d-none d-sm-block" to="/test">
-          <Button variant="danger"> Test</Button>
+          <Button variant="danger">Snow</Button>
         </NavLink>
+
+        {/*<Button variant="danger" onClick={() => setShowSnowfall(false)}>*/}
+        {/*  Test*/}
+        {/*</Button>*/}
         <AuthSection />
       </div>
     </Navbar>
