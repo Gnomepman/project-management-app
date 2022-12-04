@@ -11,7 +11,7 @@ export const languages = [
   },
   {
     code: 'bel',
-    name: 'Беларускі',
+    name: 'Беларуская',
     className: 'flag-united-kingdom flag',
   },
   {
