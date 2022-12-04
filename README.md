@@ -17,13 +17,13 @@ git clone https://github.com/Gnomepman/project-management-app.git
 ## Installing NPM modules
 
 ```
+git checkout develop
 npm install
 ```
 
 ## Running application
 
 ```
-git checkout develop
 npm start
 ```
 
