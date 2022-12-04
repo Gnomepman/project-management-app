@@ -9,4 +9,14 @@ export const languages = [
     name: 'English',
     className: 'flag-united-kingdom flag',
   },
+  {
+    code: 'bel',
+    name: 'Беларускі',
+    className: 'flag-united-kingdom flag',
+  },
+  {
+    code: 'uk',
+    name: 'україський',
+    className: 'flag-united-kingdom flag',
+  },
 ];
