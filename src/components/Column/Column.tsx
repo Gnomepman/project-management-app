@@ -23,7 +23,6 @@ export function Column(props: {
   const [createTaskModal, setCreateTaskModal] = useState(false);
   const { id: userId } = JSON.parse(localStorage.getItem('user') || '');
   const { t } = useTranslation();
-  // const [check, setCheck] = useState(false);
   const [showColumnDeleteModal, setShowColumnDeleteModal] = useState(false);
 
   return (
@@ -70,7 +69,12 @@ export function Column(props: {
                 >
                   <>
                     {props.tasks.length !== 0 ? (
-                      <InnerListColumn tasks={props.tasks} key={props.column.id} />
+                      <InnerListColumn
+                        tasks={props.tasks}
+                        key={props.column.id}
+                        boardId={props.boardId}
+                        columnId={props.column.id}
+                      />
                     ) : (
                       <div
                         style={{
@@ -123,11 +127,17 @@ export function Column(props: {
   );
 }
 
-const InnerListColumn = (props: { tasks: task[] }) => {
+const InnerListColumn = (props: { tasks: task[]; boardId: string; columnId: string }) => {
   return (
     <>
       {props.tasks.map((task, index) => (
-        <Task key={task.id} task={task} index={index} />
+        <Task
+          key={task.id}
+          task={task}
+          index={index}
+          boardId={props.boardId}
+          columnId={props.columnId}
+        />
       ))}
     </>
   );
