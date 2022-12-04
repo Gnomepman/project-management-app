@@ -59,7 +59,6 @@ export const taskApi = createApi({
           },
         };
       },
-      // invalidatesTags: ['Task'],
     }),
 
     putTaskWihoutRefetch: build.mutation<
