@@ -39,16 +39,13 @@ export const AuthSection = () => {
         <>
           <Navbar>
             <NavLink className="mr-10 px-2" to="/boards">
-              <Button
-                variant="outline-danger btn-overflow"
-                onClick={() => setCreateBoardModal(true)}
-              >
+              <Button variant="secondary btn-overflow" onClick={() => setCreateBoardModal(true)}>
                 {t('auth.add-boards')}
               </Button>
             </NavLink>
 
             <NavLink className="px-2 lh-sm" to="/">
-              <Button variant="outline-danger btn-overflow"> {t('auth.to-main-page')}</Button>
+              <Button variant="secondary btn-overflow"> {t('auth.to-main-page')}</Button>
             </NavLink>
 
             <NavLink className="px-2" to="/edit-profile">
