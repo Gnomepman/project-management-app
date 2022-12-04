@@ -22,28 +22,39 @@ export const EditProfilePage = () => {
 
   return (
     <>
-      <div className="app-container py-3">
-        <h5 className="py-3">{t('auth.logged')}:</h5>
-        <p>
-          <b className="text-secondary">{t('auth.name')}:</b> {data?.name}
-        </p>
-        <p>
-          <b className="text-secondary">{t('auth.login')}:</b> {data?.login}
-        </p>
+      <div className="app-container">
+        <div className="row d-flex pt-5 justify-content-center">
+          <article className="col-md-6 text-center">
+            <section className="text-center">
+              <h4>{t('edit.greeting')}!</h4>
+              <p className="lead">{t('edit.support')}</p>
+              <p className="lead">{t('edit.help')}</p>
+            </section>
+            <div className="mt-5">
+              <h5 className="py-3">{t('edit.logged')}:</h5>
+              <p className="pb-1">
+                <b className="text-secondary">{t('auth.name')}:</b> {data?.name}
+              </p>
+              <p className="pb-1">
+                <b className="text-secondary">{t('auth.login')}:</b> {data?.login}
+              </p>
 
-        <Button
-          variant="primary"
-          style={{ marginRight: '15px' }}
-          onClick={() => {
-            setEditModal(true);
-          }}
-        >
-          {t('auth.edit-user')}
-        </Button>
+              <Button
+                variant="primary"
+                style={{ marginRight: '15px' }}
+                onClick={() => {
+                  setEditModal(true);
+                }}
+              >
+                {t('auth.edit-user')}
+              </Button>
 
-        <Button variant="danger" onClick={() => setDeleteModal(true)}>
-          {t('auth.delete-user')}
-        </Button>
+              <Button variant="danger" onClick={() => setDeleteModal(true)}>
+                {t('auth.delete-user')}
+              </Button>
+            </div>
+          </article>
+        </div>
       </div>
 
       <ModalComponent
