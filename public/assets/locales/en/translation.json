@@ -53,6 +53,7 @@
   },
   "boards": {
     "create": "Create new board",
+    "min-length": "Minimum length - 4",
     "modal": {
       "creating": "Creating new board",
       "editing": "Editing board",
@@ -67,6 +68,7 @@
   },
   "columns": {
     "create": "Create new column",
+    "min-length": "Minimum length - 4",
     "modal": {
       "creating": "Creating new column",
       "editing": "Editing column",
@@ -81,6 +83,7 @@
   },
   "tasks": {
     "create": "Add task",
+    "min-length": "Minimum length - 4",
     "modal": {
       "creating": "Creating new task",
       "editing": "Editing task",
