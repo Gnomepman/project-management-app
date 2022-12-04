@@ -62,20 +62,17 @@ export const BoardItem = ({ item }: IBoardItemProps) => {
                 </Button>
               </div>
             </div>
-            <ModalComponent
-              show={editBoardModal}
-              title={t('boards.modal.editing')}
-              onHide={() => setEditBoardModal(false)}
-              setModal={setEditBoardModal}
-            >
-              <EditBoardModal
-                setEditBoardModal={setEditBoardModal}
-                boardId={item._id}
-              ></EditBoardModal>
-            </ModalComponent>
           </div>
         </div>
       </Link>
+      <ModalComponent
+        show={editBoardModal}
+        title={t('boards.modal.editing')}
+        onHide={() => setEditBoardModal(false)}
+        setModal={setEditBoardModal}
+      >
+        <EditBoardModal setEditBoardModal={setEditBoardModal} boardId={item._id}></EditBoardModal>
+      </ModalComponent>
       <DeleteModal
         description={t('boards.modal.warning')}
         title={t('boards.modal.deleting')}
