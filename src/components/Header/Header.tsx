@@ -1,11 +1,12 @@
 import { changeLanguage } from 'i18next';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import { Button, Navbar } from 'react-bootstrap';
+import { Button, Form, Navbar } from 'react-bootstrap';
 import Logo from '../../assets/images/pm-logo.png';
 import { languages } from '../../utils/languages';
 import { AuthSection } from '../AuthSection/AuthSection';
 import React, { useEffect, useRef, useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import '../Header/Header.scss';
 
 export function Header() {
   const [navBackground, setNavBackground] = useState(false);
@@ -34,6 +35,17 @@ export function Header() {
     >
       <div className="container-xxl">
         <Navbar.Collapse>
+          <div className="toggle-button-cover">
+            <div className="button-cover" onClick={() => console.log('123')}>
+              <div className="button b2" id="button-11">
+                <input type="checkbox" className="checkbox" />
+                <div className="knobs">
+                  <span></span>
+                </div>
+                <div className="layer"></div>
+              </div>
+            </div>
+          </div>
           <NavLink to="/">
             <img
               src={Logo}
