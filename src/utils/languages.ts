@@ -1,12 +1,18 @@
 export const languages = [
   {
-    code: 'ru',
-    name: 'Русский',
-    className: 'flag-russia flag',
-  },
-  {
     code: 'en',
     name: 'English',
-    className: 'flag-united-kingdom flag',
+  },
+  {
+    code: 'ru',
+    name: 'Русский',
+  },
+  {
+    code: 'ua',
+    name: 'Українська',
+  },
+  {
+    code: 'by',
+    name: 'Беларуская',
   },
 ];
