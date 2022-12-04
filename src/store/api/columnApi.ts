@@ -57,6 +57,22 @@ export const columnApi = createApi({
       invalidatesTags: ['Column'],
     }),
 
+    putColumnWithoutRefetch: build.mutation<
+      IColumn,
+      { boardId: string; columnId: string; payload: IColumnRes }
+    >({
+      query({ boardId, columnId, payload }) {
+        return {
+          url: `boards/${boardId}/columns/${columnId}`,
+          method: 'PUT',
+          body: payload,
+          query: {
+            id: boardId,
+          },
+        };
+      },
+    }),
+
     deleteColumn: build.mutation<IColumn, Record<string, string>>({
       query: ({ boardId, columnId }) => ({
         url: `boards/${boardId}/columns/${columnId}`,
@@ -94,4 +110,5 @@ export const {
   useDeleteColumnMutation,
   useGetColumnSetQuery,
   useGetColumnSetByIdQuery,
+  usePutColumnWithoutRefetchMutation,
 } = columnApi;
