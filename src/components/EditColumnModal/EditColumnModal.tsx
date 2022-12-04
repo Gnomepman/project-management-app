@@ -9,12 +9,14 @@ interface IEditColumnModalProps {
   setEditColumnModal: Dispatch<SetStateAction<boolean>>;
   boardId: string;
   columnId: string;
+  order: number;
 }
 
 export const EditColumnModal = ({
   setEditColumnModal,
   boardId,
   columnId,
+  order,
 }: IEditColumnModalProps) => {
   const { t } = useTranslation();
   const [putColumn, { isLoading }] = usePutColumnMutation();
@@ -28,7 +30,7 @@ export const EditColumnModal = ({
       columnId: columnId,
       payload: {
         title: inputName,
-        order: 0,
+        order: order,
       } as IColumnRes,
     });
     setInputName('');
