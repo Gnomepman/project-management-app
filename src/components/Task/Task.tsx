@@ -91,8 +91,8 @@ export function Task(props: {
         )}
       </Draggable>
       <DeleteModal
-        description={t('auth.warning-task')}
-        title={t('auth.delete-task')}
+        description={t('tasks.modal.warning')}
+        title={t('tasks.modal.deleting')}
         check={showTaskDeleteModal}
         setCheck={setShowTaskDeleteModal}
         handleDelete={() =>
@@ -101,7 +101,7 @@ export function Task(props: {
       />
       <ModalComponent
         show={editTaskModal}
-        title={t('boards.modal.editing')}
+        title={t('tasks.modal.editing')}
         onHide={() => setEditTaskModal(false)}
         setModal={setEditTaskModal}
       >

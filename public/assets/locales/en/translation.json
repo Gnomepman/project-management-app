@@ -56,6 +56,8 @@
     "modal": {
       "creating": "Creating new board",
       "editing": "Editing board",
+      "deleting": "Deleting board",
+      "warning": "Are you sure you want to delete board?",
       "confirm": "Edit",
       "form": {
         "title": "Board name",
@@ -67,9 +69,13 @@
     "create": "Create new column",
     "modal": {
       "creating": "Creating new column",
+      "editing": "Editing column",
+      "deleting": "Deleting column",
+      "warning": "Are you sure you want to delete column?",
       "form": {
         "title": "Column name",
-        "placeholder": "New column"
+        "placeholder": "New column",
+        "placeholderEdit": "New column name"
       }
     }
   },
@@ -77,10 +83,15 @@
     "create": "Add task",
     "modal": {
       "creating": "Creating new task",
+      "editing": "Editing task",
+      "deleting": "Deleting task",
+      "warning": "Are you sure you want to delete task?",
       "form": {
         "title": "Task name",
+        "titleEdit": "New task name",
         "titlePlaceholder": "Give your task a name",
         "description": "Task description",
+        "descriptionEdit": "New task description",
         "descriptionPlaceholder": "Give your task a description"
       }
     }

@@ -119,15 +119,15 @@ export function Column(props: {
         )}
       </Draggable>
       <DeleteModal
-        description={t('auth.warning-column')}
-        title={t('auth.delete-column')}
+        description={t('columns.modal.warning')}
+        title={t('columns.modal.deleting')}
         check={showColumnDeleteModal}
         setCheck={setShowColumnDeleteModal}
         handleDelete={() => delColumn({ boardId: props.boardId, columnId: props.column.id })}
       />
       <ModalComponent
         show={editColumnModal}
-        title={t('columns.editing')}
+        title={t('columns.modal.editing')}
         onHide={() => setEditColumnModal(false)}
         setModal={setEditColumnModal}
       >

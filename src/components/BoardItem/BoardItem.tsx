@@ -77,8 +77,8 @@ export const BoardItem = ({ item }: IBoardItemProps) => {
         </div>
       </Link>
       <DeleteModal
-        description={t('auth.warning-board')}
-        title={t('auth.delete-board')}
+        description={t('boards.modal.warning')}
+        title={t('boards.modal.deleting')}
         check={showBoardDeleteModal}
         setCheck={setShowBoardDeleteModal}
         handleDelete={() => deleteBoard(item._id)}

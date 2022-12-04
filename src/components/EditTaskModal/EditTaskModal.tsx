@@ -53,19 +53,19 @@ export const EditTaskModal = ({
       <Modal.Body>
         <Form onSubmit={handleSubmit}>
           <Form.Group>
-            <Form.Label>{t('tasks.modal.form.title')}</Form.Label>
+            <Form.Label>{t('tasks.modal.form.titleEdit')}</Form.Label>
             <Form.Control
               type="name"
-              placeholder={String(t('tasks.modal.form.placeholder'))}
+              placeholder={String(t('tasks.modal.form.titlePlaceholder'))}
               value={inputName}
               onChange={(e) => setInputName(e.target.value)}
             />
           </Form.Group>
-          <Form.Group>
-            <Form.Label>{t('tasks.modal.form.title')}</Form.Label>
+          <Form.Group style={{ marginTop: '10px' }}>
+            <Form.Label>{t('tasks.modal.form.descriptionEdit')}</Form.Label>
             <Form.Control
               type="name"
-              placeholder={String(t('tasks.modal.form.placeholder'))}
+              placeholder={String(t('tasks.modal.form.descriptionPlaceholder'))}
               value={inputDescription}
               onChange={(e) => setInputDescription(e.target.value)}
             />
