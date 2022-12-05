@@ -44,7 +44,7 @@ export function LoginPage() {
         autoClose: 3000,
       });
     }
-  }, [t, error, isError, isSuccess, navigate, isLoading, data, setUser]);
+  }, [t, error, isError, isSuccess, navigate, isLoading, data]);
 
   useEffect(() => {
     if (!errors) {

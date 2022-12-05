@@ -76,7 +76,6 @@ export function Board() {
 
   useEffect(() => {
     setBoard(translateDataFromApiToStateObject(columns!, tasks!)! as initial);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [columns, tasks]);
 
   if (isLoading) return <Loader />;
