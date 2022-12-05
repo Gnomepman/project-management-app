@@ -93,7 +93,7 @@ export const onDragEnd = (
   const foreign = state.columns[destination.droppableId];
   const userId = JSON.parse(localStorage.getItem('user')!).id!;
 
-  //if moving task in one column
+  // if moving task in one column
   if (home === foreign) {
     const newTaskIds = Array.from(home.taskIds);
     newTaskIds.splice(source.index, 1);

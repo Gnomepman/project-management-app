@@ -24,9 +24,6 @@ export const authApi = createApi({
         url: `auth/signup`,
         method: 'POST',
         body: payload,
-        headers: {
-          'Content-type': 'application/json; charset=UTF-8',
-        },
       }),
     }),
   }),
