@@ -22,7 +22,7 @@ export const EditProfilePage = () => {
     <>
       <div className="app-container">
         <div className="row d-flex pt-5 justify-content-center">
-          <article className="col-md-6 text-center">
+          <article className="col-md-6 text-center mb-2">
             <section className="text-center">
               <h4>{t('edit.greeting')}!</h4>
               <p className="lead">{t('edit.support')}</p>

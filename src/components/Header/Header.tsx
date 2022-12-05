@@ -40,7 +40,7 @@ export function Header() {
     >
       <div className="container-xxl">
         <Navbar.Collapse>
-          <NavLink to="/">
+          <NavLink to="/" className="m-0">
             <img
               src={Logo}
               width="100"
@@ -51,7 +51,7 @@ export function Header() {
           </NavLink>
           <NavDropdown
             title={<img className="px-1" height="20" src={Globe} alt="languages" />}
-            className="px-2"
+            className="px-sm-2"
           >
             {languages.map(({ code, name }) => (
               <NavDropdown.Item
@@ -71,7 +71,7 @@ export function Header() {
               toggleSnow();
             }}
           >
-            <img className="px-1" height="20" src={SnowFlake} alt="snowflake" />
+            <img className="px-sm-1" height="20" src={SnowFlake} alt="snowflake" />
           </Button>
         </Navbar.Collapse>
         <AuthSection />

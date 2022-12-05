@@ -54,7 +54,7 @@ a:hover {
 }
 
 .app-container {
-  height: calc(100vh - 129px);
+  min-height: calc(100vh - 129px);
 }
 
 .text-responsive {
