@@ -7,7 +7,7 @@ import { isAuthenticated } from '../../utils/isAuthenticated';
 import { ModalComponent } from '../ModalComponent/ModalComponent';
 import { CreateBoardModal } from '../CreateBoard/CreateBoardModal';
 import LogoutIcon from '../../assets/images/header-icons/logout.png';
-import AddIcon from '../../assets/images/header-icons/add-file.png';
+import AddIcon from '../../assets/images/header-icons/add.png';
 import CheckIcon from '../../assets/images/header-icons/checked.png';
 import EditIcon from '../../assets/images/header-icons/edit-user.png';
 
@@ -65,7 +65,7 @@ export const AuthSection = () => {
 
             <Nav.Item>
               <Button className="btn-overflow" onClick={onClickHandler}>
-                <img className="px-1" height="20" src={LogoutIcon} alt="auth.sign-out" />
+                <img className="px-1" height="24" src={LogoutIcon} alt="auth.sign-out" />
                 {t('auth.sign-out')}
               </Button>
             </Nav.Item>
