@@ -13,7 +13,7 @@ export const Technologies = () => {
     <>
       <section className="row justify-content-center py-md-5 py-sm-3">
         <div className="col-8 px-2 py-5">
-          <div className="row justify-content-center gap-3">
+          <div className="row justify-content-center gap-md-3 gap-1">
             {TechnologiesData.map((item: ITechnology) => (
               <TechnologyItem key={item.id} item={item} />
             ))}
