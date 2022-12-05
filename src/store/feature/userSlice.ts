@@ -8,7 +8,7 @@ interface IUserState {
 
 const initialState: IUserState = {
   user: null,
-  snow: true,
+  snow: false,
 };
 
 export const userSlice = createSlice({

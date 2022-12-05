@@ -16,13 +16,29 @@ import { LoginPage } from './pages/LoginPage/LoginPage';
 import { EditProfilePage } from './pages/EditProfilePage/EditProfilePage';
 import { PrivateRoute } from './components/PrivateRoute/PrivateRoute';
 import { IsLoggedRoute } from './components/PrivateRoute/IsLoggedRoute';
+import Snowfall from 'react-snowfall';
+import { useAppSelector } from './hooks/redux';
 
 function App() {
+  const { snow } = useAppSelector((store) => store.user);
+
+  const snowflakeCount = () => {
+    return snow ? 200 : 0;
+  };
+
   return (
     <>
       <Header />
       <div className="container-xxl">
         <Suspense fallback={<Loader />}>
+          <Snowfall
+            snowflakeCount={snowflakeCount()}
+            style={{
+              position: 'fixed',
+              width: '100vw',
+              height: '100vh',
+            }}
+          />
           <ToastContainer position="top-right" hideProgressBar={true} theme="colored" />
           <Routes>
             <Route path="/" element={<WelcomePage />} />
