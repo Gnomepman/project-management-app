@@ -21,7 +21,7 @@ export const BoardItem = ({ item }: IBoardItemProps) => {
   const [showBoardDeleteModal, setShowBoardDeleteModal] = useState(false);
 
   return (
-    <div key={item._id} className="col-xl-3 col-md-3 col-sm-4 col-6">
+    <div key={item._id} className="col-xl-3 col-md-3 col-sm-4 col-12">
       <Link to={`/boards/${item._id}`}>
         <div
           className="board row rounded-2"
