@@ -12,7 +12,7 @@ export const Introduction = () => {
       <div className="col-lg-3 col-md-2 pt-lg-5 pt-md-0 mt-lg-5 mt-md-0 text-center">
         <h1 className="pt-lg-5 pt-md-3 fw-bold">{t('title')}</h1>
         <h4 className="py-2 py-sm-2 text-md-responsive">{t('wp.description')}</h4>
-        <NavLink to="/login">
+        <NavLink to="/boards">
           <Button className="btn-lg" variant="primary">
             {t('wp.button')}
           </Button>

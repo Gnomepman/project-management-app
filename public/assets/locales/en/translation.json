@@ -36,9 +36,7 @@
     "delete-user": "Delete user",
     "edit": "Edit",
     "edit-data": "Edit User data",
-    "cancel": "Cancel",
-    "have-account": "Already got an account?",
-    "no-account": "Don't have an account yet?"
+    "cancel": "Cancel"
   },
   "edit": {
     "greeting": "Hello Dear Customer",
