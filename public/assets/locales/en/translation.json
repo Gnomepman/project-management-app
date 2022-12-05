@@ -36,7 +36,9 @@
     "delete-user": "Delete user",
     "edit": "Edit",
     "edit-data": "Edit User data",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "have-account": "Already got an account?",
+    "no-account": "Don't have an account yet?"
   },
   "edit": {
     "greeting": "Hello Dear Customer",
@@ -68,7 +70,7 @@
       "confirm": "Edit",
       "form": {
         "title": "Board name",
-        "placeholder": "My cool board"
+        "placeholder": "My board"
       }
     }
   },

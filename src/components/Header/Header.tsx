@@ -1,11 +1,12 @@
 import { changeLanguage } from 'i18next';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import { Navbar } from 'react-bootstrap';
+import { Button, Navbar } from 'react-bootstrap';
 import Logo from '../../assets/images/pm-logo.png';
 import { languages } from '../../utils/languages';
 import { AuthSection } from '../AuthSection/AuthSection';
 import React, { useEffect, useRef, useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import { useActions } from '../../hooks/actions';
 
 export function Header() {
   const [navBackground, setNavBackground] = useState(false);
@@ -25,6 +26,8 @@ export function Header() {
     };
   }, []);
 
+  const { toggleSnow } = useActions();
+
   return (
     <Navbar
       sticky="top"
@@ -40,7 +43,7 @@ export function Header() {
               src={Logo}
               width="100"
               height="50"
-              className="d-inline-block align-top d-none d-md-block"
+              className="d-inline-block align-top d-none d-md-block "
               alt="pm-app-logo"
             />
           </NavLink>
@@ -56,6 +59,15 @@ export function Header() {
               </NavDropdown.Item>
             ))}
           </NavDropdown>
+          <Button
+            variant="none"
+            className="card-hover border-0"
+            onClick={() => {
+              toggleSnow();
+            }}
+          >
+            {'❄'}
+          </Button>
         </Navbar.Collapse>
         <AuthSection />
       </div>
