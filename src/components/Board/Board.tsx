@@ -10,7 +10,7 @@ import { RootState } from '../../store';
 import { useBoardActions } from '../../hooks/actions';
 import {
   useGetTaskSetByBoardQuery,
-  usePutTaskWihoutRefetchMutation,
+  usePutTaskWithoutRefetchMutation,
 } from '../../store/api/taskApi';
 import { useGetBoardByIdQuery, usePutBoardMutation } from '../../store/api/boardApi';
 import { usePutColumnWithoutRefetchMutation } from '../../store/api/columnApi';
@@ -36,7 +36,7 @@ export function Board() {
   const { data: tasks } = useGetTaskSetByBoardQuery(id!);
   const { data } = useGetBoardByIdQuery(id!);
   const [putColumn] = usePutColumnWithoutRefetchMutation();
-  const [putTask] = usePutTaskWihoutRefetchMutation();
+  const [putTask] = usePutTaskWithoutRefetchMutation();
   const [createColumnModal, setCreateColumnModal] = useState(false);
   const [toggle, setToggle] = useState(true);
   const [boardName, setBoardName] = useState(data?.title);

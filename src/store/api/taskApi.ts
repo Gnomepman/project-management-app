@@ -2,7 +2,6 @@ import { createApi } from '@reduxjs/toolkit/query/react';
 import { ITask, ITaskRes, ITaskResponse } from '../../models';
 import { baseQuery } from './baseQuery';
 
-//Todo Recheck, fix and update
 export const taskApi = createApi({
   reducerPath: 'task/api',
   baseQuery: baseQuery,
@@ -62,7 +61,7 @@ export const taskApi = createApi({
       invalidatesTags: ['Task'],
     }),
 
-    putTaskWihoutRefetch: build.mutation<
+    putTaskWithoutRefetch: build.mutation<
       ITaskResponse,
       { boardId: string; columnId: string; taskId: string; payload: ITaskRes }
     >({
@@ -121,5 +120,5 @@ export const {
   useGetTaskSetQuery,
   usePatchTaskSetMutation,
   useGetTaskSetByBoardQuery,
-  usePutTaskWihoutRefetchMutation,
+  usePutTaskWithoutRefetchMutation,
 } = taskApi;

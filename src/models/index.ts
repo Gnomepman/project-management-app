@@ -5,6 +5,4 @@ export * from './board';
 export * from './token';
 export * from './error';
 export * from './column';
-export * from './file';
 export * from './task';
-export * from './point';
