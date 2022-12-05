@@ -7,6 +7,10 @@
   &:hover {
     transform: scale(1.01);
   }
+
+  @media screen and (max-width: 768px) {
+    height: 80px;
+  }
 }
 
 .board-item {
