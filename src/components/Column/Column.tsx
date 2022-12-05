@@ -42,7 +42,9 @@ export function Column(props: {
             }}
           >
             <div className="column_header" {...provided.dragHandleProps}>
-              <span>{props.column.title}</span>
+              <span title={props.column.title.length > 12 ? props.column.title : ''}>
+                {props.column.title}
+              </span>
               <Button className="action_button" onClick={() => setEditColumnModal(true)}>
                 <img src={Edit} alt="edit" />
               </Button>

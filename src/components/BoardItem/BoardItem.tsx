@@ -35,13 +35,17 @@ export const BoardItem = ({ item }: IBoardItemProps) => {
           <div className="col-12 p-0">
             <div className="board-item">
               <div className="d-flex w-100 h-25p gap-1 board-item-wrapper p-2">
-                <div className="board-name fw-semibold fs-5 text-white">{item.title}</div>
+                <div
+                  className="board-name fw-semibold fs-5 text-white"
+                  title={item.title.length > 20 ? item.title : ''}
+                >
+                  {item.title}
+                </div>
                 <Button
                   className="action_button"
                   onClick={(e: React.MouseEvent<Element, MouseEvent>) => {
                     setEditBoardModal(true);
                     e.preventDefault();
-                    e.nativeEvent.stopImmediatePropagation();
                   }}
                 >
                   <img src={Edit} alt="edit" />
@@ -50,7 +54,6 @@ export const BoardItem = ({ item }: IBoardItemProps) => {
                   variant="danger"
                   onClick={(e) => {
                     e.preventDefault();
-                    e.nativeEvent.stopImmediatePropagation();
                     setShowBoardDeleteModal(true);
                   }}
                   className="action_button"
