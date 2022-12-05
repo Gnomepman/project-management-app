@@ -47,6 +47,10 @@ export function Board() {
     setToggle(false);
   }
 
+  useEffect(() => {
+    setBoardName(data?.title);
+  }, [data?.title]);
+
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setToggle(true);
@@ -93,7 +97,7 @@ export function Board() {
                   >
                     <Link to="/boards">
                       <Button style={{ display: 'flex', gap: '10px' }} className="action_button">
-                        <img src={Back} height="20px"></img>
+                        <img src={Back} height="20px" alt="back"></img>
                         {t('board.back')}
                       </Button>
                     </Link>

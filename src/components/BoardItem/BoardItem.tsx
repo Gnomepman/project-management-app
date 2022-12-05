@@ -68,7 +68,7 @@ export const BoardItem = ({ item }: IBoardItemProps) => {
         onHide={() => setEditBoardModal(false)}
         setModal={setEditBoardModal}
       >
-        <EditBoardModal setEditBoardModal={setEditBoardModal} boardId={item._id}></EditBoardModal>
+        <EditBoardModal setEditBoardModal={setEditBoardModal} board={item}></EditBoardModal>
       </ModalComponent>
       <DeleteModal
         description={t('boards.modal.warning')}

@@ -19,7 +19,7 @@ export const DeleteModal = ({
 }: IDeleteModalProps) => {
   return (
     <>
-      <Modal show={check} onHide={handleDelete} centered>
+      <Modal show={check} centered>
         <Modal.Header>
           <Modal.Title>{title}</Modal.Title>
         </Modal.Header>

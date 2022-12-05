@@ -3,6 +3,7 @@ import { Button, Form, Modal } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import { ITaskResponse } from '../../models';
+import { task } from '../../models/initial';
 import { usePutTaskMutation } from '../../store/api/taskApi';
 import { Loader } from '../Loader/Loader';
 
@@ -10,7 +11,7 @@ interface IEditTaskModalProps {
   setEditTaskModal: Dispatch<SetStateAction<boolean>>;
   boardId: string;
   columnId: string;
-  taskId: string;
+  task: task;
   order: number;
 }
 
@@ -18,20 +19,20 @@ export const EditTaskModal = ({
   setEditTaskModal,
   boardId,
   columnId,
-  taskId,
+  task,
   order,
 }: IEditTaskModalProps) => {
   const { t } = useTranslation();
   const { id: userId } = JSON.parse(localStorage.getItem('user') || '');
   const [putTask, { isLoading }] = usePutTaskMutation();
-  const [inputName, setInputName] = useState('');
-  const [inputDescription, setInputDescription] = useState('');
+  const [inputName, setInputName] = useState(task.title);
+  const [inputDescription, setInputDescription] = useState(task.content);
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
 
     if (inputName.length < 4 || inputDescription.length < 4) {
-      toast.error(t('column.min-length'), {
+      toast.error(t('tasks.min-length'), {
         autoClose: 2000,
       });
       return;
@@ -40,7 +41,7 @@ export const EditTaskModal = ({
     putTask({
       boardId: boardId,
       columnId: columnId,
-      taskId: taskId,
+      taskId: task.id,
       payload: {
         title: inputName,
         order: order,
@@ -63,7 +64,7 @@ export const EditTaskModal = ({
           <Form.Group>
             <Form.Label>{t('tasks.modal.form.titleEdit')}</Form.Label>
             <Form.Control
-              type="name"
+              type="search"
               placeholder={String(t('tasks.modal.form.titlePlaceholder'))}
               value={inputName}
               onChange={(e) => setInputName(e.target.value)}
@@ -72,7 +73,7 @@ export const EditTaskModal = ({
           <Form.Group style={{ marginTop: '10px' }}>
             <Form.Label>{t('tasks.modal.form.descriptionEdit')}</Form.Label>
             <Form.Control
-              type="name"
+              type="search"
               placeholder={String(t('tasks.modal.form.descriptionPlaceholder'))}
               value={inputDescription}
               onChange={(e) => setInputDescription(e.target.value)}
