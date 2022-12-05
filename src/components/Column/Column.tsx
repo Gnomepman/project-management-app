@@ -134,7 +134,7 @@ export function Column(props: {
         <EditColumnModal
           setEditColumnModal={setEditColumnModal}
           boardId={props.boardId}
-          columnId={props.column.id}
+          column={props.column}
           order={props.index}
         ></EditColumnModal>
       </ModalComponent>

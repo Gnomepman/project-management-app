@@ -2,20 +2,20 @@ import { Dispatch, SetStateAction, useState } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
-import { IBoardRes } from '../../models';
+import { IBoard, IBoardRes } from '../../models';
 import { usePutBoardMutation } from '../../store/api/boardApi';
 import { Loader } from '../Loader/Loader';
 
 interface IEditBoardModalProps {
   setEditBoardModal: Dispatch<SetStateAction<boolean>>;
-  boardId: string;
+  board: IBoard;
 }
 
-export const EditBoardModal = ({ setEditBoardModal, boardId }: IEditBoardModalProps) => {
+export const EditBoardModal = ({ setEditBoardModal, board }: IEditBoardModalProps) => {
   const { t } = useTranslation();
   const { id: userId } = JSON.parse(localStorage.getItem('user') || '');
   const [putBoard, { isLoading }] = usePutBoardMutation();
-  const [inputName, setInputName] = useState('');
+  const [inputName, setInputName] = useState(board.title);
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
@@ -28,7 +28,7 @@ export const EditBoardModal = ({ setEditBoardModal, boardId }: IEditBoardModalPr
     }
 
     putBoard({
-      boardId: boardId!,
+      boardId: board._id!,
       payload: { title: inputName, owner: userId, users: [userId] } as IBoardRes,
     });
     setInputName('');
@@ -43,7 +43,7 @@ export const EditBoardModal = ({ setEditBoardModal, boardId }: IEditBoardModalPr
           <Form.Group>
             <Form.Label>{t('boards.modal.form.title')}</Form.Label>
             <Form.Control
-              type="name"
+              type="search"
               placeholder={String(t('boards.modal.form.placeholder'))}
               value={inputName}
               onChange={(e) => setInputName(e.target.value)}
