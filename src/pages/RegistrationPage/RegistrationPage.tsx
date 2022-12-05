@@ -87,12 +87,18 @@ export function RegistrationPage() {
                   register={register}
                   errors={errors.password}
                 />
+                <p className="text-muted">
+                  {t('auth.have-account')}
+                  <a className="px-2" href="/login">
+                    {t('auth.sign-in')}
+                  </a>
+                </p>
                 <Button
                   type="submit"
                   value="submit"
                   data-testid="button-submit"
                   disabled={hasError()}
-                  className={hasError() ? 'bg-secondary my-4' : 'bg-primary my-4'}
+                  className={hasError() ? 'bg-secondary my-2' : 'bg-primary my-2'}
                 >
                   {t('auth.submit')}
                 </Button>
