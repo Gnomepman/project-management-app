@@ -88,7 +88,7 @@ export function Board() {
         <Droppable droppableId="all-columns" direction="horizontal" type="column">
           {(provided) => {
             return (
-              <div className="app-container">
+              <div className="app-fixed-container">
                 <div className="board-main">
                   <div
                     style={{ display: 'flex', gap: '10px', alignItems: 'center' }}

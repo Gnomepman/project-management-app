@@ -57,6 +57,10 @@ a:hover {
   min-height: calc(100vh - 129px);
 }
 
+.app-fixed-container {
+  height: calc(100vh - 129px);
+}
+
 .text-responsive {
   font-size: calc(40% + 1vw);
 }
