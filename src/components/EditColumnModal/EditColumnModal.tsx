@@ -3,31 +3,32 @@ import { Button, Form, Modal } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import { IColumnRes } from '../../models';
+import { column } from '../../models/initial';
 import { usePutColumnMutation } from '../../store/api/columnApi';
 import { Loader } from '../Loader/Loader';
 
 interface IEditColumnModalProps {
   setEditColumnModal: Dispatch<SetStateAction<boolean>>;
   boardId: string;
-  columnId: string;
+  column: column;
   order: number;
 }
 
 export const EditColumnModal = ({
   setEditColumnModal,
   boardId,
-  columnId,
+  column,
   order,
 }: IEditColumnModalProps) => {
   const { t } = useTranslation();
   const [putColumn, { isLoading }] = usePutColumnMutation();
-  const [inputName, setInputName] = useState('');
+  const [inputName, setInputName] = useState(column.title);
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
 
     if (inputName.length < 4) {
-      toast.error(t('column.min-length'), {
+      toast.error(t('columns.min-length'), {
         autoClose: 2000,
       });
       return;
@@ -35,7 +36,7 @@ export const EditColumnModal = ({
 
     putColumn({
       boardId: boardId,
-      columnId: columnId,
+      columnId: column.id,
       payload: {
         title: inputName,
         order: order,
@@ -53,7 +54,7 @@ export const EditColumnModal = ({
           <Form.Group>
             <Form.Label>{t('columns.modal.form.title')}</Form.Label>
             <Form.Control
-              type="name"
+              type="search"
               placeholder={String(t('columns.modal.form.placeholderEdit'))}
               value={inputName}
               onChange={(e) => setInputName(e.target.value)}

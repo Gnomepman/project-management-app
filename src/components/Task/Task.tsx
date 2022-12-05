@@ -110,7 +110,7 @@ export function Task(props: {
           boardId={props.boardId}
           columnId={props.columnId}
           order={props.index}
-          taskId={props.task.id}
+          task={props.task}
         ></EditTaskModal>
       </ModalComponent>
     </>

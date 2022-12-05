@@ -47,6 +47,10 @@ export function Board() {
     setToggle(false);
   }
 
+  useEffect(() => {
+    setBoardName(data?.title);
+  }, [data?.title]);
+
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setToggle(true);

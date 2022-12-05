@@ -54,7 +54,7 @@ export const CreateTaskModal = ({
         <Form.Group>
           <Form.Label>{t('tasks.modal.form.title')}</Form.Label>
           <Form.Control
-            type="name"
+            type="search"
             placeholder={String(t('tasks.modal.form.titlePlaceholder'))}
             value={inputTitle}
             onChange={(e) => setInputTitle(e.target.value)}
@@ -63,7 +63,7 @@ export const CreateTaskModal = ({
         <Form.Group>
           <Form.Label>{t('tasks.modal.form.description')}</Form.Label>
           <Form.Control
-            type="name"
+            type="search"
             placeholder={String(t('tasks.modal.form.descriptionPlaceholder'))}
             value={inputDescription}
             onChange={(e) => setInputDescription(e.target.value)}

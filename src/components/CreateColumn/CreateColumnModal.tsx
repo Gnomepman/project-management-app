@@ -14,7 +14,6 @@ interface ICreateColumnModalProps {
 
 export const CreateColumnModal = ({ setCreateColumnModal }: ICreateColumnModalProps) => {
   const { t } = useTranslation();
-
   const [inputName, setInputName] = useState('');
   const [postColumn] = usePostColumnsMutation();
   const { id } = useParams();
@@ -45,7 +44,7 @@ export const CreateColumnModal = ({ setCreateColumnModal }: ICreateColumnModalPr
         <Form.Group>
           <Form.Label>{t('columns.modal.form.title')}</Form.Label>
           <Form.Control
-            type="name"
+            type="search"
             placeholder={String(t('columns.modal.form.placeholder'))}
             value={inputName}
             onChange={(e) => setInputName(e.target.value)}

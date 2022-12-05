@@ -13,7 +13,6 @@ interface ICreateBoardModalProps {
 
 export const CreateBoardModal = ({ setCreateBoardModal }: ICreateBoardModalProps) => {
   const { t } = useTranslation();
-
   const { id } = JSON.parse(localStorage.getItem('user') || '');
   const [postBoard, { isLoading }] = usePostBoardsMutation();
   const [inputName, setInputName] = useState('');
@@ -46,7 +45,7 @@ export const CreateBoardModal = ({ setCreateBoardModal }: ICreateBoardModalProps
         <Form.Group>
           <Form.Label>{t('boards.modal.form.title')}</Form.Label>
           <Form.Control
-            type="name"
+            type="search"
             placeholder={String(t('boards.modal.form.placeholder'))}
             value={inputName}
             onChange={(e) => setInputName(e.target.value)}
