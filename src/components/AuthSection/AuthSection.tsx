@@ -42,31 +42,39 @@ export const AuthSection = () => {
       {isAuthenticated() && (
         <>
           <Navbar>
-            <NavLink className="mr-10 px-2" to="/boards">
-              <Button variant="secondary btn-overflow" onClick={() => setCreateBoardModal(true)}>
-                <img className="px-1" height="20" src={AddIcon} alt="auth.add-boards" />
-                {t('auth.add-boards')}
+            <NavLink className="mr-sm-10 px-sm-2 px-1" to="/boards">
+              <Button
+                variant="secondary btn-overflow"
+                onClick={() => setCreateBoardModal(true)}
+                title={t('auth.add-boards') || ''}
+              >
+                <img className="px-sm-1" height="20" src={AddIcon} alt="auth.add-boards" />
+                <span className="d-none d-sm-inline d-md-inline">{t('auth.add-boards')}</span>
               </Button>
             </NavLink>
 
-            <NavLink className="px-2 lh-sm" to="/">
-              <Button variant="secondary btn-overflow">
-                <img className="px-1" height="20" src={CheckIcon} alt="auth.to-main-page" />
-                {t('auth.to-main-page')}
+            <NavLink className="px-sm-2 px-1" to="/">
+              <Button variant="secondary btn-overflow" title={t('auth.to-main-page') || ''}>
+                <img className="px-sm-1" height="20" src={CheckIcon} alt="auth.to-main-page" />
+                <span className="d-none d-sm-inline d-md-inline">{t('auth.to-main-page')}</span>
               </Button>
             </NavLink>
 
-            <NavLink className="px-2" to="/edit-profile">
-              <Button variant="outline-secondary btn-overflow">
-                <img className="px-1" height="20" src={EditIcon} alt="auth.edit-profile" />
-                {t('auth.edit-profile')}
+            <NavLink className="px-sm-2 px-1" to="/edit-profile">
+              <Button variant="outline-secondary btn-overflow" title={t('auth.edit-profile') || ''}>
+                <img className="px-sm-1" height="20" src={EditIcon} alt="auth.edit-profile" />
+                <span className="d-none d-sm-inline d-md-inline">{t('auth.edit-profile')}</span>
               </Button>
             </NavLink>
 
             <Nav.Item>
-              <Button className="btn-overflow" onClick={onClickHandler}>
-                <img className="px-1" height="24" src={LogoutIcon} alt="auth.sign-out" />
-                {t('auth.sign-out')}
+              <Button
+                className="btn-overflow"
+                onClick={onClickHandler}
+                title={t('auth.sign-out') || ''}
+              >
+                <img className="px-sm-2 px-1" height="20" src={LogoutIcon} alt="auth.sign-out" />
+                <span className="d-none d-sm-inline d-md-inline">{t('auth.sign-out')}</span>
               </Button>
             </Nav.Item>
           </Navbar>

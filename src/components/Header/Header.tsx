@@ -9,8 +9,11 @@ import { NavLink } from 'react-router-dom';
 import { useActions } from '../../hooks/actions';
 import Globe from '../../assets/images/header-icons/globe.png';
 import SnowFlake from '../../assets/images/header-icons/snowflake.png';
+import { useTranslation } from 'react-i18next';
 
 export function Header() {
+  const { t } = useTranslation();
+
   const [navBackground, setNavBackground] = useState(false);
 
   const navRef = useRef();
@@ -40,7 +43,7 @@ export function Header() {
     >
       <div className="container-xxl">
         <Navbar.Collapse>
-          <NavLink to="/">
+          <NavLink to="/" className="m-0">
             <img
               src={Logo}
               width="100"
@@ -51,7 +54,7 @@ export function Header() {
           </NavLink>
           <NavDropdown
             title={<img className="px-1" height="20" src={Globe} alt="languages" />}
-            className="px-2"
+            className="px-sm-2"
           >
             {languages.map(({ code, name }) => (
               <NavDropdown.Item
@@ -70,8 +73,9 @@ export function Header() {
             onClick={() => {
               toggleSnow();
             }}
+            title={t('auth.mood') || ''}
           >
-            <img className="px-1" height="20" src={SnowFlake} alt="snowflake" />
+            <img className="px-sm-1" height="20" src={SnowFlake} alt="snowflake" />
           </Button>
         </Navbar.Collapse>
         <AuthSection />
