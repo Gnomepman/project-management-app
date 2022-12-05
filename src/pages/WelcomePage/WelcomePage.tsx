@@ -4,9 +4,9 @@ import React from 'react';
 
 export const WelcomePage = () => {
   return (
-    <>
+    <div className="app-container">
       <Introduction />
       <Technologies />
-    </>
+    </div>
   );
 };
