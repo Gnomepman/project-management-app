@@ -26,7 +26,6 @@ export function RegistrationPage() {
 
   const { setUser } = useActions();
 
-  // Todo Refactor
   useEffect(() => {
     if (isSuccess) {
       toast.success(t('auth.reg-success'), {

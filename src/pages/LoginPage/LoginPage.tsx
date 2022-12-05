@@ -27,7 +27,6 @@ export function LoginPage() {
 
   const { setUser } = useActions();
 
-  // Todo Refactor
   useEffect(() => {
     if (isSuccess) {
       toast.success(t('auth.login-success'), {

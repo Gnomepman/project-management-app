@@ -20,10 +20,7 @@ export const store = configureStore({
     board: boardReducers,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
-      // Todo recheck if we need serializableCheck
-      serializableCheck: false,
-    }).concat([
+    getDefaultMiddleware({}).concat([
       authApi.middleware,
       userApi.middleware,
       boardApi.middleware,

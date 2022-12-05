@@ -2,7 +2,6 @@ import { createApi } from '@reduxjs/toolkit/query/react';
 import { IColumn, IColumnRes } from '../../models';
 import { baseQuery } from './baseQuery';
 
-//Todo Recheck, fix and update
 export const columnApi = createApi({
   reducerPath: 'column/api',
   baseQuery: baseQuery,
