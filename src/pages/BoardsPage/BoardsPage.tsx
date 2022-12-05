@@ -24,7 +24,7 @@ export function BoardsPage() {
           {data.map((item: IBoard) => (
             <BoardItem key={item._id} item={item} />
           ))}
-          <div className="col-xl-3 col-md-3 col-sm-4 col-6">
+          <div className="col-xl-3 col-md-3 col-sm-6 col-12">
             <div className="board row rounded-3">
               <Button
                 className="fw-semibold"
