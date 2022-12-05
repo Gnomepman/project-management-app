@@ -6,8 +6,6 @@ import { userApi } from './api/userApi';
 import { boardApi } from './api/boardApi';
 import { columnApi } from './api/columnApi';
 import { taskApi } from './api/taskApi';
-import { pointApi } from './api/pointApi';
-import { fileApi } from './api/fileApi';
 import { boardReducers } from './feature/boardSlice';
 
 export const store = configureStore({
@@ -17,8 +15,7 @@ export const store = configureStore({
     [boardApi.reducerPath]: boardApi.reducer,
     [columnApi.reducerPath]: columnApi.reducer,
     [taskApi.reducerPath]: taskApi.reducer,
-    [fileApi.reducerPath]: fileApi.reducer,
-    [pointApi.reducerPath]: pointApi.reducer,
+
     user: userReducer,
     board: boardReducers,
   },
@@ -32,8 +29,6 @@ export const store = configureStore({
       boardApi.middleware,
       columnApi.middleware,
       taskApi.middleware,
-      fileApi.middleware,
-      pointApi.middleware,
     ]),
 });
 

@@ -7,6 +7,8 @@ import { AuthSection } from '../AuthSection/AuthSection';
 import React, { useEffect, useRef, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useActions } from '../../hooks/actions';
+import Globe from '../../assets/images/header-icons/globe.png';
+import SnowFlake from '../../assets/images/header-icons/snowflake.png';
 
 export function Header() {
   const [navBackground, setNavBackground] = useState(false);
@@ -47,7 +49,10 @@ export function Header() {
               alt="pm-app-logo"
             />
           </NavLink>
-          <NavDropdown title={'🌐'} className="px-2">
+          <NavDropdown
+            title={<img className="px-1" height="20" src={Globe} alt="languages" />}
+            className="px-2"
+          >
             {languages.map(({ code, name }) => (
               <NavDropdown.Item
                 key={name}
@@ -66,7 +71,7 @@ export function Header() {
               toggleSnow();
             }}
           >
-            {'❄'}
+            <img className="px-1" height="20" src={SnowFlake} alt="snowflake" />
           </Button>
         </Navbar.Collapse>
         <AuthSection />

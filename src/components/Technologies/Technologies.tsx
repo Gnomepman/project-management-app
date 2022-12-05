@@ -24,7 +24,7 @@ export const Technologies = () => {
           <h1 className="pt-sm-5 fw-bold">{t('title')}</h1>
           <h4 className="py-2 py-sm-2 text-md-responsive">{t('wp.created')}</h4>
           <NavLink to="/login">
-            <Button className="btn-lg mb-md-3" variant="primary">
+            <Button className="btn-lg mb-md-3 mb-2" variant="primary">
               {t('wp.button')}
             </Button>
           </NavLink>
