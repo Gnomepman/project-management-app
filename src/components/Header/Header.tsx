@@ -9,8 +9,11 @@ import { NavLink } from 'react-router-dom';
 import { useActions } from '../../hooks/actions';
 import Globe from '../../assets/images/header-icons/globe.png';
 import SnowFlake from '../../assets/images/header-icons/snowflake.png';
+import { useTranslation } from 'react-i18next';
 
 export function Header() {
+  const { t } = useTranslation();
+
   const [navBackground, setNavBackground] = useState(false);
 
   const navRef = useRef();
@@ -70,6 +73,7 @@ export function Header() {
             onClick={() => {
               toggleSnow();
             }}
+            title={t('auth.mood') || ''}
           >
             <img className="px-sm-1" height="20" src={SnowFlake} alt="snowflake" />
           </Button>

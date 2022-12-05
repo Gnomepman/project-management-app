@@ -38,7 +38,8 @@
     "edit-data": "Edit User data",
     "cancel": "Cancel",
     "have-account": "Already got an account?",
-    "no-account": "Don't have an account yet?"
+    "no-account": "Don't have an account yet?",
+    "mood": "Winter mood"
   },
   "edit": {
     "greeting": "Hello Dear Customer",

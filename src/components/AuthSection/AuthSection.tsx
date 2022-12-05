@@ -43,28 +43,36 @@ export const AuthSection = () => {
         <>
           <Navbar>
             <NavLink className="mr-sm-10 px-sm-2 px-1" to="/boards">
-              <Button variant="secondary btn-overflow" onClick={() => setCreateBoardModal(true)}>
+              <Button
+                variant="secondary btn-overflow"
+                onClick={() => setCreateBoardModal(true)}
+                title={t('auth.add-boards') || ''}
+              >
                 <img className="px-sm-1" height="20" src={AddIcon} alt="auth.add-boards" />
                 <span className="d-none d-sm-inline d-md-inline">{t('auth.add-boards')}</span>
               </Button>
             </NavLink>
 
             <NavLink className="px-sm-2 px-1" to="/">
-              <Button variant="secondary btn-overflow">
+              <Button variant="secondary btn-overflow" title={t('auth.to-main-page') || ''}>
                 <img className="px-sm-1" height="20" src={CheckIcon} alt="auth.to-main-page" />
                 <span className="d-none d-sm-inline d-md-inline">{t('auth.to-main-page')}</span>
               </Button>
             </NavLink>
 
             <NavLink className="px-sm-2 px-1" to="/edit-profile">
-              <Button variant="outline-secondary btn-overflow">
+              <Button variant="outline-secondary btn-overflow" title={t('auth.edit-profile') || ''}>
                 <img className="px-sm-1" height="20" src={EditIcon} alt="auth.edit-profile" />
                 <span className="d-none d-sm-inline d-md-inline">{t('auth.edit-profile')}</span>
               </Button>
             </NavLink>
 
             <Nav.Item>
-              <Button className="btn-overflow" onClick={onClickHandler}>
+              <Button
+                className="btn-overflow"
+                onClick={onClickHandler}
+                title={t('auth.sign-out') || ''}
+              >
                 <img className="px-sm-2 px-1" height="20" src={LogoutIcon} alt="auth.sign-out" />
                 <span className="d-none d-sm-inline d-md-inline">{t('auth.sign-out')}</span>
               </Button>
