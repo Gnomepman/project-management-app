@@ -1,0 +1,79 @@
+$primary: #5160a3;
+$secondary: #292b69;
+$success: #538645;
+$warning: #e3dd6c;
+$info: #e3786c;
+$light: #e0e6f3;
+$dark: #0e112f;
+$muted: #3c3f41;
+
+@import 'bootstrap';
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+}
+
+:root {
+  .Toastify__toast-container--top-right {
+    margin-top: 60px;
+    width: 250px;
+  }
+  --toastify-color-success: #6caf6e;
+
+  --toastify-color-error: #e3786c;
+}
+
+a {
+  text-decoration: none;
+  color: $primary;
+}
+
+a:hover {
+  color: $dark;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 11px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(164, 164, 164);
+  border-radius: 10px;
+}
+
+.app-container {
+  min-height: calc(100vh - 129px);
+}
+
+.app-fixed-container {
+  height: calc(100vh - 129px);
+}
+
+.text-responsive {
+  font-size: calc(40% + 1vw);
+}
+
+.text-md-responsive {
+  font-size: calc(60% + 1vw);
+}
+
+.btn-overflow {
+  overflow-y: hidden;
+  height: 38px !important;
+}
+
+.card-hover:hover {
+  transform: scale(1.1);
+}

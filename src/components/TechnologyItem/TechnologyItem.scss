@@ -1,0 +1,13 @@
+.card-item {
+  margin-bottom: 0.5em;
+  padding: 2px 0;
+  border-radius: 1em;
+  text-align: center;
+  box-shadow: 2px 2px 3px 3px #e0e6f3;
+  transition: all 0.2s ease;
+}
+
+.card-item:hover {
+  box-shadow: 2px 2px 3px 3px #9bb3da;
+  transform: scale(1.05);
+}

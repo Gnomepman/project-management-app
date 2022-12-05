@@ -1,0 +1,118 @@
+{
+  "title": "PM Guru",
+  "error-main": "Oops! Page not found.",
+  "error-description": "The page you’re looking for doesn’t exist.",
+  "error-button": "Go Home",
+  "yes": "Yes",
+  "no": "No",
+  "auth": {
+    "enter": "Enter",
+    "registration": "Sign Up",
+    "registration_name": "Name",
+    "language": "Language",
+    "sign-in": "Sign In",
+    "login": "Login",
+    "name": "Name",
+    "password": "Password",
+    "add": "Add",
+    "required-field": "* required field",
+    "min-length": "* minimum length - 4",
+    "max-length": "* maximum length - 20",
+    "submit": "Submit",
+    "reg-success": "You have successfully registered",
+    "login-success": "You successfully logged in",
+    "login-error": "Incorrectly entered data",
+    "about": "About",
+    "add-boards": "Create new board",
+    "to-main-page": "Go to Main Page",
+    "edit-profile": "Edit profile",
+    "sign-out": "Sign Out",
+    "pass_error": "Enter the password",
+    "name_error": "Enter your name",
+    "reg-error": "This user already exists",
+    "upd-success": "The changes were made successfully",
+    "warning": "Are you sure you want to delete the user?",
+    "edit-user": "Edit user",
+    "delete-user": "Delete user",
+    "edit": "Edit",
+    "edit-data": "Edit User data",
+    "cancel": "Cancel",
+    "have-account": "Already got an account?",
+    "no-account": "Don't have an account yet?",
+    "mood": "Winter mood"
+  },
+  "edit": {
+    "greeting": "Hello Dear Customer",
+    "support": "Thank you for signing up! Thank you for choosing our product. If you have any questions or problems signing in, please reach out.",
+    "help": "We are happy to assist.",
+    "logged": "You are logged in as User"
+  },
+  "wp": {
+    "description": "The work management tool for happy collaboration",
+    "button": "Try it now",
+    "created": "Application created with the most appropriate technology for Web Development"
+  },
+  "footer": {
+    "created": "Created in",
+    "rights": "All Rights Reserved"
+  },
+  "modal": {
+    "close": "Close",
+    "create": "Create"
+  },
+  "boards": {
+    "create": "Create new board",
+    "min-length": "Minimum length - 4",
+    "modal": {
+      "creating": "Creating new board",
+      "editing": "Editing board",
+      "deleting": "Deleting board",
+      "warning": "Are you sure you want to delete board?",
+      "confirm": "Edit",
+      "form": {
+        "title": "Board name",
+        "placeholder": "My board"
+      }
+    }
+  },
+  "columns": {
+    "create": "Create new column",
+    "min-length": "Minimum length - 4",
+    "modal": {
+      "creating": "Creating new column",
+      "editing": "Editing column",
+      "deleting": "Deleting column",
+      "warning": "Are you sure you want to delete column?",
+      "form": {
+        "title": "Column name",
+        "placeholder": "New column",
+        "placeholderEdit": "New column name"
+      }
+    }
+  },
+  "tasks": {
+    "create": "Add task",
+    "min-length": "Minimum length - 4",
+    "modal": {
+      "creating": "Creating new task",
+      "editing": "Editing task",
+      "deleting": "Deleting task",
+      "warning": "Are you sure you want to delete task?",
+      "form": {
+        "title": "Task name",
+        "titleEdit": "New task name",
+        "titlePlaceholder": "Give your task a name",
+        "description": "Task description",
+        "descriptionEdit": "New task description",
+        "descriptionPlaceholder": "Give your task a description"
+      }
+    }
+  },
+  "board": {
+    "back": "Back",
+    "dropPlaceholder": "Drop here",
+    "taskCreation": "Add task",
+    "columnCreation": "Add column",
+    "editName": "New board name"
+  }
+}
